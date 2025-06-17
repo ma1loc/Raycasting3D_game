@@ -36,8 +36,8 @@ void	open_window(t_setup *setup)
 	int your_screen_width;
 	int your_screen_height;
 
-	setup->game->screen_width = 600;
-	setup->game->screen_height = 600;
+	setup->game->screen_width = 640;
+	setup->game->screen_height = 480;
 	
 	mlx_get_screen_size(setup->game->mlx_ptr, &your_screen_width, &your_screen_height);	
 	if (setup->game->screen_width > your_screen_width)
@@ -71,8 +71,8 @@ void	get_player_position(t_setup *setup)
 			if (setup->game->map[i][j] == 'N')
 			{
 				// [i] is the (row)(Y) and [j] is the (column)(X) in the map
-				setup->player->p_x = j + 0.5; // Player's X position
 				setup->player->p_y = i + 0.5; // Player's Y position
+				setup->player->p_x = j + 0.5; // Player's X position
 				// setup->player->dir_x = 0; // North direction
 				// setup->player->dir_y = -1; // North direction
 				// setup->player->plane_x = 0.66; // Camera plane X
@@ -80,8 +80,9 @@ void	get_player_position(t_setup *setup)
 			}
 			else if (setup->game->map[i][j] == 'S')
 			{
-				setup->player->p_x = j + 0.5;
+				
 				setup->player->p_y = i + 0.5;
+				setup->player->p_x = j + 0.5;
 				// setup->player->dir_x = 0; // South direction
 				// setup->player->dir_y = 1; // South direction
 				// setup->player->plane_x = -0.66; // Camera plane X
@@ -89,8 +90,8 @@ void	get_player_position(t_setup *setup)
 			}
 			else if (setup->game->map[i][j] == 'E')
 			{
-				setup->player->p_x = j + 0.5;
 				setup->player->p_y = i + 0.5;
+				setup->player->p_x = j + 0.5;
 				// setup->player->dir_x = 1; // East direction
 				// setup->player->dir_y = 0; // East direction
 				// setup->player->plane_x = 0; // Camera plane X
@@ -98,8 +99,8 @@ void	get_player_position(t_setup *setup)
 			}
 			else if (setup->game->map[i][j] == 'W')
 			{
-				setup->player->p_x = j + 0.5;
 				setup->player->p_y = i + 0.5;
+				setup->player->p_x = j + 0.5;
 				// setup->player->dir_x = -1; // West direction
 				// setup->player->dir_y = 0; // West direction
 				// setup->player->plane_x = 0; // Camera plane X

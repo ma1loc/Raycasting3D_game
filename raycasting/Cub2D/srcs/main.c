@@ -31,6 +31,32 @@ void	*setup_struct_init()
 }
 
 
+void	load_player_img(t_player *player, t_game *game)
+{
+	char	*image_path;
+	int		x;
+	int		y;
+
+	image_path = "./images_config/player_img.xpm";
+	player->player_img = mlx_xpm_file_to_image(game->mlx_ptr, image_path, &x, &y);
+	if (!player->player_img)
+	{
+		printf("player->player_img is filed\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	draw_player_img(t_player *player, t_game *game)
+{
+	int x = player->p_x * TILE_SIZE;
+	int y = player->p_y * TILE_SIZE;
+
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		player->player_img, x, y); // adjust -8 to center the sprite
+		// player->player_img, x - 8, y - 8); // adjust -8 to center the sprite
+}
+
+
 int	main()
 {
 	t_setup *setup;
@@ -40,6 +66,9 @@ int	main()
 	init_game_config(setup->game);	// init t_game
 	init_player_config(setup->player, setup->game);	// init t_player
 
+	load_player_img(setup->player, setup->game);
+	draw_player_img(setup->player, setup->game);
+	
 	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
 
 	// >>> keep the session alive and display the window without closing it

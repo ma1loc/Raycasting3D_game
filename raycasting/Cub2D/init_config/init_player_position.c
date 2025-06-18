@@ -68,16 +68,30 @@ void	get_player_position(t_player *player, t_game *game)
 		while (game->map[i][j])
 		{
 			// [i] is the (row)(Y) and [j] is the (column)(X) in the map
-			player->p_y = i + 0.5; // Player's Y position
-			player->p_x = j + 0.5; // Player's X position
-			if (game->map[i][j] == 'N')
-				init_north_position(player);
-			else if (game->map[i][j] == 'S')
-				init_south_position(player);
-			else if (game->map[i][j] == 'E')
-				init_east_position(player);
-			else if (game->map[i][j] == 'W')
-				init_west_position(player);
+				if (game->map[i][j] == 'N')
+				{
+					player->p_y = i + 0.5;
+					player->p_x = j + 0.5;
+					init_north_position(player);
+				}
+				else if (game->map[i][j] == 'S')
+				{
+					player->p_y = i + 0.5;
+					player->p_x = j + 0.5;
+					init_south_position(player);
+				}
+				else if (game->map[i][j] == 'E')
+				{
+					player->p_y = i + 0.5;
+					player->p_x = j + 0.5;
+					init_east_position(player);
+				}
+				else if (game->map[i][j] == 'W')
+				{
+					player->p_y = i + 0.5;
+					player->p_x = j + 0.5;
+					init_west_position(player);
+				}
 			j++;
 		}
 		i++;

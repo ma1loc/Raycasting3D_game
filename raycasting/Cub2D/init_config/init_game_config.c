@@ -9,9 +9,9 @@ char	**map_init() // >>> to remove later on
 
 	const char *default_map[] = {
 		"111111",
+		"1N0011",
 		"100001",
-		"101001",
-		"1100N1",
+		"110001",
 		"111111",
 		NULL
 	};
@@ -40,27 +40,27 @@ char	**map_init() // >>> to remove later on
 
 // >>>>>>>>>>>>>>>>>> done // for the 3D view used >>>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void	open_window(t_game *game)
-{
-	// >>> screen width and height, just in case for later use
-	int 	full_width;
-	int 	full_height;
+// void	open_window(t_game *game)
+// {
+// 	// >>> screen width and height, just in case for later use
+// 	int 	full_width;
+// 	int 	full_height;
 
-	game->screen_width = SCREEN_WIDTH;
-	game->screen_height = SCREEN_HEIGHT;
-	mlx_get_screen_size(game->mlx_ptr, &full_width, &full_height);
-	if (SCREEN_WIDTH > full_width)
-		game->screen_width = full_width;
-	if (SCREEN_HEIGHT > full_height)
-		game->screen_height = full_height;
+// 	game->screen_width = SCREEN_WIDTH;
+// 	game->screen_height = SCREEN_HEIGHT;
+// 	mlx_get_screen_size(game->mlx_ptr, &full_width, &full_height);
+// 	if (SCREEN_WIDTH > full_width)
+// 		game->screen_width = full_width;
+// 	if (SCREEN_HEIGHT > full_height)
+// 		game->screen_height = full_height;
 
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
-	if (!game->win_ptr)
-	{
-		perror("Failed to create MLX window");
-		exit(EXIT_FAILURE);
-	}
-}
+// 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
+// 	if (!game->win_ptr)
+// 	{
+// 		perror("Failed to create MLX window");
+// 		exit(EXIT_FAILURE);
+// 	}
+// }
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 void	open_window_2d(t_game *game)
@@ -84,6 +84,8 @@ void	open_window_2d(t_game *game)
 	width = j * game->tile_size;
 	height = i * game->tile_size;
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	printf("width %d\n", width);
+	printf("height %d\n", height);
 	game->screen_width = width;
 	game->screen_height = height;
 }

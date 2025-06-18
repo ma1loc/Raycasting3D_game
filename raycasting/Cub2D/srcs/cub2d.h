@@ -62,6 +62,8 @@ typedef	struct s_player
 	/// >>> player camera plane for the (fov)field of view of the player
 	// double	plane_x;
 	// double	plane_y;
+
+	void	*player_img;
 }	t_player;
 
 typedef struct s_game

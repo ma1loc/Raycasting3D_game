@@ -10,8 +10,10 @@
 # include <string.h>
 # include <math.h>
 
+
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+
 
 // the key presed to add
 # define UP_KEY    XK_w
@@ -20,9 +22,11 @@
 # define RIGHT_KEY XK_d
 # define ESC_KEY   XK_Escape
 
-# define TILE_SIZE      32
-# define PLAYER_SPEED   0.1
-# define ROTATE_SPEED   0.05
+
+// this is just for the 3d view
+# define SCREEN_WIDTH 640
+// // this is just for the 3d view
+# define SCREEN_HEIGHT 480
 
 
 // typedef struct s_image
@@ -38,7 +42,14 @@
 
 typedef	struct s_player
 {
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	double	angle; // >>> player angle in radians
+	double	move_speed; // >>> player speed in the map movements, player->move_speed = 0.05
+	double	rot_speed;	// >>> rotat left and right
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 	// >>> player position in the map(x, y)
+	// how to init this at first just loop thghout the map and git it value of int not float
 	double	p_x;
 	double	p_y;
 	// >>> player direction in the map (north, south, east, west)
@@ -56,8 +67,9 @@ typedef struct s_game
 	char	**map;
 	int		map_width;
 	int		map_height;
-	int		screen_width;
-	int		screen_height;
+	int		screen_width;	// this is just for the 3d view
+	int		screen_height;	// // this is just for the 3d view
+	int		tile_size;	// >>> size of the tile in pixels
 }	t_game;
 
 // >>> this is the core structure of the game

@@ -15,100 +15,140 @@ char	**map_init()
 		"100001",
 		"101001",
 		"1100N1",
-		"111111"
+		"111111",
+		NULL
 	};
-	i = -1;
-
-	while (++i < 5)
+	i = 0;
+	while (i < 5)
+	{
 		strcpy(map[i], default_map[i]);
+		i++;
+	}
 	
-	map_ptrs = malloc(5 * sizeof(char *));
-	i = -1;
-	while (++i < 5)
+	map_ptrs = malloc(6 * sizeof(char *));
+	i = 0;
+	while (i < 5)
+	{
 		map_ptrs[i] = map[i];
+		i++;
+	}
 
 	return (map_ptrs);
 }
 
-void	open_window(t_setup *setup)
-{
-	// >>> screen width and height, just in case for later use
-	int your_screen_width;
-	int your_screen_height;
 
-	setup->game->screen_width = 640;
-	setup->game->screen_height = 480;
-	
-	mlx_get_screen_size(setup->game->mlx_ptr, &your_screen_width, &your_screen_height);	
-	if (setup->game->screen_width > your_screen_width)
-		setup->game->screen_width = your_screen_width;
-	if (setup->game->screen_height > your_screen_height)
-		setup->game->screen_height = your_screen_height;
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-	setup->game->win_ptr = mlx_new_window(setup->game->mlx_ptr, setup->game->screen_width, setup->game->screen_height, "Cub2D");
-	if (!setup->game->mlx_ptr || !setup->game->win_ptr)
-	{
-		perror("Failed to create MLX window");
-		free(setup->game);
-		free(setup);
-		exit(EXIT_FAILURE);
-	}
-}
 // void	set_direction(t_player *player, char dir);
 void	get_player_position(t_setup *setup)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	j = 0;
-	while (setup->game->map[++i])
+	i = 0;
+	while (setup->game->map[i])
 	{
+		// j = -1;
 		j = 0;
 		while (setup->game->map[i][j])
 		{
+			// [i] is the (row)(Y) and [j] is the (column)(X) in the map
+			setup->player->p_y = i + 0.5; // Player's Y position
+			setup->player->p_x = j + 0.5; // Player's X position
 			if (setup->game->map[i][j] == 'N')
 			{
-				// [i] is the (row)(Y) and [j] is the (column)(X) in the map
-				setup->player->p_y = i + 0.5; // Player's Y position
-				setup->player->p_x = j + 0.5; // Player's X position
-				// setup->player->dir_x = 0; // North direction
-				// setup->player->dir_y = -1; // North direction
+				printf("get the North player position\n");
+
+				setup->player->dir_x = 0;	// >>> for the row
+				setup->player->dir_y = -1;	// >>> for the colum
+
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 				// setup->player->plane_x = 0.66; // Camera plane X
 				// setup->player->plane_y = 0; // Camera plane Y
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 			}
 			else if (setup->game->map[i][j] == 'S')
 			{
-				
-				setup->player->p_y = i + 0.5;
-				setup->player->p_x = j + 0.5;
-				// setup->player->dir_x = 0; // South direction
-				// setup->player->dir_y = 1; // South direction
+				printf("get the South player position\n");
+
+				setup->player->dir_x = 0; // South direction
+				setup->player->dir_y = 1; // South direction
+
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 				// setup->player->plane_x = -0.66; // Camera plane X
 				// setup->player->plane_y = 0; // Camera plane Y
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			}
 			else if (setup->game->map[i][j] == 'E')
 			{
-				setup->player->p_y = i + 0.5;
-				setup->player->p_x = j + 0.5;
-				// setup->player->dir_x = 1; // East direction
-				// setup->player->dir_y = 0; // East direction
+				printf("get the East player position\n");
+
+				setup->player->dir_x = 1; // East direction
+				setup->player->dir_y = 0; // East direction
+
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 				// setup->player->plane_x = 0; // Camera plane X
 				// setup->player->plane_y = -0.66; // Camera plane Y
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 			}
 			else if (setup->game->map[i][j] == 'W')
 			{
-				setup->player->p_y = i + 0.5;
-				setup->player->p_x = j + 0.5;
-				// setup->player->dir_x = -1; // West direction
-				// setup->player->dir_y = 0; // West direction
+				printf("get the West player position\n");
+
+				setup->player->dir_x = -1; // West direction
+				setup->player->dir_y = 0; // West direction
+
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 				// setup->player->plane_x = 0; // Camera plane X
 				// setup->player->plane_y = 0.66; // Camera plane Y
+				// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 			}
 			j++;
 		}
+		i++;
 	}
+}
+
+// >>> as the name of the function converting from degrees to radians
+double	degrees_to_radians(int degree)
+{
+	double	radian;
+
+	// to get the radian we use the one PI (180 degree) 
+	// becouse the radian based on the PI that's why * 180
+	radian = degree * M_PI / 180.0;
+	return (radian);
+}
+
+// void	init_player_config(t_setup *setup)
+// {
+// 	// (void)setup;
+// 	t_player *player;
+
+// 	player = setup->player;
+
+// 	// >>> first thing first i have to give it the angle (FOV)
+// 	// >>> before that i have to create an way that convete degree to radians
+// 	player->angle = degrees_to_radians(60);	// >>> FOV of the player
+// 	player->move_speed = 0.05;	// >>> speed of up and down move
+// 	player->rot_speed = 0.05;	// >>> speed of left/right move 
+
+// 	get_player_position(setup); // here segv
+
+// }
+
+int	key_event(int key_code, t_setup *setup)
+{
+	(void)setup;
+	if (key_code == ESC_KEY)
+		return (printf("exit_the_game (ESC) pressed\n"), exit(1), 0);
+	// else if (key_code == UP_KEY)
+	// else if (key_code == DOWN_KEY)
+	// else if (key_code == LEFT_KEY)
+	// else if (key_code == RIGHT_KEY)
+	
+	return (0);
 }
 
 int	main()
@@ -129,13 +169,18 @@ int	main()
 	if (!setup->game)
 	{
 		perror("Failed to allocate memory for game");
-		free(setup);
 		return (1);
 	}
+	setup->player = malloc(sizeof(t_player));
+	if (!setup->player)
+	{
+		perror("Failed to allocate memory for game");
+		return (1);
+	}
+
 	
 	// >>> init the map
 	setup->game->map = map_init();
-
 
 	// >>> Initialize MLX first before using any MLX function
 	// >>> you must create a session and get the session pointer (mlx_ptr hold it) first
@@ -144,6 +189,11 @@ int	main()
 	// >>> open the window and check the resolution of the screen
 	open_window(setup);
 	
+	init_player_config(setup);	// >>> segv here to fix
+	
+	// >>> lession on the key event
+	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
+
 	// >>> keep the session alive and display the window without closing it
 	mlx_loop(setup->game->mlx_ptr);
 

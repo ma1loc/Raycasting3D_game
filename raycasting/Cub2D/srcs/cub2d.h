@@ -1,3 +1,7 @@
+# ifndef CUB2D_H
+# define CUB2D_H
+
+
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -25,7 +29,7 @@
 
 // this is just for the 3d view
 # define SCREEN_WIDTH 640
-// // this is just for the 3d view
+// this is just for the 3d view
 # define SCREEN_HEIGHT 480
 
 
@@ -62,11 +66,12 @@ typedef	struct s_player
 
 typedef struct s_game
 {
-	void	*mlx_ptr;
+	void	*mlx_ptr;	// >>> done
 	void	*win_ptr;
-	char	**map;
+	char	**map;		// >>> done
 	int		map_width;
 	int		map_height;
+	// for the 3D view
 	int		screen_width;	// this is just for the 3d view
 	int		screen_height;	// // this is just for the 3d view
 	int		tile_size;	// >>> size of the tile in pixels
@@ -79,3 +84,17 @@ typedef struct s_setup
 	t_player	*player;
 	t_game		*game;
 }	t_setup;
+
+// void	init_player_config(t_setup *setup);
+// void	open_window(t_game *game);
+void	init_player_config(t_player *player, t_game *game);
+void	get_player_position(t_player *player, t_game *game);
+int		key_event(int key_code, t_setup *setup);
+void	init_game_config(t_game *game);
+// void	init_game_config(t_game *game)
+// double	degrees_to_radians(int degree);
+// void	open_window(t_setup *setup);
+// void	get_player_position(t_setup *setup);
+
+
+# endif

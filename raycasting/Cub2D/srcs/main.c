@@ -4,7 +4,7 @@
 // second 3D projection
 // North(up), South(down), East(right), and West(left).
 
-t_setup	*setup_struct_init()
+void	*setup_struct_init()
 {
 	t_setup	*setup;
 
@@ -41,8 +41,9 @@ int	main()
 	init_player_config(setup->player, setup->game);
 	
 	// >>> lession on the key event
-	if (setup->game->win_ptr)
-		mlx_key_hook(setup->game->win_ptr, key_event, &setup);
+	// if (setup->game->win_ptr)
+
+	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
 
 	// >>> keep the session alive and display the window without closing it
 	mlx_loop(setup->game->mlx_ptr);

@@ -1,10 +1,11 @@
 # include "cub2d.h"
 
-char	**map_init()	// >>> to remove later on
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+char	**map_init() // >>> to remove later on
 {
-	static char map[5][7];
-	char **map_ptrs;
-	int i;
+	static char	map[5][7];
+	char		**map_ptrs;
+	int			i;
 
 	const char *default_map[] = {
 		"111111",
@@ -14,23 +15,28 @@ char	**map_init()	// >>> to remove later on
 		"111111",
 		NULL
 	};
+
 	i = 0;
 	while (i < 5)
 	{
 		strcpy(map[i], default_map[i]);
 		i++;
 	}
-	
+
 	map_ptrs = malloc(6 * sizeof(char *));
+	if (!map_ptrs)
+		return (NULL);
+
 	i = 0;
 	while (i < 5)
 	{
 		map_ptrs[i] = map[i];
 		i++;
 	}
+	map_ptrs[i] = NULL;
+
 	return (map_ptrs);
 }
-
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // done // for the 3D view used
 void	open_window(t_game *game)
@@ -58,8 +64,8 @@ void	open_window(t_game *game)
 
 void	open_window_2d(t_game *game)
 {
-	// int	width;
-	// int	height;	
+	int	width;
+	int	height;	
 
 	int i;
 	int j;
@@ -69,29 +75,36 @@ void	open_window_2d(t_game *game)
 	{
 		j = 0;
 		while (game->map[i][j])
-		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')
-			{
-				printf("get position\n");
-				return ;
-			}
 			j++;
-		}
 		i++;
 	}
+	width = i * game->tile_size;
+	height = j * game->tile_size;
+	game->screen_width = width;
+	game->screen_height = height;
 }
 
 void	init_game_config(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
-	// if (!game->mlx_ptr)
-		// >>> later on
+	if (!game->mlx_ptr)
+		return (printf("mlx_init filed\n"), exit(EXIT_FAILURE), (void)0);
 	// open_window(game);	// >>> 3D view used
+	game->tile_size = TILE_SIZE;
+	game->map = map_init();	// >>> the map
 	
+
+	open_window_2d(game);
+
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
+	if (!game->win_ptr)
+	{
+		perror("Failed to create MLX window");
+		exit(EXIT_FAILURE);
+	}
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-	game->map = map_init();	// >>> the map
-	// open_window_2d(game);
 
 
 }

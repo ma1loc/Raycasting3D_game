@@ -1,7 +1,6 @@
 # ifndef CUB2D_H
 # define CUB2D_H
 
-
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -26,6 +25,7 @@
 # define RIGHT_KEY XK_d
 # define ESC_KEY   XK_Escape
 
+# define TILE_SIZE 32
 
 // this is just for the 3d view
 # define SCREEN_WIDTH 640

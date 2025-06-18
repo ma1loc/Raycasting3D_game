@@ -58,31 +58,28 @@ void	init_west_position(t_player *player)
 }
 void	get_player_position(t_player *player, t_game *game)
 {
-	// int	i;
-	(void)player;
-	// int	j;
+	int	i;
+	int	j;
 
-	// i = 0;
-	if (!game->map[0])
-		printf("no map\n");
-	// while (game->map[i])
-	// {
-	// 	j = 0;
-	// 	while (game->map[i][j])
-	// 	{
-	// 		// [i] is the (row)(Y) and [j] is the (column)(X) in the map
-	// 		player->p_y = i + 0.5; // Player's Y position
-	// 		player->p_x = j + 0.5; // Player's X position
-	// 		if (game->map[i][j] == 'N')
-	// 			init_north_position(player);
-	// 		else if (game->map[i][j] == 'S')
-	// 			init_south_position(player);
-	// 		else if (game->map[i][j] == 'E')
-	// 			init_east_position(player);
-	// 		else if (game->map[i][j] == 'W')
-	// 			init_west_position(player);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			// [i] is the (row)(Y) and [j] is the (column)(X) in the map
+			player->p_y = i + 0.5; // Player's Y position
+			player->p_x = j + 0.5; // Player's X position
+			if (game->map[i][j] == 'N')
+				init_north_position(player);
+			else if (game->map[i][j] == 'S')
+				init_south_position(player);
+			else if (game->map[i][j] == 'E')
+				init_east_position(player);
+			else if (game->map[i][j] == 'W')
+				init_west_position(player);
+			j++;
+		}
+		i++;
+	}
 }

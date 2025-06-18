@@ -37,8 +37,9 @@ char	**map_init() // >>> to remove later on
 
 	return (map_ptrs);
 }
+
+// >>>>>>>>>>>>>>>>>> done // for the 3D view used >>>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-// done // for the 3D view used
 void	open_window(t_game *game)
 {
 	// >>> screen width and height, just in case for later use
@@ -78,8 +79,11 @@ void	open_window_2d(t_game *game)
 			j++;
 		i++;
 	}
-	width = i * game->tile_size;
-	height = j * game->tile_size;
+	// j is column count (width of a row)
+	// i is row count (height of map)
+	width = j * game->tile_size;
+	height = i * game->tile_size;
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	game->screen_width = width;
 	game->screen_height = height;
 }
@@ -90,12 +94,9 @@ void	init_game_config(t_game *game)
 	if (!game->mlx_ptr)
 		return (printf("mlx_init filed\n"), exit(EXIT_FAILURE), (void)0);
 	// open_window(game);	// >>> 3D view used
-	game->tile_size = TILE_SIZE;
+	game->tile_size = TILE_SIZE;	// TILE_SIZE = 32
 	game->map = map_init();	// >>> the map
-	
-
 	open_window_2d(game);
-
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
 	if (!game->win_ptr)
@@ -104,7 +105,4 @@ void	init_game_config(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
 }

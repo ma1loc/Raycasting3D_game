@@ -67,14 +67,14 @@ typedef	struct s_player
 typedef struct s_game
 {
 	void	*mlx_ptr;	// >>> done
-	void	*win_ptr;
+	void	*win_ptr;	// >>> done
 	char	**map;		// >>> done
-	int		map_width;
-	int		map_height;
+	int		map_width;	// >>> done
+	int		map_height;	// >>> done
 	// for the 3D view
 	int		screen_width;	// this is just for the 3d view
 	int		screen_height;	// // this is just for the 3d view
-	int		tile_size;	// >>> size of the tile in pixels
+	int		tile_size;	// >>> done
 }	t_game;
 
 // >>> this is the core structure of the game
@@ -89,6 +89,7 @@ typedef struct s_setup
 // void	open_window(t_game *game);
 void	init_player_config(t_player *player, t_game *game);
 void	get_player_position(t_player *player, t_game *game);
+// void	get_player_position(t_player *player, t_game *game);
 int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
 // void	init_game_config(t_game *game)

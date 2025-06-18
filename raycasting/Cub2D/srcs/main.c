@@ -37,11 +37,8 @@ int	main()
 
 	setup = setup_struct_init();
 	
-	init_game_config(setup->game);
-	init_player_config(setup->player, setup->game);
-	
-	// >>> lession on the key event
-	// if (setup->game->win_ptr)
+	init_game_config(setup->game);	// init t_game
+	init_player_config(setup->player, setup->game);	// init t_player
 
 	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
 

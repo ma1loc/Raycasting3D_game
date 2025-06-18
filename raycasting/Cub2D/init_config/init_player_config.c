@@ -20,7 +20,7 @@ void	init_player_config(t_player *player, t_game *game)
 	player->move_speed = 0.05;	// >>> speed of up and down move
 	player->rot_speed = 0.05;	// >>> speed of left/right move 
 
-	// get_player_position(player, game);
+	get_player_position(player, game);
 
 }
 

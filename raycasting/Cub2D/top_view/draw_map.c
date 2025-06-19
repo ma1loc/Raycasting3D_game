@@ -34,43 +34,33 @@ void	draw_map(t_game *game)
 	}
 }
 
-// void	draw_player_dot(t_player *player, t_game *game)
-// {
-// 	int	x = player->p_x * TILE_SIZE;
-// 	int	y = player->p_y * TILE_SIZE;
-// 	int	radius_outer = 4; // stroke (black)
-// 	int	radius_inner = 3; // core (red)
-
-// 	for (int dx = -radius_outer; dx <= radius_outer; dx++)
-// 	{
-// 		for (int dy = -radius_outer; dy <= radius_outer; dy++)
-// 		{
-// 			int dist2 = dx * dx + dy * dy;
-// 			if (dist2 <= radius_outer * radius_outer)
-// 			{
-// 				int color = (dist2 <= radius_inner * radius_inner) ? 0xFF0000 : 0x000000;
-// 				mlx_pixel_put(game->mlx_ptr, game->win_ptr, x + dx, y + dy, color);
-// 			}
-// 		}
-// 	}
-// }
-
-// Correct:
-
-
-
-// void	draw_player_dot(t_player *player, t_game *game)
-// {
-// 	// first thing we have to know the player direction
-// 	int	pixel_x;
-// 	int	pixel_y;
-// 	int	radius;
+void	draw_player_dot(t_player *player, t_game *game)
+{
+	// first thing we have to know the player direction
+	int	pixel_x;
+	int	pixel_y;
+	int	radius;
+	int	dx;
+	int	dy;
 	
-// 	// >>> my question is i workd with the (TILE_SIZE = 32) in the 3d view and 2d
-// 	int pixel_x = player->p_x * TILE_SIZE; // column → horizontal → x
-// 	int pixel_y = player->p_y * TILE_SIZE; // row → vertical → y
-// 	radius = 4;
-
-
-
-// }
+	
+	// >>> my question is i workd with the (TILE_SIZE = 32) in the 3d view and 2d
+	pixel_x = player->p_x * TILE_SIZE; // column → horizontal → x
+	pixel_y = player->p_y * TILE_SIZE; // row → vertical → y
+	radius = 4;	// radius = 4 -> 8px
+	dx = -radius;	// col
+	while (dx <= radius)
+	{
+		printf("dx = %d\n", dx);
+		dy = -radius;	// row
+		while (dy <= radius)
+		{
+			printf("dy = %d\n", dy);
+			if (dx * dx + dy * dy <= radius * radius)
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+					pixel_x + dx, pixel_y + dy, RED_COLOR);
+			dy++;
+		}
+		dx++;
+	}
+}

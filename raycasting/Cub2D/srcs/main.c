@@ -14,10 +14,12 @@ int	main()
 	init_player_config(setup->player, setup->game);	// init t_player
 
 	draw_map(setup->game);
-	// draw_player_dot(setup->player, setup->game);
+	draw_player_dot(setup->player, setup->game);
 	
-	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
+	printf("player->p_y %f\n", setup->player->p_y);
 
+	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
+	
 	// >>> keep the session alive and display the window without closing it
 	mlx_loop(setup->game->mlx_ptr);
 

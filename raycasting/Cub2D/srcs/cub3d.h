@@ -15,6 +15,7 @@
 
 # define GRAY_COLOR 0xAAAAAA
 # define D_GRAY_COLOR 0x222222
+#define RED_COLOR 0xFF0000
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -99,6 +100,7 @@ int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
 
 // drawing 2d top view
+void	draw_player_dot(t_player *player, t_game *game);
 void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);
 

@@ -46,15 +46,21 @@ void	load_player_img(t_player *player, t_game *game)
 	}
 }
 
+// void	load_wall_img(t_player *player, t_game *game)
+// {
+
+// }
+
 void	draw_player_img(t_player *player, t_game *game)
 {
 	int x = player->p_x * TILE_SIZE;
 	int y = player->p_y * TILE_SIZE;
 
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-		player->player_img, x, y); // adjust -8 to center the sprite
-		// player->player_img, x - 8, y - 8); // adjust -8 to center the sprite
+		player->player_img, x - 8, y - 8); // adjust -8 to center the sprite
 }
+
+// void	draw_walls_img()
 
 
 int	main()

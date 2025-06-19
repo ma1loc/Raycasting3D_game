@@ -3,6 +3,8 @@
 // simple 2D map first
 // second 3D projection
 // North(up), South(down), East(right), and West(left).
+// flickering to fix
+// pressed keyyyyyyyyyyyyyyyy
 
 int	main()
 {
@@ -16,11 +18,10 @@ int	main()
 	draw_map(setup->game);
 	draw_player_dot(setup->player, setup->game);
 	
-	printf("player->p_y %f\n", setup->player->p_y);
-
-	mlx_key_hook(setup->game->win_ptr, key_event, &setup);
+	mlx_key_hook(setup->game->win_ptr, key_event, setup);
 	
 	// >>> keep the session alive and display the window without closing it
+	
 	mlx_loop(setup->game->mlx_ptr);
 
 	return (0);

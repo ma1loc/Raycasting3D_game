@@ -66,9 +66,9 @@ typedef	struct s_player
 	// double	plane_x;
 	// double	plane_y;
 
-	void	*player_img;
-	void	*wall_img;
-	void	*back_img;
+	// void	*player_img;
+	// void	*wall_img;
+	// void	*back_img;
 
 }	t_player;
 

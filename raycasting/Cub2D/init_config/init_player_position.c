@@ -1,4 +1,4 @@
-# include "cub2d.h"
+# include "cub3d.h"
 
 // void	set_direction(t_player *player, char dir);
 // North(up), South(down), East(right), and West(left).

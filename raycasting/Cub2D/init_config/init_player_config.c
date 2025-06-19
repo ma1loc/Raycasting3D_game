@@ -1,4 +1,4 @@
-# include "cub2d.h"
+# include "cub3d.h"
 
 // >>> as the name of the function converting from degrees to radians
 double	degrees_to_radians(int degree)

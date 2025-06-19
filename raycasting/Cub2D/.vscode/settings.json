@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"cub2d.h": "c"
+		"cub2d.h": "c",
+		"random": "c"
 	}
 }

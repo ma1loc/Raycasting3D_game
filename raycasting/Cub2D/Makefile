@@ -9,7 +9,8 @@ MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 MLX_INCLUDE = -Iminilibx-linux
 
 SRC = ./srcs/main.c ./init_config/init_player_config.c ./init_config/key_event.c \
-	./init_config/init_player_position.c ./init_config/init_game_config.c
+	./init_config/init_player_position.c ./init_config/init_game_config.c \
+	./init_config/init_setup.c ./top_view/draw_map.c
 
 OBJ = $(SRC:.c=.o)
 

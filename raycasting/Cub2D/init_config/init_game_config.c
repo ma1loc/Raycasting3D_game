@@ -1,18 +1,18 @@
-# include "cub2d.h"
+# include "cub3d.h"
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 char	**map_init() // >>> to remove later on
 {
-	static char	map[5][7];
+	static char	map[5][11];
 	char		**map_ptrs;
 	int			i;
 
 	const char *default_map[] = {
-		"111111",
-		"1N0011",
-		"100001",
-		"110001",
-		"111111",
+		"1111111111",
+		"1N00001111",
+		"1001000001",
+		"1101000111",
+		"1111111111",
 		NULL
 	};
 
@@ -95,9 +95,9 @@ void	init_game_config(t_game *game)
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (printf("mlx_init filed\n"), exit(EXIT_FAILURE), (void)0);
-	// open_window(game);	// >>> 3D view used
 	game->tile_size = TILE_SIZE;	// TILE_SIZE = 32
 	game->map = map_init();	// >>> the map
+	// open_window(game);	// >>> 3D view used
 	open_window_2d(game);
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");

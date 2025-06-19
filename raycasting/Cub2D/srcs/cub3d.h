@@ -1,5 +1,5 @@
-# ifndef CUB2D_H
-# define CUB2D_H
+# ifndef CUB3D_H
+# define CUB3D_H
 
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -13,6 +13,8 @@
 # include <string.h>
 # include <math.h>
 
+# define GRAY_COLOR 0xAAAAAA
+# define D_GRAY_COLOR 0x222222
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -90,17 +92,15 @@ typedef struct s_setup
 	t_game		*game;
 }	t_setup;
 
-// void	init_player_config(t_setup *setup);
-// void	open_window(t_game *game);
+void	*setup_struct_init();
 void	init_player_config(t_player *player, t_game *game);
 void	get_player_position(t_player *player, t_game *game);
-// void	get_player_position(t_player *player, t_game *game);
 int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
-// void	init_game_config(t_game *game)
-// double	degrees_to_radians(int degree);
-// void	open_window(t_setup *setup);
-// void	get_player_position(t_setup *setup);
+
+// drawing 2d top view
+void	draw_tile(t_game *game, int col, int row, int color);
+void	draw_map(t_game *game);
 
 
 # endif

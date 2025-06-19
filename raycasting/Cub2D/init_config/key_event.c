@@ -1,4 +1,4 @@
-# include "cub2d.h"
+# include "cub3d.h"
 
 int	key_event(int key_code, t_setup *setup)
 {

@@ -1,24 +1,11 @@
 # include "cub3d.h"
 
-void	draw_tile(t_game *game, int col, int row, int color)
-{
-	int	i;
-	int j;
-
-	i = -1;
-	while (++i < TILE_SIZE)
-	{
-		j = -1;
-		while (++j < TILE_SIZE)
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr,
-				col * TILE_SIZE + j, row * TILE_SIZE + i, color);
-	}
-}
-
-void	draw_map(t_game *game)
+void	draw_top_view_map(t_game *game, t_player *player)
 {
 	int	row;
 	int col;
+
+	(void)player;
 
 	row = -1;
 	while (game->map[++row])
@@ -27,22 +14,22 @@ void	draw_map(t_game *game)
 		while (game->map[row][++col])
 		{
 			if (game->map[row][col] == '1')
-				draw_tile(game, col, row, D_GRAY_COLOR);
+				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+				game->top_view->wall_img, col * TILE_SIZE, row * TILE_SIZE);
 			else 
-				draw_tile(game, col, row, GRAY_COLOR);
+				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+				game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
 		}
 	}
 }
 
 void	draw_player_dot(t_player *player, t_game *game)
 {
-	// first thing we have to know the player direction
 	int	pixel_x;
 	int	pixel_y;
 	int	radius;
 	int	dx;
 	int	dy;
-	
 	
 	// >>> my question is i workd with the (TILE_SIZE = 32) in the 3d view and 2d
 	pixel_x = player->p_x * TILE_SIZE; // column → horizontal → x
@@ -57,15 +44,10 @@ void	draw_player_dot(t_player *player, t_game *game)
 		{
 			// printf("dy = %d\n", dy);
 			if (dx * dx + dy * dy <= radius * radius)
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
-					pixel_x + dx, pixel_y + dy, RED_COLOR);
-			dy++;
+			mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+				pixel_x + dx, pixel_y + dy, RED_COLOR);
+				dy++;
+			}
+			dx++;
 		}
-		dx++;
-	}
 }
-
-
-// void	draw_tile(t_game *game, int col, int row, int color);
-// void	draw_map(t_game *game);
-// void	draw_player_dot(t_player *player, t_game *game);

@@ -13,8 +13,8 @@
 # include <string.h>
 # include <math.h>
 
-# define GRAY_COLOR 0xAAAAAA
-# define D_GRAY_COLOR 0x222222
+// # define GRAY_COLOR 0xAAAAAA
+// # define D_GRAY_COLOR 0x222222
 #define RED_COLOR 0xFF0000
 
 # define EXIT_SUCCESS 0
@@ -47,6 +47,13 @@
 //     int     height;
 // }   t_image;
 
+typedef struct s_top_view
+{
+	void	*player_img;
+	void	*wall_img;
+	void	*free_space_img;
+}	t_top_view;
+
 typedef	struct s_player
 {
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -59,16 +66,14 @@ typedef	struct s_player
 	// how to init this at first just loop thghout the map and git it value of int not float
 	double	p_x;
 	double	p_y;
+
 	// >>> player direction in the map (north, south, east, west)
 	double	dir_x;
 	double	dir_y;
+
 	/// >>> player camera plane for the (fov)field of view of the player
 	// double	plane_x;
 	// double	plane_y;
-
-	// void	*player_img;
-	// void	*wall_img;
-	// void	*back_img;
 
 }	t_player;
 
@@ -83,6 +88,9 @@ typedef struct s_game
 	int		screen_width;	// this is just for the 3d view
 	int		screen_height;	// // this is just for the 3d view
 	int		tile_size;	// >>> done
+
+	// for the 2D top view
+	t_top_view	*top_view;
 }	t_game;
 
 // >>> this is the core structure of the game
@@ -91,6 +99,7 @@ typedef struct s_setup
 {
 	t_player	*player;
 	t_game		*game;
+	// t_top_view	*top_view;
 }	t_setup;
 
 void	*setup_struct_init();
@@ -100,6 +109,10 @@ int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
 
 // drawing 2d top view
+void	draw_player_dot(t_player *player, t_game *game);
+void	draw_top_view_map(t_game *game, t_player *player);
+// void	draw_map(t_game *game);
+void	load_images_top_view(t_setup *setup);
 void	draw_player_dot(t_player *player, t_game *game);
 void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);

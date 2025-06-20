@@ -23,5 +23,12 @@ void	*setup_struct_init()
 		perror("Failed to allocate memory for game");
 		exit(1);
 	}
+
+	setup->game->top_view = malloc(sizeof(t_top_view));
+	if (!setup->game->top_view)
+	{
+		perror("Failed to allocate memory for game");
+		exit(1);
+	}
 	return (setup);
 }

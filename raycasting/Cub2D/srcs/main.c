@@ -15,8 +15,12 @@ int	main()
 	init_game_config(setup->game);	// init t_game
 	init_player_config(setup->player, setup->game);	// init t_player
 
-	// draw_map(setup->game);
-	// draw_player_dot(setup->player, setup->game);
+	// first thing here is to load the images
+	load_images_top_view(setup);
+
+	draw_top_view_map(setup->game, setup->player);
+	draw_player_dot(setup->player, setup->game);
+
 	
 	mlx_key_hook(setup->game->win_ptr, key_event, setup);
 	// mlx_hook(setup->game->win_ptr, 17, 0, NULL, NULL);

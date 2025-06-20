@@ -14,6 +14,8 @@ double	degrees_to_radians(int degree)
 void	init_player_config(t_setup *setup)
 {
 	
+	// seting shit setup here
+
 	// >>> first thing first i have to give it the angle (FOV)
 	// >>> before that i have to create an way that convete degree to radians
 	player->angle = degrees_to_radians(60);	// >>> FOV of the player

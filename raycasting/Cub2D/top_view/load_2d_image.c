@@ -2,8 +2,6 @@
 
 void	load_images_top_view(t_setup *setup)
 {
-	// void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *height);
-
 	t_top_view	*top_view;
 	int			width;
 	int			height;

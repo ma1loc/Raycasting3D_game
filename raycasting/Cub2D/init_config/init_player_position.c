@@ -1,6 +1,5 @@
 # include "cub3d.h"
 
-// void	set_direction(t_player *player, char dir);
 // North(up), South(down), East(right), and West(left).
 
 void	init_north_position(t_player *player, int row, int col)

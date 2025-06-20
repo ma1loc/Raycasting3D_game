@@ -31,9 +31,9 @@
 # define TILE_SIZE 32
 
 // this is just for the 3d view
-# define SCREEN_WIDTH 640
+# define SCREEN_WIDTH 1920
 // this is just for the 3d view
-# define SCREEN_HEIGHT 480
+# define SCREEN_HEIGHT 1080
 
 
 // typedef struct s_image
@@ -78,8 +78,8 @@ typedef	struct s_player
 	double	dir_y;
 
 	/// >>> player camera plane for the (fov)field of view of the player
-	// double	plane_x;
-	// double	plane_y;
+	double	plane_x;
+	double	plane_y;
 
 }	t_player;
 

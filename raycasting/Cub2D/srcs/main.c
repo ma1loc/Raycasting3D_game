@@ -5,6 +5,7 @@
 // North(up), South(down), East(right), and West(left).
 // flickering to fix
 // pressed keyyyyyyyyyyyyyyyy
+// to create my_mlx_put_pixel() later on
 
 int	main()
 {

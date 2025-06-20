@@ -97,12 +97,10 @@ void	init_game_config(t_game *game)
 	game->map = map_init();	// >>> the map
 	// open_window(game);	// >>> 3D view used
 	open_window_2d(game);
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
 	if (!game->win_ptr)
 	{
 		perror("Failed to create MLX window");
 		exit(EXIT_FAILURE);
 	}
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }

@@ -8,11 +8,14 @@
 // here i have to get is the new press key hit the wall or not to move the player a bit
 int	is_wall(t_setup *setup, int key_code)
 {
-	if (setup->game->map[(int)setup->direction->new_p_x][(int)setup->direction->new_p_x] == "1")
+	t_direction	*direction;
+
+	direction = setup->direction;
+	if (setup->game->map[(int)setup->direction->new_p_x][(int)setup->direction->new_p_x] == '1')
 	{
 		//  i think i have to return the new_px/y to the defult if it wall, right?
-		direction->new_p_x = player->p_x;
-		direction->new_p_y = player->p_y;
+		direction->new_p_x = setup->player->p_x;
+		direction->new_p_y = setup->player->p_y;
 		return (1);
 	}
 	else if (key_code == UP_KEY)
@@ -28,6 +31,7 @@ int	is_wall(t_setup *setup, int key_code)
 	// move the FOV to right
 	else if (key_code == RIGHT_KEY)
 		setup->player->p_x = direction->new_p_x;
+	return (0);
 }
 
 
@@ -55,7 +59,7 @@ int	key_event(int key_code, t_setup *setup)
 	else if (key_code == RIGHT_KEY)
 		direction->new_p_x += 0.1;
 
-	if (is_wall(setup, int key_code));
+	if (is_wall(setup, key_code))
 		return (0);
 
 	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);

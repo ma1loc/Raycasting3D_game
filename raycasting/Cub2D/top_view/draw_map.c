@@ -64,3 +64,8 @@ void	draw_player_dot(t_player *player, t_game *game)
 		dx++;
 	}
 }
+
+
+// void	draw_tile(t_game *game, int col, int row, int color);
+// void	draw_map(t_game *game);
+// void	draw_player_dot(t_player *player, t_game *game);

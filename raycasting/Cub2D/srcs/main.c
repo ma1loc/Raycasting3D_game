@@ -15,13 +15,12 @@ int	main()
 	init_game_config(setup->game);	// init t_game
 	init_player_config(setup->player, setup->game);	// init t_player
 
-	draw_map(setup->game);
-	draw_player_dot(setup->player, setup->game);
+	// draw_map(setup->game);
+	// draw_player_dot(setup->player, setup->game);
 	
 	mlx_key_hook(setup->game->win_ptr, key_event, setup);
-	
-	// >>> keep the session alive and display the window without closing it
-	
+	// mlx_hook(setup->game->win_ptr, 17, 0, NULL, NULL);
+	// mlx_loop_hook(setup->game->mlx_ptr);
 	mlx_loop(setup->game->mlx_ptr);
 
 	return (0);

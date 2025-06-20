@@ -25,8 +25,8 @@ void	init_player_config(t_setup *setup)
 	player->rot_speed = 0.05;	// >>> speed of left/right move 
 	
 	// init the new row/col
-	setup->direction->new_row = player->p_y;
-	setup->direction->new_col = player->p_x;
+	setup->direction->new_p_y = player->p_y;
+	setup->direction->new_p_x = player->p_x;
 
 	get_player_position(setup->player, setup->game);
 

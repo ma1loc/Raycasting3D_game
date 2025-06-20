@@ -49,8 +49,8 @@
 
 typedef struct s_direction
 {
-	double	new_row;
-	double	new_col;
+	double	new_p_y;
+	double	new_p_x;
 }	t_direction;
 
 typedef struct s_top_view

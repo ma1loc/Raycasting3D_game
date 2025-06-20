@@ -9,55 +9,60 @@
 int	is_wall(t_setup *setup, int key_code)
 {
 	t_direction	*direction;
-
+	t_player	*player;
+	double		radius;
+	double 		x;
+	double		y;
+	
+	radius = 4 / TILE_SIZE;
+	player = setup->player;
 	direction = setup->direction;
-	if (setup->game->map[(int)setup->direction->new_p_x][(int)setup->direction->new_p_x] == '1')
+	x = direction->new_p_x;
+	y = direction->new_p_y;
+
+	if (setup->game->map[(int)(y - radius)][(int)(x - radius)] == '1' ||
+		setup->game->map[(int)(y - radius)][(int)(x + radius)] == '1' ||
+		setup->game->map[(int)(y + radius)][(int)(x - radius)] == '1' ||
+		setup->game->map[(int)(y + radius)][(int)(x + radius)] == '1')
 	{
-		//  i think i have to return the new_px/y to the defult if it wall, right?
-		direction->new_p_x = setup->player->p_x;
-		direction->new_p_y = setup->player->p_y;
+		direction->new_p_x = player->p_x;
+		direction->new_p_y = player->p_y;
 		return (1);
 	}
-	else if (key_code == UP_KEY)
-		setup->player->p_y = direction->new_p_y;
-	
-	else if (key_code == DOWN_KEY)
+	else if (key_code == UP_KEY || key_code == DOWN_KEY)
 		setup->player->p_y = direction->new_p_y;
 	
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// move the FOV to left
-	else if (key_code == LEFT_KEY)
-		setup->player->p_x = direction->new_p_x;
 	// move the FOV to right
-	else if (key_code == RIGHT_KEY)
+	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
 		setup->player->p_x = direction->new_p_x;
+
 	return (0);
 }
 
-
 int	key_event(int key_code, t_setup *setup)
 {
-	t_direction	*direction;
+	t_direction	*dir;
+	t_player	*player;
+	
+	
+	dir = setup->direction;
+	player = setup->player;
+	dir->new_p_x = player->p_x;
+	dir->new_p_y = player->p_y;
 
-	direction = setup->direction;
 	if (key_code == ESC_KEY)
-		return (printf("exit_the_game (ESC) pressed\n"), exit(1), 0);
-	
-	// player->p_y -= 0.1;
-	else if (key_code == UP_KEY)
-		direction->new_p_y -= 0.1;
-	
-	// player->p_y += 0.1;
+		return (printf("exit_the_game (ESC) pressed\n"), exit(0), 0);
+
+	if (key_code == UP_KEY)
+		dir->new_p_y -= 0.2;
 	else if (key_code == DOWN_KEY)
-		direction->new_p_y += 0.1;
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// move the FOV to left
+		dir->new_p_y += 0.2;
 	else if (key_code == LEFT_KEY)
-		direction->new_p_x -= 0.1;
-	// move the FOV to right
+		dir->new_p_x -= 0.2;
 	else if (key_code == RIGHT_KEY)
-		direction->new_p_x += 0.1;
+		dir->new_p_x += 0.2;
 
 	if (is_wall(setup, key_code))
 		return (0);
@@ -65,6 +70,6 @@ int	key_event(int key_code, t_setup *setup)
 	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
 	draw_top_view_map(setup->game, setup->player);
 	draw_player_dot(setup->player, setup->game);
-	
+
 	return (0);
 }

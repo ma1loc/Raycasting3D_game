@@ -6,6 +6,10 @@
 // flickering to fix
 // pressed keyyyyyyyyyyyyyyyy
 // to create my_mlx_put_pixel() later on
+// >>>>>>>>>>>>>>>>>>> TO kNOW <<<<<<<<<<<<<<<<<<<<<<
+	// to knwo why the mlx_put_pixel flickering and slow?
+	// to know how mlx_do_key_autorepeaton(void *mlx_ptr) work?
+	// to know what the fucking diff mlx_hook, mlx_loop_hook, mlx_loop
 
 int	main()
 {
@@ -22,11 +26,22 @@ int	main()
 	draw_top_view_map(setup->game, setup->player);
 	draw_player_dot(setup->player, setup->game);
 
-	
 	mlx_key_hook(setup->game->win_ptr, key_event, setup);
+	
+	// mlx_do_key_autorepeaton(setup->game->mlx_ptr);
+	// mlx_key_autorepeat_on(setup->game->mlx_ptr);
+	mlx_do_key_autorepeaton(setup->game->mlx_ptr);
+
 	// mlx_hook(setup->game->win_ptr, 17, 0, NULL, NULL);
 	// mlx_loop_hook(setup->game->mlx_ptr);
+	
+	// mlx_hook(win, 2, 0, key_press, setup);
+	// mlx_hook(win, 3, 0, key_release, setup);
+	// mlx_loop_hook(mlx_ptr, update, setup);
+	// mlx_loop(mlx_ptr);
+	
 	mlx_loop(setup->game->mlx_ptr);
+	
 
 	return (0);
 }

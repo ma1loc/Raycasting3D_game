@@ -47,6 +47,12 @@
 //     int     height;
 // }   t_image;
 
+typedef struct s_direction
+{
+	double	new_row;
+	double	new_col;
+}	t_direction;
+
 typedef struct s_top_view
 {
 	void	*player_img;
@@ -99,11 +105,12 @@ typedef struct s_setup
 {
 	t_player	*player;
 	t_game		*game;
+	t_direction	*direction;
 	// t_top_view	*top_view;
 }	t_setup;
 
 void	*setup_struct_init();
-void	init_player_config(t_player *player, t_game *game);
+void	init_player_config(t_setup *setup);
 void	get_player_position(t_player *player, t_game *game);
 int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);

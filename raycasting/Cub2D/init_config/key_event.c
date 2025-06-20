@@ -1,6 +1,9 @@
 # include "cub3d.h"
 
-
+int	pressed_key(t_setup *setup)
+{
+	
+}
 
 int	key_event(int key_code, t_setup *setup)
 {

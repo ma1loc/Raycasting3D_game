@@ -84,8 +84,6 @@ void	open_window_2d(t_game *game)
 	width = j * game->tile_size;
 	height = i * game->tile_size;
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	printf("width %d\n", width);
-	printf("height %d\n", height);
 	game->screen_width = width;
 	game->screen_height = height;
 }

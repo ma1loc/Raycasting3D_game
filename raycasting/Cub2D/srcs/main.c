@@ -13,7 +13,7 @@ int	main()
 	setup = setup_struct_init();
 	
 	init_game_config(setup->game);	// init t_game
-	init_player_config(setup->player, setup->game);	// init t_player
+	init_player_config(setup);	// init t_player
 
 	// first thing here is to load the images
 	load_images_top_view(setup);

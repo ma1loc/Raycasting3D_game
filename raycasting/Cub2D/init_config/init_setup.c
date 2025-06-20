@@ -30,5 +30,11 @@ void	*setup_struct_init()
 		perror("Failed to allocate memory for game");
 		exit(1);
 	}
+	setup->direction = malloc(sizeof(t_direction));
+	if (!setup->direction)
+	{
+		perror("Failed to allocate memory for game");
+		exit(1);
+	}
 	return (setup);
 }

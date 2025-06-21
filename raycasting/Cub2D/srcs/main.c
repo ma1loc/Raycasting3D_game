@@ -7,6 +7,7 @@
 // pressed keyyyyyyyyyyyyyyyy
 // to create my_mlx_put_pixel() later on
 // >>>>>>>>>>>>>>>>>>> TO kNOW <<<<<<<<<<<<<<<<<<<<<<
+	// i think about the mlx as engen taht i have to start it (mlx_init) to get start woking with it
 	// to knwo why the mlx_put_pixel flickering and slow?
 	// to know how mlx_do_key_autorepeaton(void *mlx_ptr) work?
 	// to know what the fucking diff mlx_hook, mlx_loop_hook, mlx_loop
@@ -17,16 +18,20 @@ int	main()
 
 	setup = setup_struct_init();
 	
-	init_game_config(setup->game);	// init t_game
-	init_player_config(setup);	// init t_player
+	init_game_config(setup->game);
 
-	// first thing here is to load the images
+	init_player_config(setup);
+
 	load_images_top_view(setup);
 
 	draw_top_view_map(setup->game, setup->player);
+
 	draw_player_dot(setup->player, setup->game);
 
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// just listener in the key pressed
 	mlx_key_hook(setup->game->win_ptr, key_event, setup);
+
 	
 	// mlx_do_key_autorepeaton(setup->game->mlx_ptr);
 	// mlx_key_autorepeat_on(setup->game->mlx_ptr);

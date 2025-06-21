@@ -21,9 +21,9 @@ void	init_player_config(t_setup *setup)
 	// >>> first thing first i have to give it the angle (FOV)
 	// >>> before that i have to create an way that convete degree to radians
 	player->angle = degrees_to_radians(60);	// >>> FOV of the player
-	player->move_speed = 0.05;	// >>> speed of up and down move
-	player->rot_speed = 0.05;	// >>> speed of left/right move 
-	
+	player->move_speed = MOVE_SPEED;	// >>> speed of up and down move
+	player->rot_speed = ROT_SPEED;		// >>> speed of left/right move 
+
 	// init the new row/col
 	setup->direction->new_p_y = player->p_y;
 	setup->direction->new_p_x = player->p_x;
@@ -31,4 +31,3 @@ void	init_player_config(t_setup *setup)
 	get_player_position(setup->player, setup->game);
 
 }
-

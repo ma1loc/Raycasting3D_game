@@ -25,7 +25,6 @@ int	key_event(int key_code, t_setup *setup)
 	t_direction	*dir = setup->direction;
 	t_player	*player = setup->player;
 
-	// 🟡 Reset starting position
 	dir->new_p_x = player->p_x;
 	dir->new_p_y = player->p_y;
 

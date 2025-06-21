@@ -20,6 +20,19 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
+// >>> pixel based to use
+# define TILE_SIZE 32
+
+// >>> filed of view
+# define FOV 60.0
+
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.05
+
+// >>> this is just for the 3d view
+# define SCREEN_WIDTH 1920
+// >>> this is just for the 3d view
+# define SCREEN_HEIGHT 1080
 
 // the key presed to add
 # define UP_KEY    XK_w
@@ -27,14 +40,6 @@
 # define LEFT_KEY  XK_a
 # define RIGHT_KEY XK_d
 # define ESC_KEY   XK_Escape
-
-# define TILE_SIZE 32
-
-// this is just for the 3d view
-# define SCREEN_WIDTH 1920
-// this is just for the 3d view
-# define SCREEN_HEIGHT 1080
-
 
 // typedef struct s_image
 // {

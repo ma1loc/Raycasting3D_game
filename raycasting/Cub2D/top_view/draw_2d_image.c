@@ -23,6 +23,11 @@ void	draw_top_view_map(t_game *game, t_player *player)
 	}
 }
 
+void	draw_facing_line()
+{
+
+}
+
 void	draw_player_dot(t_player *player, t_game *game)
 {
 	int	pixel_x;
@@ -38,11 +43,9 @@ void	draw_player_dot(t_player *player, t_game *game)
 	dx = -radius;	// col
 	while (dx <= radius)
 	{
-		// printf("dx = %d\n", dx);
 		dy = -radius;	// row
 		while (dy <= radius)
 		{
-			// printf("dy = %d\n", dy);
 			if (dx * dx + dy * dy <= radius * radius)
 			mlx_pixel_put(game->mlx_ptr, game->win_ptr,
 				pixel_x + dx, pixel_y + dy, RED_COLOR);

@@ -34,6 +34,9 @@
 // >>> this is just for the 3d view
 # define SCREEN_HEIGHT 1080
 
+// >>> to remove it latter and based on the map char now just a test
+# define ANGEL 'N'
+
 // the key presed to add
 # define UP_KEY    XK_w
 # define DOWN_KEY  XK_s
@@ -92,13 +95,13 @@ typedef struct s_game
 {
 	void	*mlx_ptr;	// >>> done
 	void	*win_ptr;	// >>> done
-	char	**map;		// >>> done
 	int		map_width;	// >>> done
 	int		map_height;	// >>> done
 	// for the 3D view
 	int		screen_width;	// this is just for the 3d view
 	int		screen_height;	// // this is just for the 3d view
 	int		tile_size;	// >>> done
+	char	**map;		// >>> done
 
 	// for the 2D top view
 	t_top_view	*top_view;
@@ -119,6 +122,7 @@ void	init_player_config(t_setup *setup);
 void	get_player_position(t_player *player, t_game *game);
 int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
+double	degrees_to_radians(int degree);
 
 // drawing 2d top view
 void	draw_player_dot(t_player *player, t_game *game);

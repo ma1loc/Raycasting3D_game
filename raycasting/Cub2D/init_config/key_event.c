@@ -55,10 +55,13 @@ int	key_event(int key_code, t_setup *setup)
 	if (key_code == ESC_KEY)
 		return (printf("exit_the_game (ESC) pressed\n"), exit(0), 0);
 
+	// move the player up/down
 	if (key_code == UP_KEY)
 		dir->new_p_y -= 0.2;
 	else if (key_code == DOWN_KEY)
 		dir->new_p_y += 0.2;
+	// rotate the player left/right
+	// to fix -> i have to get this in the right direction
 	else if (key_code == LEFT_KEY)
 		dir->new_p_x -= 0.2;
 	else if (key_code == RIGHT_KEY)

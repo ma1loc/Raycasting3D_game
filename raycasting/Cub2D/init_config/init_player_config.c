@@ -11,6 +11,19 @@ double	degrees_to_radians(int degree)
 	return (radian);
 }
 
+
+void	get_player_angle(t_player *player)
+{
+	if (ANGEL == 'N')
+		player->angle = degrees_to_radians(90);
+	else if (ANGEL == 'S')
+		player->angle = degrees_to_radians(270);
+	else if (ANGEL == 'E')
+		player->angle = degrees_to_radians(360);
+	else if (ANGEL == 'W')
+		player->angle = degrees_to_radians(180);
+}
+
 void	init_player_config(t_setup *setup)
 {
 	t_player *player;
@@ -20,7 +33,8 @@ void	init_player_config(t_setup *setup)
 
 	// >>> first thing first i have to give it the angle (FOV)
 	// >>> before that i have to create an way that convete degree to radians
-	player->angle = degrees_to_radians(60);	// >>> FOV of the player
+
+	get_player_angle(player);
 	player->move_speed = MOVE_SPEED;	// >>> speed of up and down move
 	player->rot_speed = ROT_SPEED;		// >>> speed of left/right move 
 

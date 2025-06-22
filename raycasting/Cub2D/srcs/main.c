@@ -16,6 +16,7 @@
 // >>>>>>>>>>>>>>>>>>>>> TO-DO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// TO-DO: create-function conver form binnary to hex for the colors
 
+	
 
 int	main()
 {

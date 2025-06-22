@@ -55,11 +55,11 @@
 //     int     height;
 // }   t_image;
 
-typedef struct s_direction
-{
-	double	new_p_y;
-	double	new_p_x;
+typedef struct s_direction {
+	double	walk_dir;  // -1 = backward, +1 = forward
+	double	turn_dir;  // -1 = left,     +1 = right
 }	t_direction;
+
 
 typedef struct s_top_view
 {
@@ -71,7 +71,7 @@ typedef struct s_top_view
 typedef	struct s_player
 {
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	double	angle; // >>> player angle in radians
+	double	rot_angle;	// >>> player angle facing -> [S, N, E, W]
 	double	move_speed; // >>> player speed in the map movements, player->move_speed = 0.05
 	double	rot_speed;	// >>> rotat left and right
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -114,7 +114,6 @@ typedef struct s_setup
 	t_player	*player;
 	t_game		*game;
 	t_direction	*direction;
-	// t_top_view	*top_view;
 }	t_setup;
 
 void	*setup_struct_init();

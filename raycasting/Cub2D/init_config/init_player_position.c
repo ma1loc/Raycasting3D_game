@@ -17,12 +17,13 @@ void	init_north_position(t_player *player, int row, int col)
 	// setup->player->plane_y = 0; // Camera plane Y
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+	player->rot_angle = degrees_to_radians(90);
+
 }
 
 void	init_south_position(t_player *player, int row, int col)
 {
 	printf("get the South player position\n");
-
 
 	player->p_y = row + 0.5;
 	player->p_x = col + 0.5;
@@ -34,6 +35,9 @@ void	init_south_position(t_player *player, int row, int col)
 	// setup->player->plane_x = -0.66; // Camera plane X
 	// setup->player->plane_y = 0; // Camera plane Y
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	player->rot_angle = degrees_to_radians(270);
+
 }
 
 void	init_east_position(t_player *player, int row, int col)
@@ -51,6 +55,9 @@ void	init_east_position(t_player *player, int row, int col)
 	// setup->player->plane_x = 0; // Camera plane X
 	// setup->player->plane_y = -0.66; // Camera plane Y
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	player->rot_angle = degrees_to_radians(360);
+
 }
 
 void	init_west_position(t_player *player, int row, int col)
@@ -67,6 +74,8 @@ void	init_west_position(t_player *player, int row, int col)
 	// setup->player->plane_x = 0; // Camera plane X
 	// setup->player->plane_y = 0.66; // Camera plane Y
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	player->rot_angle = degrees_to_radians(180);
 
 }
 void	get_player_position(t_player *player, t_game *game)

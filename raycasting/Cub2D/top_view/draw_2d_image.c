@@ -15,27 +15,29 @@ void	draw_top_view_map(t_game *game, t_player *player)
 		{
 			if (game->map[row][col] == '1')
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-				game->top_view->wall_img, col * TILE_SIZE, row * TILE_SIZE);
+					game->top_view->wall_img, col * TILE_SIZE, row * TILE_SIZE);
 			else 
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-				game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
+					game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
 		}
 	}
-}
-
-void	draw_facing_line()
-{
-
+	// mlx_put_image_to_window(
+	// 	game->mlx_ptr,
+	// 	game->win_ptr,
+	// 	game->top_view->player_img,
+	// 	(int)(player->p_x * TILE_SIZE),
+	// 	(int)(player->p_y * TILE_SIZE)
+	// );
 }
 
 void	draw_player_dot(t_player *player, t_game *game)
 {
-	int	pixel_x;
-	int	pixel_y;
+	double pixel_x;
+	double pixel_y;
 	int	radius;
 	int	dx;
 	int	dy;
-	
+
 	// >>> my question is i workd with the (TILE_SIZE = 32) in the 3d view and 2d
 	pixel_x = player->p_x * TILE_SIZE; // column → horizontal → x
 	pixel_y = player->p_y * TILE_SIZE; // row → vertical → y
@@ -48,7 +50,7 @@ void	draw_player_dot(t_player *player, t_game *game)
 		{
 			if (dx * dx + dy * dy <= radius * radius)
 			mlx_pixel_put(game->mlx_ptr, game->win_ptr,
-				pixel_x + dx, pixel_y + dy, RED_COLOR);
+				(int)(pixel_x + dx + 0.5), (int)(pixel_y + dy + 0.5), RED_COLOR);
 				dy++;
 			}
 			dx++;

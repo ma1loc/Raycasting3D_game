@@ -21,7 +21,9 @@
 # define EXIT_FAILURE 1
 
 // >>> pixel based to use
-# define TILE_SIZE 32
+// # define TILE_SIZE 32
+# define TILE_SIZE 64
+// # define TILE_SIZE 128
 
 // >>> filed of view
 # define FOV 60.0
@@ -131,6 +133,7 @@ void	load_images_top_view(t_setup *setup);
 void	draw_player_dot(t_player *player, t_game *game);
 void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);
+int		double_to_int(double nbr);
 
 
 # endif

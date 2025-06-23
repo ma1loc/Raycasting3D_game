@@ -18,6 +18,13 @@
 // >>>>>>>>>>>>>>>>>>>>> TO-DO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// TO-DO: create-function conver form binnary to hex for the colors
 
+// int	double_to_int(double nbr)
+// {
+// 	printf(">>> double nbr -> %f\n", nbr);
+// 	printf(">>> int nbr -> %d\n", (int)(nbr + 0.5));
+
+// 	return ((int)(nbr + 0.5));
+// }
 
 int	main()
 {
@@ -29,8 +36,8 @@ int	main()
 	init_player_config(setup);	// >>> to check later
 	load_images_top_view(setup);
 
-	draw_top_view_map(setup->game, setup->player);	
-	draw_player_dot(setup->player, setup->game);
+	draw_top_view_map(setup->game, setup->player);
+	// draw_player_dot(setup->player, setup->game);
 	
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_loop(setup->game->mlx_ptr);

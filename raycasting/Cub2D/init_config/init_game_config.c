@@ -94,9 +94,13 @@ void	init_game_config(t_game *game)
 	if (!game->mlx_ptr)
 		return (printf("mlx_init filed\n"), exit(EXIT_FAILURE), (void)0);
 	game->tile_size = TILE_SIZE;	// TILE_SIZE = 32
+
+	// >>>>>>> not the main map just a test <<<<<<<<<
 	game->map = map_init();	// >>> the map
 	// open_window(game);	// >>> 3D view used
 	open_window_2d(game);
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->screen_width, game->screen_height, "Cub2D");
 	if (!game->win_ptr)
 	{

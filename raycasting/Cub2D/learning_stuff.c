@@ -50,6 +50,7 @@ int	key_event(int key_code, t_setup *setup)
 	return (0);
 }
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 double radius = 4.0 / TILE_SIZE;
 double x = direction->new_p_x;
@@ -66,3 +67,50 @@ if (
     direction->new_p_y = player->p_y;
     return (1);
 }
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+int	is_wall(t_setup *setup, int key_code)
+{
+	t_direction	*direction;
+	t_player	*player;
+	double		radius;
+	double 		x;
+	double		y;
+	
+	radius = 4 / TILE_SIZE;
+	player = setup->player;
+	direction = setup->direction;
+	x = direction->new_p_x;
+	y = direction->new_p_y;
+
+	if (setup->game->map[(int)(y - radius)][(int)(x - radius)] == '1' ||
+		setup->game->map[(int)(y - radius)][(int)(x + radius)] == '1' ||
+		setup->game->map[(int)(y + radius)][(int)(x - radius)] == '1' ||
+		setup->game->map[(int)(y + radius)][(int)(x + radius)] == '1')
+	{
+		direction->new_p_x = player->p_x;
+		direction->new_p_y = player->p_y;
+		return (1);
+	}
+	else if (key_code == UP_KEY || key_code == DOWN_KEY)
+		setup->player->p_y = direction->new_p_y;
+	
+	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
+		setup->player->p_x = direction->new_p_x;
+
+	return (0);
+}
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+if (key_code == UP_KEY)	// -1
+		player->p_x = cos(player->rot_angle) * dir->walk_dir * player->move_speed;
+		player->p_y = sin(player->rot_angle) * dir->walk_dir * player->move_speed;
+	else if (key_code == DOWN_KEY)	// +1
+		player->p_x = cos(player->rot_angle) * dir->walk_dir * player->move_speed;
+		player->p_y = sin(player->rot_angle) * dir->walk_dir * player->move_speed;
+// or like this
+if (key_code == UP_KEY || key_code == DOWN_KEY)
+	player->p_x = cos(player->rot_angle) * dir->walk_dir * player->move_speed;
+	player->p_y = sin(player->rot_angle) * dir->walk_dir * player->move_speed;

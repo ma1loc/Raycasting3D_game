@@ -1,6 +1,6 @@
 # include "cub3d.h"
 
-// 2D from 9D
+// 3D from 9D
 // simple 2D map first
 // second 3D projection
 // North(up), South(down), East(right), and West(left).
@@ -26,7 +26,7 @@ int	main()
 	setup = setup_struct_init();
 	
 	init_game_config(setup->game);
-	init_player_config(setup);
+	init_player_config(setup);	// >>> to check later
 	load_images_top_view(setup);
 
 	draw_top_view_map(setup->game, setup->player);	

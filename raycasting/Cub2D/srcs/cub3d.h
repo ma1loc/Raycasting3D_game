@@ -21,15 +21,14 @@
 # define EXIT_FAILURE 1
 
 // >>> pixel based to use
-// # define TILE_SIZE 32
-# define TILE_SIZE 64
-// # define TILE_SIZE 128
+# define TILE_SIZE 32
+
 
 // >>> filed of view
 # define FOV 60.0
 
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
 
 // >>> this is just for the 3d view
 # define SCREEN_WIDTH 1920
@@ -58,8 +57,8 @@
 // }   t_image;
 
 typedef struct s_direction {
-	double	walk_dir;  // -1 = backward, +1 = forward
-	double	turn_dir;  // -1 = left,     +1 = right
+	int	walk_dir;  // -1 = backward, +1 = forward
+	int turn_dir;  // -1 = left,     +1 = right
 }	t_direction;
 
 
@@ -125,6 +124,8 @@ int		key_event(int key_code, t_setup *setup);
 void	init_game_config(t_game *game);
 double	degrees_to_radians(int degree);
 
+int	key_release(int key_code, t_setup *setup);
+
 // drawing 2d top view
 void	draw_player_dot(t_player *player, t_game *game);
 void	draw_top_view_map(t_game *game, t_player *player);
@@ -134,6 +135,5 @@ void	draw_player_dot(t_player *player, t_game *game);
 void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);
 int		double_to_int(double nbr);
-
 
 # endif

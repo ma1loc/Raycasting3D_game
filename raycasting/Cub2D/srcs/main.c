@@ -40,6 +40,9 @@ int	main()
 	// draw_player_dot(setup->player, setup->game);
 	
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
+	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);
+	printf("rest dir -> %d\n", setup->direction->turn_dir);
+	printf("rest dir -> %d\n", setup->direction->walk_dir);
 	mlx_loop(setup->game->mlx_ptr);
 
 	return (0);

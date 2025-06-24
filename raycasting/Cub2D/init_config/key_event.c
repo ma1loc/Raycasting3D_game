@@ -37,9 +37,9 @@ void	update_pposition(t_setup *setup, int key_code)
 	{
 		move_step = dir->walk_dir * player->move_speed;
 		player->p_y += sin(player->rot_angle) * move_step;
-		player->p_x += cos(player->rot_angle) * move_step;	
+		player->p_x += cos(player->rot_angle) * move_step;
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		printf("dir -> %f\n", dir->walk_dir);
+		printf("dir -> %d\n", dir->walk_dir);
 		printf("p_y -> %f\n", player->p_y);
 		printf("p_x -> %f\n", player->p_x);
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -72,14 +72,26 @@ int	key_event(int key_code, t_setup *setup)
 		dir->turn_dir = -1;
 	else if (key_code == RIGHT_KEY)
 		dir->turn_dir = 1;
+	else
+		return (0);	
 
 	// >>> no wall collision set intel get all direction turn/walk!
 	update_pposition(setup, key_code);
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	
+	printf("new player position\np_x -> %f\np_y -> %f\n", setup->player->p_x, setup->player->p_y);
 	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
 	draw_top_view_map(setup->game, setup->player);
-	draw_player_dot(setup->player, setup->game);
+	// draw_player_dot(setup->player, setup->game);
+	return (0);
+}
+
+int	key_release(int key_code, t_setup *setup)
+{
+	t_direction	*dir;
+
+	dir = setup->direction;
+	if (key_code == UP_KEY || key_code == DOWN_KEY)
+		dir->walk_dir = 0;
+	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
+		dir->turn_dir = 0;
 	return (0);
 }

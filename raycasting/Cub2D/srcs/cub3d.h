@@ -20,31 +20,23 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
-// >>> pixel based to use
-# define TILE_SIZE 32
+// # define TILE_SIZE 128
+# define TILE_SIZE 64
 
-
-// >>> filed of view
 # define FOV 60.0
 
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.05
 
-// >>> this is just for the 3d view
-# define SCREEN_WIDTH 1920
-// >>> this is just for the 3d view
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
-// >>> to remove it latter and based on the map char now just a test
-# define ANGEL 'N'
-
-// the key presed to add
 # define UP_KEY    XK_w
 # define DOWN_KEY  XK_s
 # define LEFT_KEY  XK_a
-# define RIGHT_KEY XK_d
 # define ESC_KEY   XK_Escape
 
+# define RIGHT_KEY XK_d
 // typedef struct s_image
 // {
 //     void    *img_ptr;
@@ -57,10 +49,9 @@
 // }   t_image;
 
 typedef struct s_direction {
-	int	walk_dir;  // -1 = backward, +1 = forward
-	int turn_dir;  // -1 = left,     +1 = right
+	int	walk_dir;
+	int turn_dir;
 }	t_direction;
-
 
 typedef struct s_top_view
 {
@@ -71,22 +62,16 @@ typedef struct s_top_view
 
 typedef	struct s_player
 {
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	double	rot_angle;	// >>> player angle facing -> [S, N, E, W]
-	double	move_speed; // >>> player speed in the map movements, player->move_speed = 0.05
-	double	rot_speed;	// >>> rotat left and right
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	double	rot_angle;
+	double	move_speed;
+	double	rot_speed;
 
-	// >>> player position in the map(x, y)
-	// how to init this at first just loop thghout the map and git it value of int not float
 	double	p_x;
 	double	p_y;
 
-	// >>> player direction in the map (north, south, east, west)
 	double	dir_x;
 	double	dir_y;
 
-	/// >>> player camera plane for the (fov)field of view of the player
 	double	plane_x;
 	double	plane_y;
 
@@ -94,22 +79,20 @@ typedef	struct s_player
 
 typedef struct s_game
 {
-	void	*mlx_ptr;	// >>> done
-	void	*win_ptr;	// >>> done
-	int		map_width;	// >>> done
-	int		map_height;	// >>> done
+	void	*mlx_ptr;
+	void	*win_ptr;
+	// int		map_width;
+	// int		map_height;
 	// for the 3D view
-	int		screen_width;	// this is just for the 3d view
-	int		screen_height;	// // this is just for the 3d view
-	int		tile_size;	// >>> done
-	char	**map;		// >>> done
+	int		screen_width;
+	int		screen_height;
+	// int		tile_size;
+	char	**map;
 
 	// for the 2D top view
 	t_top_view	*top_view;
 }	t_game;
 
-// >>> this is the core structure of the game
-// >>> it contains the map, the player position, the player direction, etc...
 typedef struct s_setup
 {
 	t_player	*player;

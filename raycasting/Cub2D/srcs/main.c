@@ -1,6 +1,6 @@
 # include "cub3d.h"
 
-// 3D from 9D
+// 4D from 9D
 // simple 2D map first
 // second 3D projection
 // North(up), South(down), East(right), and West(left).
@@ -18,13 +18,6 @@
 // >>>>>>>>>>>>>>>>>>>>> TO-DO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// TO-DO: create-function conver form binnary to hex for the colors
 
-// int	double_to_int(double nbr)
-// {
-// 	printf(">>> double nbr -> %f\n", nbr);
-// 	printf(">>> int nbr -> %d\n", (int)(nbr + 0.5));
-
-// 	return ((int)(nbr + 0.5));
-// }
 
 int	main()
 {
@@ -33,16 +26,14 @@ int	main()
 	setup = setup_struct_init();
 	
 	init_game_config(setup->game);
-	init_player_config(setup);	// >>> to check later
+	init_player_config(setup);
 	load_images_top_view(setup);
 
 	draw_top_view_map(setup->game, setup->player);
-	// draw_player_dot(setup->player, setup->game);
+	draw_player_dot(setup->player, setup->game);
 	
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);
-	printf("rest dir -> %d\n", setup->direction->turn_dir);
-	printf("rest dir -> %d\n", setup->direction->walk_dir);
 	mlx_loop(setup->game->mlx_ptr);
 
 	return (0);

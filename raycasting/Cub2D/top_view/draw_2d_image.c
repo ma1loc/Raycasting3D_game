@@ -21,38 +21,30 @@ void	draw_top_view_map(t_game *game, t_player *player)
 					game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
 		}
 	}
-	mlx_put_image_to_window(
-		game->mlx_ptr,
-		game->win_ptr,
-		game->top_view->player_img,
-		(int)(player->p_x * TILE_SIZE + 0.5),
-		(int)(player->p_y * TILE_SIZE + 0.5)
-	);
 }
 
-// void	draw_player_dot(t_player *player, t_game *game)
-// {
-// 	double pixel_x;
-// 	double pixel_y;
-// 	int	radius;
-// 	int	dx;
-// 	int	dy;
+void	draw_player_dot(t_player *player, t_game *game)
+{
+	double	pixel_x;
+	double	pixel_y;
+	int		radius;
+	int		dx;
+	int		dy;
 
-// 	// >>> my question is i workd with the (TILE_SIZE = 32) in the 3d view and 2d
-// 	pixel_x = player->p_x * TILE_SIZE; // >>> column → horizontal → x
-// 	pixel_y = player->p_y * TILE_SIZE; // >>> row → vertical → y
-// 	radius = 4;	// radius = 4 -> 8px
-// 	dx = -radius;	// >>> col
-// 	while (dx <= radius)
-// 	{
-// 		dy = -radius;	// >>> row
-// 		while (dy <= radius)
-// 		{
-// 			if (dx * dx + dy * dy <= radius * radius)
-// 				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
-// 					(int)(pixel_x + dx), (int)(pixel_y + dy), RED_COLOR);
-// 			dy++;
-// 		}
-// 		dx++;
-// 	}
-// }
+	pixel_x = player->p_x * TILE_SIZE;
+	pixel_y = player->p_y * TILE_SIZE;
+	radius = 4;
+	dx = -radius;	// >>> col
+	while (dx <= radius)
+	{
+		dy = -radius;	// >>> row
+		while (dy <= radius)
+		{
+			if (dx * dx + dy * dy <= radius * radius)
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+					(int)(pixel_x + dx + 0.5), (int)(pixel_y + dy + 0.5), RED_COLOR);
+			dy++;
+		}
+		dx++;
+	}
+}

@@ -32,24 +32,19 @@ void	update_pposition(t_setup *setup, int key_code)
 	player = setup->player;
 	dir = setup->direction;
 	
-	// >>> UP/DOWN move the Player vertical Y useing sin
 	if (key_code == UP_KEY || key_code == DOWN_KEY)
 	{
 		move_step = dir->walk_dir * player->move_speed;
-		player->p_y += sin(player->rot_angle) * move_step;
+		
+		// >>> (cos) is moving the player horizontal(p_x)
 		player->p_x += cos(player->rot_angle) * move_step;
-		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		printf("dir -> %d\n", dir->walk_dir);
-		printf("p_y -> %f\n", player->p_y);
-		printf("p_x -> %f\n", player->p_x);
-		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// >>> (sin) is moving the player vertical(p_y)
+		player->p_y += sin(player->rot_angle) * move_step;
+		printf("player->p_x %f\n", player->p_x);
+		printf("player->p_y %f\n", player->p_y);
 	}
 	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
-	{
 		player->rot_angle += dir->turn_dir * player->rot_speed;
-
-		printf("player->rot_angle -> %f\n", player->rot_angle);
-	}
 }
 
 int	key_event(int key_code, t_setup *setup)
@@ -59,15 +54,10 @@ int	key_event(int key_code, t_setup *setup)
 	dir = setup->direction;
 	if (key_code == ESC_KEY)
 		return (printf("exit_the_game (ESC) pressed\n"), exit(0), 0);
-
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	
-	// move the player up/down
-	if (key_code == UP_KEY)
-		dir->walk_dir = -1;
-	else if (key_code == DOWN_KEY)
+	else if (key_code == UP_KEY)
 		dir->walk_dir = 1;
-
+	else if (key_code == DOWN_KEY)
+		dir->walk_dir = -1;
 	else if (key_code == LEFT_KEY)
 		dir->turn_dir = -1;
 	else if (key_code == RIGHT_KEY)
@@ -75,12 +65,11 @@ int	key_event(int key_code, t_setup *setup)
 	else
 		return (0);	
 
-	// >>> no wall collision set intel get all direction turn/walk!
 	update_pposition(setup, key_code);
-	printf("new player position\np_x -> %f\np_y -> %f\n", setup->player->p_x, setup->player->p_y);
+	
 	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
-	draw_top_view_map(setup->game, setup->player);
-	// draw_player_dot(setup->player, setup->game);
+	// draw_top_view_map(setup->game, setup->player);
+	draw_player_dot(setup->player, setup->game);
 	return (0);
 }
 

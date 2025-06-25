@@ -122,17 +122,32 @@ int		double_to_int(double nbr);
 
 # endif
 
-int	is_wall(t_setup *setup, int new_p_x, int new_p_y)
+int is_wall_at(t_setup *setup, double x, double y)
 {
-	double		radius;
+	int map_x;
+    int map_y;
 	
-	radius = 4 / TILE_SIZE;
-	if (setup->game->map[(int)(new_p_y - radius)][(int)(new_p_x - radius)] == '1')
-		return (1);
-	return (0);
+	map_x = (int)x;
+	map_y = (int)y;
+    
+    if (map_x < 0 || map_y < 0 || !setup->game->map[map_y] || 
+        !setup->game->map[map_y][map_x])
+        return (1);
+    
+    return (setup->game->map[map_y][map_x] == '1');
 }
 
-int	update_pposition(t_setup *setup, int key_code)
+int is_valid_move(t_setup *setup, double new_x, double new_y)
+{
+    double radius = 0.1;
+    
+    return (!is_wall_at(setup, new_x - radius, new_y - radius) &&
+            !is_wall_at(setup, new_x + radius, new_y - radius) &&
+            !is_wall_at(setup, new_x - radius, new_y + radius) &&
+            !is_wall_at(setup, new_x + radius, new_y + radius));
+}
+
+int	update_player_position(t_setup *setup, int key_code)
 {
 	t_player	*player;
 	t_direction	*dir;
@@ -151,7 +166,7 @@ int	update_pposition(t_setup *setup, int key_code)
 		double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
  
 
-		if (is_wall(setup, new_p_x, new_p_y))
+		if (is_valid_move(setup, new_p_x, new_p_y))
 			return (1);
 		player->p_x = new_p_x;
 		player->p_y = new_p_y;
@@ -178,14 +193,6 @@ int	key_event(int key_code, t_setup *setup)
 		dir->turn_dir = -1;
 	else if (key_code == RIGHT_KEY)
 		dir->turn_dir = 1;
-	else
-		return (0);	
-
-	update_pposition(setup, key_code);
-	
-	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
-	draw_top_view_map(setup->game, setup->player);
-	draw_player_dot(setup->player, setup->game);
 	return (0);
 }
 
@@ -200,6 +207,23 @@ int	key_release(int key_code, t_setup *setup)
 		dir->turn_dir = 0;
 	return (0);
 }
+
+int	game_loop(t_setup *setup)
+{
+	t_direction	*dir;
+
+	dir = setup->direction;
+	if (dir->walk_dir != 0)
+	{
+		update_player_position(setup, key_code);
+	
+		mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
+		draw_top_view_map(setup->game, setup->player);
+		draw_player_dot(setup->player, setup->game);
+	}
+	return (0);
+}
+
 
 void	draw_top_view_map(t_game *game, t_player *player)
 {
@@ -480,6 +504,9 @@ int	main()
 	
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);
+
+	mlx_loop_hook(setup->game->mlx_ptr, game_loop, setup);
+	
 	mlx_loop(setup->game->mlx_ptr);
 
 	return (0);

@@ -118,3 +118,42 @@ if (key_code == UP_KEY || key_code == DOWN_KEY)
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+
+int	game_loop(t_setup *setup)
+{
+	t_direction	*dir;
+	t_player	*player;
+	int			moved;
+
+	dir = setup->direction;
+	player = setup->player;
+	moved = 0;
+
+	if (dir->walk_dir != 0)
+	{
+		double move_step = dir->walk_dir * player->move_speed;
+		double new_p_x = player->p_x + cos(player->rot_angle) * move_step;
+		double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
+
+		if (is_valid_move(setup, new_p_x, new_p_y))
+		{
+			player->p_x = new_p_x;
+			player->p_y = new_p_y;
+			moved = 1;
+		}
+	}
+
+	if (dir->turn_dir != 0)
+	{
+		player->rot_angle += dir->turn_dir * player->rot_speed;
+		moved = 1;
+	}
+
+	if (moved)
+	{
+		mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
+		draw_top_view_map(setup->game, setup->player);
+		draw_player_dot(setup->player, setup->game);
+	}
+	return (0);
+}

@@ -19,7 +19,6 @@
 	// TO-DO: create-function converting form binnary to hex for the colors
 	// TO-DO: create-function coverd the mlx_piexl_put
 
-	
 int	main()
 {
 	t_setup *setup;
@@ -35,8 +34,6 @@ int	main()
 	
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);
-
-	mlx_loop_hook(setup->game->mlx_ptr, game_loop, setup);
 	
 	mlx_loop(setup->game->mlx_ptr);
 

@@ -20,6 +20,13 @@ void	draw_top_view_map(t_game *game, t_player *player)
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 					game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
 		}
+	// 	mlx_put_image_to_window(
+	// 		game->mlx_ptr,
+	// 		game->win_ptr,
+	// 		game->top_view->player_img,
+	// 		(int)(player->p_x * TILE_SIZE + 0.5),
+	// 		(int)(player->p_y * TILE_SIZE + 0.5));
+	// }
 	}
 }
 
@@ -33,6 +40,7 @@ void	draw_player_dot(t_player *player, t_game *game)
 
 	pixel_x = player->p_x * TILE_SIZE;
 	pixel_y = player->p_y * TILE_SIZE;
+	
 	radius = 4;
 	dx = -radius;	// >>> col
 	while (dx <= radius)

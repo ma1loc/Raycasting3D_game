@@ -25,8 +25,8 @@
 
 # define FOV 60.0
 
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -37,6 +37,7 @@
 # define ESC_KEY   XK_Escape
 
 # define RIGHT_KEY XK_d
+
 // typedef struct s_image
 // {
 //     void    *img_ptr;

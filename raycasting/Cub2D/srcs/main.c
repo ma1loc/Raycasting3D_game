@@ -16,7 +16,8 @@
 	// is have to convert the ROT_SPEED to radinas?
 	// read about the cos and sin.
 // >>>>>>>>>>>>>>>>>>>>> TO-DO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// TO-DO: create-function conver form binnary to hex for the colors
+	// TO-DO: create-function converting form binnary to hex for the colors
+	// TO-DO: create-function coverd the mlx_piexl_put
 
 
 int	main()

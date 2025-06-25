@@ -22,29 +22,48 @@
 //  UP/DOWN move the Player vertical Y useing sin why sin not cos?
 // i print the p_x that represent the horzental move but no chagne of the value
 // that mean's is not for the walk_dir up/down move?
+// is i have to create an image buffer of the red player piexl put?
 
-void	update_pposition(t_setup *setup, int key_code)
+// have to get the wall colision 
+int	is_wall(t_setup *setup, int new_p_x, int new_p_y)
+{
+	double		radius;
+	
+	radius = 4 / TILE_SIZE;
+	if (setup->game->map[(int)(new_p_y - radius)][(int)(new_p_x - radius)] == '1')
+		return (1);
+	return (0);
+}
+
+int	update_pposition(t_setup *setup, int key_code)
 {
 	t_player	*player;
 	t_direction	*dir;
 	double		move_step;
-
+	
 	player = setup->player;
 	dir = setup->direction;
 	
 	if (key_code == UP_KEY || key_code == DOWN_KEY)
 	{
 		move_step = dir->walk_dir * player->move_speed;
-		
+
 		// >>> (cos) is moving the player horizontal(p_x)
-		player->p_x += cos(player->rot_angle) * move_step;
+		double new_p_x = player->p_x + cos(player->rot_angle) * move_step;
 		// >>> (sin) is moving the player vertical(p_y)
-		player->p_y += sin(player->rot_angle) * move_step;
+		double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
+ 
+
+		if (is_wall(setup, new_p_x, new_p_y))
+			return (1);
+		player->p_x = new_p_x;
+		player->p_y = new_p_y;
 		printf("player->p_x %f\n", player->p_x);
 		printf("player->p_y %f\n", player->p_y);
 	}
 	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
 		player->rot_angle += dir->turn_dir * player->rot_speed;
+	return (0);
 }
 
 int	key_event(int key_code, t_setup *setup)
@@ -68,7 +87,7 @@ int	key_event(int key_code, t_setup *setup)
 	update_pposition(setup, key_code);
 	
 	mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
-	// draw_top_view_map(setup->game, setup->player);
+	draw_top_view_map(setup->game, setup->player);
 	draw_player_dot(setup->player, setup->game);
 	return (0);
 }

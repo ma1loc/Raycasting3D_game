@@ -1,11 +1,15 @@
 NAME = cub2D
 CC = cc
 INCLUDE = -Isrcs
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g3 -fsanitize=address
 RM = rm -rf
 
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE) $(MLX_INCLUDE) -g3 -fsanitize=address
+
+MLX_FLAGS = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
+
 # MLX_FLAGS = -L/home/yanflous/cub3D/minilibix-linux -L/usr/lib -lXext -lX11 -lm -lz
-MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+# MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/home/ma1loc/Desktop/Cub3D/raycasting/Cub2D -Imlx_linux -lXext -lX11 -lm -lz
 MLX_INCLUDE = -Iminilibx-linux
 
 SRC = ./srcs/main.c ./init_config/init_player_config.c ./init_config/key_event.c \

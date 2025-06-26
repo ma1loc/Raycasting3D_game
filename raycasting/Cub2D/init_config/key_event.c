@@ -24,42 +24,35 @@
 // that mean's is not for the walk_dir up/down move?
 // is i have to create an image buffer of the red player piexl put?
 
-int is_wall_at(t_setup *setup, double x, double y)
+int	is_wall_at(t_setup *setup, double x, double y)
 {
-    int map_x;
-    int map_y;
-    
-    map_x = (int)x;
-    map_y = (int)y;
-    
-    if (map_x < 0 || map_y < 0 || !setup->game->map[map_y] || 
-        !setup->game->map[map_y][map_x])
-        return (1);
-    
-    return (setup->game->map[map_y][map_x] == '1');
+	int map_x = (int)(x);
+	int map_y = (int)(y);
+
+	if (x < 0 || y < 0)
+		return (1);
+	if (!setup->game->map[map_y] || !setup->game->map[map_y][map_x])
+		return (1);
+	if (setup->game->map[map_y][map_x] == '1')
+		return (1);
+	return (0);
 }
 
-int is_valid_move_separate(t_setup *setup, double new_x, double new_y)
+
+int	is_valid_move(t_setup *setup, double new_x, double new_y)
 {
-    double radius = 0.04;
-    double current_x = setup->player->p_x;
-    double current_y = setup->player->p_y;
-    
-    int x_valid = (!is_wall_at(setup, new_x - radius, current_y - radius) &&
-                   !is_wall_at(setup, new_x - radius, current_y) &&
-                   !is_wall_at(setup, new_x - radius, current_y + radius) &&
-                   !is_wall_at(setup, new_x + radius, current_y - radius) &&
-                   !is_wall_at(setup, new_x + radius, current_y) &&
-                   !is_wall_at(setup, new_x + radius, current_y + radius));
-    
-    int y_valid = (!is_wall_at(setup, current_x - radius, new_y - radius) &&
-                   !is_wall_at(setup, current_x, new_y - radius) &&
-                   !is_wall_at(setup, current_x + radius, new_y - radius) &&
-                   !is_wall_at(setup, current_x - radius, new_y + radius) &&
-                   !is_wall_at(setup, current_x, new_y + radius) &&
-                   !is_wall_at(setup, current_x + radius, new_y + radius));
-    
-    return (x_valid && y_valid);
+	double	radius = 0.03;
+
+
+	if (is_wall_at(setup, new_x + radius, new_y))
+		return (0);
+	if (is_wall_at(setup, new_x - radius, new_y))
+		return (0);
+	if (is_wall_at(setup, new_x, new_y + radius))
+		return (0);
+	if (is_wall_at(setup, new_x, new_y - radius))
+		return (0);
+	return (1);
 }
 
 int	key_release(int key_code, t_setup *setup)
@@ -71,6 +64,7 @@ int	key_release(int key_code, t_setup *setup)
 		dir->walk_dir = 0;
 	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
 		dir->turn_dir = 0;
+	game_loop_enhanced(setup);
 	return (0);
 }
 
@@ -90,7 +84,7 @@ int game_loop_enhanced(t_setup *setup)
         double new_p_x = player->p_x + cos(player->rot_angle) * move_step;
         double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
         
-        if (is_valid_move_separate(setup, new_p_x, new_p_y))
+        if (is_valid_move(setup, new_p_x, new_p_y))
         {
             player->p_x = new_p_x;
             player->p_y = new_p_y;
@@ -98,12 +92,12 @@ int game_loop_enhanced(t_setup *setup)
         }
         else
         {
-            if (is_valid_move_separate(setup, new_p_x, player->p_y))
+            if (is_valid_move(setup, new_p_x, player->p_y))
             {
                 player->p_x = new_p_x;
                 moved = 1;
             }
-            else if (is_valid_move_separate(setup, player->p_x, new_p_y))
+            else if (is_valid_move(setup, player->p_x, new_p_y))
             {
                 player->p_y = new_p_y;
                 moved = 1;

@@ -22,6 +22,9 @@
 int	main()
 {
 	t_setup *setup;
+
+	double x = 1.99;
+	printf("x => %d\n", (int)(x));
 	
 	setup = setup_struct_init();
 	

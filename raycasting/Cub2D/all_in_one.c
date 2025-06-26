@@ -122,8 +122,6 @@ int		double_to_int(double nbr);
 
 # endif
 
-
-
 int is_wall_at(t_setup *setup, double x, double y)
 {
 	int map_x;
@@ -141,7 +139,7 @@ int is_wall_at(t_setup *setup, double x, double y)
 
 int is_valid_move(t_setup *setup, double new_x, double new_y)
 {
-    double radius = 0.1;
+    double radius = 0.08;
 
     
     return (!is_wall_at(setup, new_x - radius, new_y - radius) &&

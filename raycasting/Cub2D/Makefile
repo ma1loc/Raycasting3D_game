@@ -12,10 +12,10 @@ MLX_FLAGS = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 # MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/home/ma1loc/Desktop/Cub3D/raycasting/Cub2D -Imlx_linux -lXext -lX11 -lm -lz
 MLX_INCLUDE = -Iminilibx-linux
 
-SRC = ./srcs/main.c ./init_config/init_player_config.c ./init_config/key_event.c \
+SRC = ./srcs/main.c ./init_config/init_player_config.c  \
 	./init_config/init_player_position.c ./init_config/init_game_config.c \
-	./init_config/init_setup.c ./top_view/load_2d_image.c ./top_view/draw_2d_image.c
-
+	./init_config/init_setup.c ./top_view/load_2d_image.c ./top_view/draw_2d_image.c \
+	./game_setup/cast_rays.c ./game_setup/game_event.c ./game_setup/wall_collision.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

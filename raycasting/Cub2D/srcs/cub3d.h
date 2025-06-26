@@ -119,8 +119,9 @@ void	draw_player_dot(t_player *player, t_game *game);
 void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);
 int		double_to_int(double nbr);
-// int		game_loop(t_setup *setup);
-int game_loop_enhanced(t_setup *setup);
+int		game_loop(t_setup *setup);
+int	is_wall_at(t_setup *setup, double x, double y);
+int	is_valid_move(t_setup *setup, double new_x, double new_y);
 
 
 # endif

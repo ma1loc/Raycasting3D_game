@@ -24,14 +24,13 @@
 // that mean's is not for the walk_dir up/down move?
 // is i have to create an image buffer of the red player piexl put?
 
-
 int is_wall_at(t_setup *setup, double x, double y)
 {
-	int map_x;
+    int map_x;
     int map_y;
-	
-	map_x = (int)x;
-	map_y = (int)y;
+    
+    map_x = (int)x;
+    map_y = (int)y;
     
     if (map_x < 0 || map_y < 0 || !setup->game->map[map_y] || 
         !setup->game->map[map_y][map_x])
@@ -40,15 +39,27 @@ int is_wall_at(t_setup *setup, double x, double y)
     return (setup->game->map[map_y][map_x] == '1');
 }
 
-int is_valid_move(t_setup *setup, double new_x, double new_y)
+int is_valid_move_separate(t_setup *setup, double new_x, double new_y)
 {
-    double radius = 0.08;
-
+    double radius = 0.04;
+    double current_x = setup->player->p_x;
+    double current_y = setup->player->p_y;
     
-    return (!is_wall_at(setup, new_x - radius, new_y - radius) &&
-            !is_wall_at(setup, new_x + radius, new_y - radius) &&
-            !is_wall_at(setup, new_x - radius, new_y + radius) &&
-            !is_wall_at(setup, new_x + radius, new_y + radius));
+    int x_valid = (!is_wall_at(setup, new_x - radius, current_y - radius) &&
+                   !is_wall_at(setup, new_x - radius, current_y) &&
+                   !is_wall_at(setup, new_x - radius, current_y + radius) &&
+                   !is_wall_at(setup, new_x + radius, current_y - radius) &&
+                   !is_wall_at(setup, new_x + radius, current_y) &&
+                   !is_wall_at(setup, new_x + radius, current_y + radius));
+    
+    int y_valid = (!is_wall_at(setup, current_x - radius, new_y - radius) &&
+                   !is_wall_at(setup, current_x, new_y - radius) &&
+                   !is_wall_at(setup, current_x + radius, new_y - radius) &&
+                   !is_wall_at(setup, current_x - radius, new_y + radius) &&
+                   !is_wall_at(setup, current_x, new_y + radius) &&
+                   !is_wall_at(setup, current_x + radius, new_y + radius));
+    
+    return (x_valid && y_valid);
 }
 
 int	key_release(int key_code, t_setup *setup)
@@ -63,44 +74,58 @@ int	key_release(int key_code, t_setup *setup)
 	return (0);
 }
 
-int	game_loop(t_setup *setup)
+int game_loop_enhanced(t_setup *setup)
 {
-	t_direction	*dir;
-	t_player	*player;
-	int			moved;
+    t_direction *dir;
+    t_player    *player;
+    int         moved;
 
-	dir = setup->direction;
-	player = setup->player;
-	moved = 0;
+    dir = setup->direction;
+    player = setup->player;
+    moved = 0;
 
-	if (dir->walk_dir != 0)
-	{
-		double move_step = dir->walk_dir * player->move_speed;
-		double new_p_x = player->p_x + cos(player->rot_angle) * move_step;
-		double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
+    if (dir->walk_dir != 0)
+    {
+        double move_step = dir->walk_dir * player->move_speed;
+        double new_p_x = player->p_x + cos(player->rot_angle) * move_step;
+        double new_p_y = player->p_y + sin(player->rot_angle) * move_step;
+        
+        if (is_valid_move_separate(setup, new_p_x, new_p_y))
+        {
+            player->p_x = new_p_x;
+            player->p_y = new_p_y;
+            moved = 1;
+        }
+        else
+        {
+            if (is_valid_move_separate(setup, new_p_x, player->p_y))
+            {
+                player->p_x = new_p_x;
+                moved = 1;
+            }
+            else if (is_valid_move_separate(setup, player->p_x, new_p_y))
+            {
+                player->p_y = new_p_y;
+                moved = 1;
+            }
+        }
+    }
 
-		if (is_valid_move(setup, new_p_x, new_p_y))
-		{
-			player->p_x = new_p_x;
-			player->p_y = new_p_y;
-			moved = 1;
-		}
-	}
+    if (dir->turn_dir != 0)
+    {
+        player->rot_angle += dir->turn_dir * player->rot_speed;
+        moved = 1;
+    }
 
-	if (dir->turn_dir != 0)
-	{
-		player->rot_angle += dir->turn_dir * player->rot_speed;
-		moved = 1;
-	}
-
-	if (moved)
-	{
-		mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
-		draw_top_view_map(setup->game, setup->player);
-		draw_player_dot(setup->player, setup->game);
-	}
-	return (0);
+    if (moved)
+    {
+        mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
+        draw_top_view_map(setup->game, setup->player);
+        draw_player_dot(setup->player, setup->game);
+    }
+    return (0);
 }
+
 
 int	key_event(int key_code, t_setup *setup)
 {
@@ -118,6 +143,6 @@ int	key_event(int key_code, t_setup *setup)
 	else if (key_code == RIGHT_KEY)
 		dir->turn_dir = 1;
 	if (dir->walk_dir != 0 || dir->turn_dir != 0)
-		game_loop(setup);
+		game_loop_enhanced(setup);
 	return (0);
 }

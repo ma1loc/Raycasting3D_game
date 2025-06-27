@@ -22,12 +22,8 @@
 int	main()
 {
 	t_setup *setup;
-
-	double x = 1.99;
-	printf("x => %d\n", (int)(x));
 	
 	setup = setup_struct_init();
-	
 	init_game_config(setup->game);
 	init_player_config(setup);
 	load_images_top_view(setup);
@@ -35,6 +31,9 @@ int	main()
 	draw_top_view_map(setup->game, setup->player);
 	draw_player_dot(setup->player, setup->game);
 	
+	printf("rot -> %f\n", setup->player->rot_angle);
+	printf("cos -> %f\n", cos(setup->player->rot_angle));
+
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);
 	

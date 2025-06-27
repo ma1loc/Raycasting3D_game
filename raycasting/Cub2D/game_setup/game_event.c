@@ -51,7 +51,6 @@ void	wall_collision(t_setup *setup, double x, double y, int *moved)
         player->p_y = y;
         *moved = 1;
     }
-
 }
 
 void	update_walk_dir(t_setup *setup, int *moved)
@@ -62,34 +61,37 @@ void	update_walk_dir(t_setup *setup, int *moved)
 	double	new_p_y;
 
 	player = setup->player;
+	// cos(a) => gives the adjacent side move
+	// sin(a) => gives the oppesite side move
+
 	move_step = setup->direction->walk_dir * player->move_speed;
     new_p_x = player->p_x + cos(player->rot_angle) * move_step;
-    new_p_y = player->p_y + sin(player->rot_angle) * move_step;        
+    new_p_y = player->p_y + sin(player->rot_angle) * move_step;
+	printf("cos -> %f\n", new_p_x);
+	printf("sin -> %f\n", new_p_y);
     if (is_valid_move(setup, new_p_x, new_p_y))
     {
         player->p_x = new_p_x;
         player->p_y = new_p_y;
         *moved = 1;
     }
-	else	// wall collision
-		wall_collision(setup, new_p_x, new_p_y, moved);
+	// else	// wall collision
+	// 	wall_collision(setup, new_p_x, new_p_y, moved);
 
 }
 
 int game_loop(t_setup *setup)
 {
-    t_direction *dir;
-    t_player    *player;
-	
-    int         moved;
-    dir = setup->direction;
-    player = setup->player;
-    moved = 0;
+    t_direction	*dir;
+    t_player	*player;
+    int			moved;
+
+	dir = setup->direction;
+	player = setup->player;
+	moved = 0;
 
     if (dir->walk_dir != 0)
 		update_walk_dir(setup, &moved);
-
-
     if (dir->turn_dir != 0)
     {
         player->rot_angle += dir->turn_dir * player->rot_speed;

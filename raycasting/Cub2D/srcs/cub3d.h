@@ -34,9 +34,14 @@
 # define UP_KEY    XK_w
 # define DOWN_KEY  XK_s
 # define LEFT_KEY  XK_a
+# define RIGHT_KEY XK_d
+# define LEFT_ARROW XK_Left
+# define RIGHT_ARROW XK_Right  
+// key left and right arrow
+
 # define ESC_KEY   XK_Escape
 
-# define RIGHT_KEY XK_d
+
 
 // typedef struct s_image
 // {
@@ -51,6 +56,7 @@
 
 typedef struct s_direction {
 	int	walk_dir;
+	int	side_dir;
 	int turn_dir;
 }	t_direction;
 
@@ -78,6 +84,24 @@ typedef	struct s_player
 
 }	t_player;
 
+typedef struct s_ray_data
+{
+	double	wall_dist;
+	double	hit_x;
+	double	hit_y;
+	// Wall orientation (vertical/horizontal)
+} t_ray_data;
+
+// >>> array of the ray data
+typedef struct s_ray_casting
+{
+	int			ray_nbr;
+	double		fov_angle;
+	double		ray_angle;
+	double		angle_step;
+	t_ray_data	*rays;
+}	t_ray_casting;
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
@@ -96,9 +120,11 @@ typedef struct s_game
 
 typedef struct s_setup
 {
-	t_player	*player;
-	t_game		*game;
-	t_direction	*direction;
+
+	t_player		*player;
+	t_game			*game;
+	t_direction		*direction;
+	t_ray_casting	*ray_casting;
 }	t_setup;
 
 void	*setup_struct_init();
@@ -120,8 +146,10 @@ void	draw_tile(t_game *game, int col, int row, int color);
 void	draw_map(t_game *game);
 int		double_to_int(double nbr);
 int		game_loop(t_setup *setup);
-int	is_wall_at(t_setup *setup, double x, double y);
-int	is_valid_move(t_setup *setup, double new_x, double new_y);
+int		is_wall_at(t_setup *setup, double x, double y);
+int		is_valid_move(t_setup *setup, double new_x, double new_y);
+void    init_ray_config(t_setup *setup);
+void    cast_rays(t_setup *setup);
 
 
 # endif

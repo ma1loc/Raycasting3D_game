@@ -9,8 +9,10 @@ void	*setup_struct_init()
 	setup->player = malloc(sizeof(t_player));
 	setup->game->top_view = malloc(sizeof(t_top_view));
 	setup->direction = malloc(sizeof(t_direction));
+	setup->ray_casting = malloc(sizeof(t_ray_casting));
 	if (!setup || !setup->game || !setup->player
-		|| !setup->game->top_view || !setup->direction)
+		|| !setup->game->top_view || !setup->direction
+		|| !setup->ray_casting)
 	{
 		// don't check the leaks i'll git garbage colacter later on here.
 		perror("Failed to allocate memory for game");

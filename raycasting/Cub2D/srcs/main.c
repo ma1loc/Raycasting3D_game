@@ -1,6 +1,6 @@
 # include "cub3d.h"
 
-// 4D from 9D
+// 6D from 9D
 // simple 2D map first
 // second 3D projection
 // North(up), South(down), East(right), and West(left).
@@ -15,6 +15,7 @@
 	// to know what the fucking diff mlx_hook, mlx_loop_hook, mlx_loop
 	// is have to convert the ROT_SPEED to radinas?
 	// read about the cos and sin.
+	// what is the fish-eye in the cub3d consipte?
 // >>>>>>>>>>>>>>>>>>>>> TO-DO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// TO-DO: create-function converting form binnary to hex for the colors
 	// TO-DO: create-function coverd the mlx_piexl_put
@@ -26,6 +27,7 @@ int	main()
 	setup = setup_struct_init();
 	init_game_config(setup->game);
 	init_player_config(setup);
+	init_ray_config(setup);
 	load_images_top_view(setup);
 
 	draw_top_view_map(setup->game, setup->player);
@@ -33,6 +35,8 @@ int	main()
 	
 	printf("rot -> %f\n", setup->player->rot_angle);
 	printf("cos -> %f\n", cos(setup->player->rot_angle));
+
+	// cast_rays(setup);
 
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);

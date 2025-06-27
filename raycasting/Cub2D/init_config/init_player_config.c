@@ -19,5 +19,6 @@ void	init_player_config(t_setup *setup)
 	player->rot_speed = ROT_SPEED;
 	dir->turn_dir = 0;
 	dir->walk_dir = 0;
+	dir->side_dir = 0;
 	get_player_position(setup->player, setup->game);
 }

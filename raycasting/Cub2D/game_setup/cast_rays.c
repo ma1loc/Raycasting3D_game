@@ -55,9 +55,8 @@ void    cast_rays(t_setup *setup)
 {
     int     colmun;
 
-    (void)setup;
-    colmun = 0;
-    while (colmun < SCREEN_WIDTH)
+    colmun = -1;
+    while (++colmun < setup->ray_casting->ray_nbr)
     {
         // >>> start casting start here
         // i will set it later on

@@ -37,11 +37,7 @@
 # define RIGHT_KEY XK_d
 # define LEFT_ARROW XK_Left
 # define RIGHT_ARROW XK_Right  
-// key left and right arrow
-
 # define ESC_KEY   XK_Escape
-
-
 
 // typedef struct s_image
 // {

@@ -41,6 +41,7 @@ void	re_drow(t_setup *setup, int *moved)
         mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
         draw_top_view_map(setup->game, setup->player);
         draw_player_dot(setup->player, setup->game);
+		// cast_rays(setup);
     }
 }
 

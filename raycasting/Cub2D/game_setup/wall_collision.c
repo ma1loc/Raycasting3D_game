@@ -2,9 +2,13 @@
 
 int	is_wall_at(t_setup *setup, double x, double y)
 {
-	int map_x = (int)(x);
-	int map_y = (int)(y);
+	int	map_x;
+	int	map_y;
 
+	map_x = (int)(x);
+	map_y = (int)(y);
+
+	// check if the player get out of bound the map
 	if (x < 0 || y < 0)
 		return (1);
 	if (!setup->game->map[map_y] || !setup->game->map[map_y][map_x])
@@ -16,9 +20,10 @@ int	is_wall_at(t_setup *setup, double x, double y)
 
 int	is_valid_move(t_setup *setup, double new_x, double new_y)
 {
-	double	radius = 0.03;
+	double	radius;
+	
 
-
+	radius = 0.02;
 	if (is_wall_at(setup, new_x + radius, new_y))
 		return (0);
 	if (is_wall_at(setup, new_x - radius, new_y))

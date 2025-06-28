@@ -1,6 +1,6 @@
 # include "cub3d.h"
 
-// 6D from 9D
+// 7D from 9D
 // simple 2D map first
 // second 3D projection
 // North(up), South(down), East(right), and West(left).

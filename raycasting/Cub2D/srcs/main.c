@@ -33,10 +33,8 @@ int	main()
 	draw_top_view_map(setup->game, setup->player);
 	draw_player_dot(setup->player, setup->game);
 	
-	printf("rot -> %f\n", setup->player->rot_angle);
-	printf("cos -> %f\n", cos(setup->player->rot_angle));
-
-	// cast_rays(setup);
+	// printf("rot -> %f\n", setup->player->rot_angle);
+	// printf("cos -> %f\n", cos(setup->player->rot_angle));
 
 	mlx_hook(setup->game->win_ptr, KeyPress, 1L << 0, key_event, setup);
 	mlx_hook(setup->game->win_ptr, KeyRelease, 1L << 1, key_release, setup);

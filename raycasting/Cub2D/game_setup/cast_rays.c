@@ -22,6 +22,13 @@
 // is i have to create an arry of rays?
 // So each ray will need its own small struct to store this data.
 
+// >>> before start casting ask what you need before casting rays?
+    // - how we cast that ray?
+    
+    // - how to move to next ray?, this is how, right?; yes
+        // >>> ray_casting->ray_angle += ray_casting->angle_step;
+
+
 void    init_ray_config(t_setup *setup)
 {
     t_ray_casting   *ray_casting;
@@ -33,9 +40,8 @@ void    init_ray_config(t_setup *setup)
     ray_casting->ray_nbr = SCREEN_WIDTH;
     // ray_casting->ray_nbr = SCREEN_WIDTH / 2; // drop the qulity and get batter performnace
     ray_casting->fov_angle = degrees_to_radians(FOV);
-    // get the left-most ray
-    ray_casting->ray_angle = player->rot_angle - (ray_casting->fov_angle / 2);
-    // distance between rays
+    
+	// distance between rays
     ray_casting->angle_step = ray_casting->fov_angle / ray_casting->ray_nbr;
 
     ray_casting->rays = malloc(sizeof(t_ray_data) * ray_casting->ray_nbr);
@@ -44,21 +50,22 @@ void    init_ray_config(t_setup *setup)
     memset(ray_casting->rays, 0, sizeof(t_ray_data) * ray_casting->ray_nbr);
 }
 
-// >>> before start casting ask what you need before casting rays?
-    // - how we cast that ray?
-    
-    // - how to move to next ray?, this is how, right?; yes
-        // >>> ray_casting->ray_angle += ray_casting->angle_step;
-
-
 void    cast_rays(t_setup *setup)
 {
-    int     colmun;
+    int     		colmun;
+	t_player		*player;
+	t_ray_casting	*rc;
 
     colmun = -1;
-    while (++colmun < setup->ray_casting->ray_nbr)
+	player = setup->player;
+	rc = setup->ray_casting;
+    double ray_angle = player->rot_angle - (rc->fov_angle / 2);
+    
+	while (++colmun < setup->ray_casting->ray_nbr)
     {
         // >>> start casting start here
         // i will set it later on
+
+		ray_angle += rc->angle_step;	// is this to go thghout the next ray, right?
     }
 }

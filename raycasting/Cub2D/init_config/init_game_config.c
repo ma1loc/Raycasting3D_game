@@ -8,7 +8,7 @@ char	**map_init() // >>> to remove later on
 
 	const char *default_map[] = {
 		"1111111111",
-		"1E00001111",
+		"1N00001111",
 		"1001000001",
 		"1101000111",
 		"1111111111",

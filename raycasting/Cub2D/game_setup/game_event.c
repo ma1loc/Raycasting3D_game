@@ -7,10 +7,20 @@
 
 // here i have to get is the new press key hit the wall or not to move the player a bit
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // LEFT / RIGHT → change rot_angle
 // UP / DOWN → use cos(rot_angle) and sin(rot_angle) for new positions
 // new_p_x = player->p_x + cos(player->rot_angle) * walk_dir * speed;
 // new_p_y = player->p_y + sin(player->rot_angle) * walk_dir * speed;
+
+// - is this lines have same things right?
+// 	new_p_x = player->p_x + cos(player->rot_angle + (M_PI)) * move_step;
+// 	new_p_x = player->p_x + cos(player->rot_angle) * move_step;
+	// gives you the opposite direction.
+    // new_p_x = player->p_x + cos(player->rot_angle + (M_PI)) * move_step;
+    // new_p_y = player->p_y + sin(player->rot_angle + (M_PI)) * move_step;
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // witche one move left/right
 // know the a-axis and the y-axis
@@ -48,17 +58,16 @@ void	update_walk_dir(t_setup *setup, int *moved)
 	move_step = setup->direction->walk_dir * player->move_speed;
     new_p_x = player->p_x + cos(player->rot_angle) * move_step;
     new_p_y = player->p_y + sin(player->rot_angle) * move_step;
-	// printf("cos -> %f\n", new_p_x);
-	// printf("sin -> %f\n", new_p_y);
+	printf("walk cos -> %f\n", new_p_x);
+	printf("walk sin -> %f\n", new_p_y);
     if (is_valid_move(setup, new_p_x, new_p_y))
     {
         player->p_x = new_p_x;
         player->p_y = new_p_y;
         *moved = 1;
     }
-	// else	// wall collision
+	// else	// wall collision put it later on
 	// 	wall_collision(setup, new_p_x, new_p_y, moved);
-
 }
 
 void	update_side_dir(t_setup *setup, int *moved)
@@ -69,20 +78,18 @@ void	update_side_dir(t_setup *setup, int *moved)
 	double	new_p_y;
 
 	player = setup->player;
-	// cos(a) => gives the adjacent side move
-	// sin(a) => gives the oppesite side move
 
 	move_step = setup->direction->side_dir * player->move_speed;
-    new_p_x = player->p_x + cos(player->rot_angle + M_PI_2) * move_step;
-    new_p_y = player->p_y + sin(player->rot_angle + M_PI_2) * move_step;
-    if (is_valid_move(setup, new_p_x, new_p_y))
+    new_p_x = player->p_x + cos(player->rot_angle + (M_PI / 2)) * move_step;
+    new_p_y = player->p_y + sin(player->rot_angle + (M_PI / 2)) * move_step;
+    printf("side cos -> %f\n", new_p_x);
+	printf("side sin -> %f\n", new_p_y);
+	if (is_valid_move(setup, new_p_x, new_p_y))
     {
         player->p_x = new_p_x;
         player->p_y = new_p_y;
         *moved = 1;
     }
-	// else	// wall collision
-	// 	wall_collision(setup, new_p_x, new_p_y, moved);
 }
 
 int game_loop(t_setup *setup)
@@ -119,12 +126,10 @@ int	key_event(int key_code, t_setup *setup)
 		dir->walk_dir = 1;
 	else if (key_code == DOWN_KEY)
 		dir->walk_dir = -1;
-
 	else if (key_code == LEFT_KEY)
 		dir->side_dir = -1;
 	else if (key_code == RIGHT_KEY)
 		dir->side_dir = 1;
-	
 	else if (key_code == LEFT_ARROW)
 		dir->turn_dir = -1;
 	else if (key_code == RIGHT_ARROW)

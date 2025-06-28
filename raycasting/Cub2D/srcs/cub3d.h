@@ -25,7 +25,7 @@
 
 # define FOV 60.0
 
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.05
 # define ROT_SPEED 0.1
 
 # define SCREEN_WIDTH 1280

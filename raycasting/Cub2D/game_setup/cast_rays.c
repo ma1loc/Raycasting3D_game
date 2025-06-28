@@ -60,5 +60,6 @@ void    cast_rays(t_setup *setup)
     while (colmun < SCREEN_WIDTH)
     {
         // >>> start casting start here
+        // i will set it later on
     }
 }

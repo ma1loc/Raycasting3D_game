@@ -20,8 +20,8 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
-// # define TILE_SIZE 128
 # define TILE_SIZE 64
+// # define TILE_SIZE 128
 
 # define FOV 60.0
 

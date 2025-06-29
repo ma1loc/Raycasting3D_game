@@ -93,7 +93,7 @@ typedef struct s_ray_casting
 {
 	int			ray_nbr;
 	double		fov_angle;
-	double		ray_angle;
+	// double		ray_angle; // no need here
 	double		angle_step;
 	t_ray_data	*rays;
 }	t_ray_casting;

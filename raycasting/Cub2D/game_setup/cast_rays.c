@@ -50,22 +50,21 @@ void    init_ray_config(t_setup *setup)
     memset(ray_casting->rays, 0, sizeof(t_ray_data) * ray_casting->ray_nbr);
 }
 
-void    cast_rays(t_setup *setup)
+void cast_rays(t_setup *setup)
 {
-    int     		colmun;
-	t_player		*player;
-	t_ray_casting	*rc;
-
-    colmun = -1;
+    int column;
+    t_player *player;
+    t_ray_casting *rc;
+    double ray_angle;
+    
+	column = 0;
 	player = setup->player;
 	rc = setup->ray_casting;
-    double ray_angle = player->rot_angle - (rc->fov_angle / 2);
-    
-	while (++colmun < setup->ray_casting->ray_nbr)
+    ray_angle = player->rot_angle - (rc->fov_angle / 2);
+    while (column < rc->ray_nbr)
     {
-        // >>> start casting start here
-        // i will set it later on
-
-		ray_angle += rc->angle_step;	// is this to go thghout the next ray, right?
+		// casting later
+        ray_angle += rc->angle_step;
+        column++;
     }
 }

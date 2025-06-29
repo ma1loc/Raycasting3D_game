@@ -30,10 +30,10 @@
 
 void    init_ray_config(t_setup *setup)
 {
-    t_player        *player;
+    // t_player        *player;
     t_ray_casting   *ray_casting;
     
-    player = setup->player;    
+    // player = setup->player;    
     ray_casting = setup->ray_casting;
     ray_casting->ray_nbr = SCREEN_WIDTH;
     ray_casting->fov_angle = degrees_to_radians(FOV);

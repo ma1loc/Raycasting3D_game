@@ -31,7 +31,7 @@ int	main()
 	load_images_top_view(setup);
 
 	draw_top_view_map(setup->game, setup->player);
-	draw_player_dot(setup->player, setup->game);
+	// draw_player_dot(setup->player, setup->game);
 	
 	// printf("rot -> %f\n", setup->player->rot_angle);
 	// printf("cos -> %f\n", cos(setup->player->rot_angle));

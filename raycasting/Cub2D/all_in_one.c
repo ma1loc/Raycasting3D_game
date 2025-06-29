@@ -425,40 +425,30 @@ void	draw_top_view_map(t_game *game, t_player *player)
 					game->top_view->free_space_img, col * TILE_SIZE, row * TILE_SIZE);
 		}
 	}
+	// this is the player red dot
+	mlx_put_image_to_window(
+		game->mlx_ptr,
+		game->win_ptr,
+		game->top_view->player_img,
+		(int)(player->p_x * TILE_SIZE),
+		(int)(player->p_y * TILE_SIZE));
 }
 
-void	draw_player_dot(t_player *player, t_game *game)
-{
-	double	pixel_x;
-	double	pixel_y;
-	int		radius;
-	int		dx;
-	int		dy;
 
-	pixel_x = player->p_x * TILE_SIZE;
-	pixel_y = player->p_y * TILE_SIZE;
-	
-	radius = 4;
-	dx = -radius;	// >>> col
-	while (dx <= radius)
-	{
-		dy = -radius;	// >>> row
-		while (dy <= radius)
-		{
-			if (dx * dx + dy * dy <= radius * radius)
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
-					(int)(pixel_x + dx + 0.5), (int)(pixel_y + dy + 0.5), RED_COLOR);
-			dy++;
-		}
-		dx++;
-	}
-}
+// that problem that i face is the wall collision that i think is here
+// i have a problem with the wall collision when i add the 0.5 to the player direction that
+// is affecting the wall conllision distance to it makes a space between the player and the wall and stop
+// and in some conrners it it hit the wall and go thghout it 
 
 int	is_wall_at(t_setup *setup, double x, double y)
 {
-	int map_x = (int)(x);
-	int map_y = (int)(y);
+	int	map_x;
+	int	map_y;
 
+	map_x = (int)(x);
+	map_y = (int)(y);
+
+	// check if the player get out of bound the map
 	if (x < 0 || y < 0)
 		return (1);
 	if (!setup->game->map[map_y] || !setup->game->map[map_y][map_x])
@@ -470,9 +460,10 @@ int	is_wall_at(t_setup *setup, double x, double y)
 
 int	is_valid_move(t_setup *setup, double new_x, double new_y)
 {
-	double	radius = 0.03;
+	double	radius;
+	
 
-
+	radius = 0.02;
 	if (is_wall_at(setup, new_x + radius, new_y))
 		return (0);
 	if (is_wall_at(setup, new_x - radius, new_y))

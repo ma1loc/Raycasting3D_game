@@ -34,13 +34,15 @@
 // that mean's is not for the walk_dir up/down move?
 // is i have to create an image buffer of the red player piexl put?
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 void	re_drow(t_setup *setup, int *moved)
 {
    	if (*moved)
     {
         mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
         draw_top_view_map(setup->game, setup->player);
-        draw_player_dot(setup->player, setup->game);
+        // draw_player_dot(setup->player, setup->game);
 		// cast_rays(setup);
     }
 }
@@ -81,6 +83,7 @@ void	update_side_dir(t_setup *setup, int *moved)
 	player = setup->player;
 
 	move_step = setup->direction->side_dir * player->move_speed;
+	printf("move_step %f\n", move_step);
     new_p_x = player->p_x + cos(player->rot_angle + (M_PI / 2)) * move_step;
     new_p_y = player->p_y + sin(player->rot_angle + (M_PI / 2)) * move_step;
     printf("side cos -> %f\n", new_p_x);

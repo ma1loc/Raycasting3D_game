@@ -28,20 +28,15 @@
     // - how to move to next ray?, this is how, right?; yes
         // >>> ray_casting->ray_angle += ray_casting->angle_step;
 
-
 void    init_ray_config(t_setup *setup)
 {
-    t_ray_casting   *ray_casting;
     t_player        *player;
+    t_ray_casting   *ray_casting;
     
+    player = setup->player;    
     ray_casting = setup->ray_casting;
-    player = setup->player;
-    
     ray_casting->ray_nbr = SCREEN_WIDTH;
-    // ray_casting->ray_nbr = SCREEN_WIDTH / 2; // drop the qulity and get batter performnace
     ray_casting->fov_angle = degrees_to_radians(FOV);
-    
-	// distance between rays
     ray_casting->angle_step = ray_casting->fov_angle / ray_casting->ray_nbr;
 
     ray_casting->rays = malloc(sizeof(t_ray_data) * ray_casting->ray_nbr);

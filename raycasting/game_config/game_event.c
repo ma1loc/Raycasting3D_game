@@ -119,6 +119,20 @@ int game_loop(t_setup *setup)
     return (0);
 }
 
+int	key_release(int key_code, t_setup *setup)
+{
+	t_direction	*dir;
+
+	dir = setup->direction;
+	if (key_code == UP_KEY || key_code == DOWN_KEY)
+		dir->walk_dir = 0;
+	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
+		dir->side_dir = 0;
+	else if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
+		dir->turn_dir = 0;
+	return (0);
+}
+
 int	key_event(int key_code, t_setup *setup)
 {
 	t_direction	*dir;
@@ -141,19 +155,5 @@ int	key_event(int key_code, t_setup *setup)
 	
 	if (dir->walk_dir != 0 || dir->turn_dir != 0 || dir->side_dir != 0)
 		game_loop(setup);
-	return (0);
-}
-
-int	key_release(int key_code, t_setup *setup)
-{
-	t_direction	*dir;
-
-	dir = setup->direction;
-	if (key_code == UP_KEY || key_code == DOWN_KEY)
-		dir->walk_dir = 0;
-	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
-		dir->side_dir = 0;
-	else if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
-		dir->turn_dir = 0;
 	return (0);
 }

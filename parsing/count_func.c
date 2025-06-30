@@ -72,6 +72,7 @@ void get_player_position(t_game *game)
 		i++;
 	}
 }
+
 void err(char *str)
 {
     while (*str)

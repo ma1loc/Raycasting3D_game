@@ -2,11 +2,13 @@
 
 void	open_window(t_game *game)
 {
-	int 	full_width;
-	int 	full_height;
+	int full_width;
+	int full_height;
+	int	screen_width;
+	int	screen_height;
 
-	int screen_width = SCREEN_WIDTH;
-	int screen_height = SCREEN_HEIGHT;
+	screen_width = SCREEN_WIDTH;
+	screen_height = SCREEN_HEIGHT;
 	mlx_get_screen_size(game->window->mlx_ptr, &full_width, &full_height);
 	if (SCREEN_WIDTH > full_width)
 		screen_width = full_width;

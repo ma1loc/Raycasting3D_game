@@ -27,13 +27,18 @@ int	main(int argc, char **argv)
 
 	if (parsing(argc, argv, &game))
 		return (1);
-	setup = setup_struct_init(&game);
-	// init_game_config(setup->game);
-	set_mlx_window(&game);
-	Xinit_player_config(setup);
-	init_ray_config(setup);
-	// load_images_top_view(setup);
 
+	// >>> the ray-casting start from here <<<
+	setup = setup_struct_init(&game);
+	set_mlx_window(&game);
+	init_player_direction(setup);
+
+	init_ray_config(setup);	// >>> working on it
+
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+	// load_images_top_view(setup);
 	// draw_top_view_map(setup->game, setup->player);
 	// draw_player_dot(setup->player, setup->game);
 

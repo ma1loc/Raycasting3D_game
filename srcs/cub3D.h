@@ -18,7 +18,6 @@
 # include <string.h>
 # include <math.h>
 
-
 // # define GRAY_COLOR 0xAAAAAA
 // # define D_GRAY_COLOR 0x222222
 #define RED_COLOR 0xFF0000
@@ -45,17 +44,17 @@
 # define RIGHT_ARROW XK_Right  
 # define ESC_KEY   XK_Escape
 
+typedef struct s_ppos
+{
+    int	height;	//row
+    int	width;	// column
+}	t_ppos;
+
 typedef struct s_counters
 {
     int floor_count;
     int ceiling_count;
 }   t_counters;
-
-typedef struct s_ppos
-{
-    int height;
-    int width;
-} t_ppos;
 
 typedef struct s_ids
 {
@@ -65,9 +64,9 @@ typedef struct s_ids
 
 typedef struct s_config
 {
-    t_ids ids[4];
-    int floor_rgb[3];
-    int ceiling_rgb[3];
+    t_ids	ids[4];
+    int		floor_rgb[3];
+    int		ceiling_rgb[3];
 } t_config;
 
 typedef struct s_window
@@ -78,15 +77,15 @@ typedef struct s_window
 
 typedef struct s_game
 {
-    int map_lines;
-    int map_start_line;
-    int map_height;
-    int width;
-    char **map;
-    t_ppos player_pos;
-    t_config *config;
-	t_window *window;
-}  t_game;
+    int			map_lines;
+    int			map_start_line;
+    int			map_height;
+    int			width;
+    char		**map;
+    t_ppos		player_pos;
+    t_config	*config;
+	t_window	*window;
+}	t_game;
 
 // ----------------------------------------
 
@@ -246,10 +245,11 @@ void err(char *str);
 // -------------------------------------------------------------------------
 
 void	*setup_struct_init(t_game *game);
-void	Xinit_player_config(t_setup *setup);
+void	init_player_direction(t_setup *setup);
 int		key_event(int key_code, t_setup *setup);
 void	set_mlx_window(t_game *game);
 double	degrees_to_radians(int degree);
+void	set_player_direction(t_player *player, t_game *game);
 
 int	key_release(int key_code, t_setup *setup);
 

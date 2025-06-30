@@ -1,6 +1,5 @@
 # include "cub3D.h"
 
-
 double	degrees_to_radians(int degree)
 {
 	double	radian;
@@ -9,17 +8,20 @@ double	degrees_to_radians(int degree)
 	return (radian);
 }
 
-void	Xinit_player_config(t_setup *setup)
+void	init_player_direction(t_setup *setup)
 {
 	t_player	*player;
 	t_direction	*dir;
 
 	player = setup->player;
 	dir = setup->direction;
+
 	player->move_speed = MOVE_SPEED;
 	player->rot_speed = ROT_SPEED;
 	dir->turn_dir = 0;
 	dir->walk_dir = 0;
 	dir->side_dir = 0;
-	// get_player_position(setup->player, setup->game);
+
+	// >>> to set
+	set_player_direction(player, setup->game);
 }

@@ -52,17 +52,18 @@
 # define TURN_LEFT -1
 # define TURN_RIGHT 1
 
-typedef struct s_ppos
-{
-	int		height;	//row
-    int		width;	// column
-}	t_ppos;
-
 typedef struct s_counters
 {
     int floor_count;
     int ceiling_count;
 }   t_counters;
+
+typedef struct s_ppos
+{
+    int height;
+    int width;
+    char player[2];
+} t_ppos;
 
 typedef struct s_ids
 {

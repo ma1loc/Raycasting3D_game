@@ -1,4 +1,3 @@
-
 #include "cub3D.h"
 
 int read_map(char *file, t_game *game)
@@ -11,7 +10,7 @@ int read_map(char *file, t_game *game)
         err("Error:\ncannot open map file\n"), exit(1);
     if (init_game_config(game))
         exit(1);
-    if (read_config_section(fd, game)) // here 
+    if (read_config_section(fd, game)) ///
         return (1);
     if (validate_textures(game->config))
         cleanup_game(game), exit(1);
@@ -19,7 +18,6 @@ int read_map(char *file, t_game *game)
         err("Error:\ninvalid map\n"), exit(1);
     return (0);
 }
-
 int handle_floor_color(char *line, t_config *config, int *floor_count)
 {
     (*floor_count)++;
@@ -58,7 +56,7 @@ int read_config_section(int fd, t_game *game)
     counters.ceiling_count = 0;
     while (1)
     {
-        result = process_line(fd, game, &counters); // here
+        result = process_line(fd, game, &counters);
         if (result == -1)
             break;
         if (result == 1)
@@ -66,7 +64,7 @@ int read_config_section(int fd, t_game *game)
         if (result == 2)
             break;
     }
-    if (result == -1)
+    if (result == -1) // EOF
         return (1);
     return (0);
 }

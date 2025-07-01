@@ -63,6 +63,8 @@ void get_player_position(t_game *game)
 		{
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
+                game->player_pos.player[0] = game->map[i][j];
+                game->player_pos.player[1] = '\0';
 				game->player_pos.height = i;
 				game->player_pos.width = j;
 				return;
@@ -72,7 +74,6 @@ void get_player_position(t_game *game)
 		i++;
 	}
 }
-
 void err(char *str)
 {
     while (*str)

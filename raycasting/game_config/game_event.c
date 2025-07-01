@@ -1,52 +1,5 @@
 # include "cub3D.h"
 
-// i don't have any idea about how to get this into the moveing of the player
-// double	angle; // >>> player angle in radians
-// double	move_speed; // >>> player speed in the map movements, player->move_speed = 0.05
-// double	rot_speed;	// >>> rotat left and right
-
-// here i have to get is the new press key hit the wall or not to move the player a bit
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-// LEFT / RIGHT → change rot_angle
-// UP / DOWN → use cos(rot_angle) and sin(rot_angle) for new positions
-// new_p_x = player->p_x + cos(player->rot_angle) * walk_dir * speed;
-// new_p_y = player->p_y + sin(player->rot_angle) * walk_dir * speed;
-
-// - is this lines have same things right?
-// 	new_p_x = player->p_x + cos(player->rot_angle + (M_PI)) * move_step;
-// 	new_p_x = player->p_x + cos(player->rot_angle) * move_step;
-	// gives you the opposite direction.
-    // new_p_x = player->p_x + cos(player->rot_angle + (M_PI)) * move_step;
-    // new_p_y = player->p_y + sin(player->rot_angle + (M_PI)) * move_step;
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// witche one move left/right
-// know the a-axis and the y-axis
-// cos(angle) → Horizontal movement (X-axis)
-// sin(angle) → Vertical movement (Y-axis)
-// virtical move/ herizontal move
-// ver move -> p_y -> sin -> row or column ?
-// hor move -> p_x -> cos
-//  UP/DOWN move the Player vertical Y useing sin why sin not cos?
-// i print the p_x that represent the horzental move but no chagne of the value
-// that mean's is not for the walk_dir up/down move?
-// is i have to create an image buffer of the red player piexl put?
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// void	re_drow(t_setup *setup, int *moved)
-// {
-//    	if (*moved)
-//     {
-//         // mlx_clear_window(setup->game->mlx_ptr, setup->game->win_ptr);
-//         // draw_top_view_map(setup->game, setup->player);
-//         // draw_player_dot(setup->player, setup->game);
-// 		// cast_rays(setup);
-//     }
-// }
-
 void	update_walk_dir(t_setup *setup, int *moved)
 {
 	t_player *player;

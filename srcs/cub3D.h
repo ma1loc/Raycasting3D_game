@@ -46,8 +46,8 @@
 
 typedef struct s_ppos
 {
-    int	height;	//row
-    int	width;	// column
+	int		height;	//row
+    int		width;	// column
 }	t_ppos;
 
 typedef struct s_counters
@@ -67,44 +67,42 @@ typedef struct s_config
     t_ids	ids[4];
     int		floor_rgb[3];
     int		ceiling_rgb[3];
-} t_config;
+}	t_config;
+
+// ----------------------------------------
+
+// bpp; how many bits are used to represent one pixel (32bit)
+// size_line; size_line = how many bytes in one row
+// endian; 
+
+typedef struct s_image
+{
+	char	*t_path;
+	void	*img_ptr;
+	char	*addr;		// "DONE"
+	int		bpp;		// "DONE" to see
+	int		size_line;	// "DONE" to see
+	int		endian;		// ""
+	int		width;
+	int		height;
+}	t_image;
+
+// ----------------------------------------
 
 typedef struct s_window
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_image	main_img;	// >>>  main image frame
 }	t_window;
-
-typedef struct s_game
-{
-    int			map_lines;
-    int			map_start_line;
-    int			map_height;
-    int			width;
-    char		**map;
-    t_ppos		player_pos;
-    t_config	*config;
-	t_window	*window;
-}	t_game;
 
 // ----------------------------------------
 
-// typedef struct s_image
-// {
-//     void    *img_ptr;
-//     char    *data;
-//     int     bpp;
-//     int     size_line;
-//     int     endian;
-//     int     width;
-//     int     height;
-// }   t_image;
-
 typedef struct s_direction
 {
-	int	walk_dir;
-	int	side_dir;
-	int turn_dir;
+	int		walk_dir;
+	int		side_dir;
+	int		turn_dir;
 }	t_direction;
 
 typedef struct s_top_view
@@ -116,19 +114,10 @@ typedef struct s_top_view
 
 typedef	struct s_player
 {
-	double	rot_angle;
-	double	move_speed;
-	double	rot_speed;
-
+	int 	fov;
+	double	angle;
 	double	p_x;
 	double	p_y;
-
-	double	dir_x;
-	double	dir_y;
-
-	double	plane_x;
-	double	plane_y;
-
 }	t_player;
 
 typedef struct s_ray_data
@@ -143,20 +132,39 @@ typedef struct s_ray_data
 typedef struct s_ray_casting
 {
 	int			ray_nbr;
-	double		fov_angle;
 	// double		ray_angle; // no need here
 	double		angle_step;
 	t_ray_data	*rays;
 }	t_ray_casting;
 
-typedef struct s_setup
+typedef struct s_textures
 {
+	t_image		t_north;
+	t_image		t_south;
+	t_image		t_east;
+	t_image		t_west;
+}				t_textures;
+
+typedef struct s_game
+{
+    int				map_lines;
+    int				map_start_line;
+    int				map_height;
+    int				width;
+    char			**map;
+    t_ppos			player_pos;
+    t_config		*config;
+	// -----------------
+	t_window		*window;
 	t_player		*player;
 	t_game			*game;
 	t_direction		*direction;
 	t_ray_casting	*ray_casting;
 	t_top_view		*top_view;
-}	t_setup;
+	t_image			*main_img;
+	t_textures		*textures;
+
+}	t_game;
 
 // ----------------------------------------
 
@@ -244,10 +252,17 @@ void err(char *str);
 
 // -------------------------------------------------------------------------
 
+t_game	*g_game(void);
+void	set_mlx_window(void);
+void	init_textures(void);
+void	set_game_textures(void);
+void	init_player_dir(void);
+
+// -------------------------------------------------------------------------
+
 void	*setup_struct_init(t_game *game);
-void	init_player_direction(t_setup *setup);
+// void	init_player_direction(t_setup *setup);
 int		key_event(int key_code, t_setup *setup);
-void	set_mlx_window(t_game *game);
 double	degrees_to_radians(int degree);
 void	set_player_direction(t_player *player, t_game *game);
 

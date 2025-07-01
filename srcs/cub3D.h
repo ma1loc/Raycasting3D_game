@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <math.h>
+# include <stdbool.h>
 
 // # define GRAY_COLOR 0xAAAAAA
 // # define D_GRAY_COLOR 0x222222
@@ -30,7 +31,7 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 2
 # define ROT_SPEED 0.1
 
 # define SCREEN_WIDTH 1280
@@ -43,6 +44,13 @@
 # define LEFT_ARROW XK_Left
 # define RIGHT_ARROW XK_Right  
 # define ESC_KEY   XK_Escape
+
+# define FORWARD 1
+# define BACKWARD -1
+# define LEFT -1
+# define RIGHT 1
+# define TURN_LEFT -1
+# define TURN_RIGHT 1
 
 typedef struct s_ppos
 {
@@ -105,12 +113,12 @@ typedef struct s_direction
 	int		turn_dir;
 }	t_direction;
 
-typedef struct s_top_view
-{
-	void	*player_img;
-	void	*wall_img;
-	void	*free_space_img;
-}	t_top_view;
+// typedef struct s_top_view
+// {
+// 	void	*player_img;
+// 	void	*wall_img;
+// 	void	*free_space_img;
+// }	t_top_view;
 
 typedef struct s_player_x_y
 {

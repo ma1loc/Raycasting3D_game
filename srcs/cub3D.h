@@ -28,7 +28,7 @@
 # define TILE_SIZE 64
 // # define TILE_SIZE 128
 
-# define FOV 60.0
+# define FOV 60
 
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.1
@@ -112,12 +112,18 @@ typedef struct s_top_view
 	void	*free_space_img;
 }	t_top_view;
 
-typedef	struct s_player
+typedef struct s_player_x_y
 {
-	int 	fov;
-	double	angle;
 	double	p_x;
 	double	p_y;
+} 	t_player_x_y;
+
+
+typedef	struct s_player
+{
+	int 			fov;
+	double			angle;
+	t_player_x_y	pos;
 }	t_player;
 
 typedef struct s_ray_data
@@ -257,12 +263,14 @@ void	set_mlx_window(void);
 void	init_textures(void);
 void	set_game_textures(void);
 void	init_player_dir(void);
+int		key_press(int key_code);
+int		key_release(int key_code);
 
 // -------------------------------------------------------------------------
 
 void	*setup_struct_init(t_game *game);
 // void	init_player_direction(t_setup *setup);
-int		key_event(int key_code, t_setup *setup);
+// int		key_event(int key_code, t_setup *setup);
 double	degrees_to_radians(int degree);
 void	set_player_direction(t_player *player, t_game *game);
 
@@ -281,6 +289,5 @@ int		is_wall_at(t_setup *setup, double x, double y);
 int		is_valid_move(t_setup *setup, double new_x, double new_y);
 void    init_ray_config(t_setup *setup);
 void    cast_rays(t_setup *setup);
-
 
 #endif

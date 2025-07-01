@@ -15,8 +15,8 @@ void	init_dir(double angle)
 	game = g_game();
 	game->player->fov = degrees_to_radians(FOV);
 	game->player.angle = degrees_to_radians(angle);
-	game->player->p_x = game->player_pos.height;
-	game->player->p_y = game->player_pos.width;
+	game->player->pos.p_x = game->player_pos.height;
+	game->player->pos.p_y = game->player_pos.width;
 }
 
 void	set_player_dir()

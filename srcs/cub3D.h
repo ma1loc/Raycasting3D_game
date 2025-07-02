@@ -74,7 +74,7 @@ typedef struct s_ids
 typedef struct s_config
 {
     t_ids	ids[4];
-    int		floor_rgb[3];
+    int		floor_rgb ;
     int		ceiling_rgb[3];
 }	t_config;
 
@@ -95,7 +95,13 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
-
+// 00000000 00000000 00000000 00000000
+//     T       R        G         B
+// x >> 24  & (0xff) = T
+// x >> 16 = R
+// x >> 8  = G
+// x       = B
+// ff ff ff ff
 // ----------------------------------------
 
 typedef struct s_window

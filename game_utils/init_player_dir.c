@@ -24,7 +24,7 @@ void	set_player_dir()
 	t_game *game;
 
 	game = g_game();
-	if (game == 'N')
+	if (game->player_pos.player == 'N')
 		init_dir(270);
 	else if (game == 'S')
 		init_dir(90);
@@ -39,7 +39,6 @@ void	init_player_dir()
 	t_direction	*dir;
 
 	dir = g_game()->direction;
-
 	dir->turn_dir = 0;
 	dir->walk_dir = 0;
 	dir->side_dir = 0;

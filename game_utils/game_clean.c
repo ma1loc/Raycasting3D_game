@@ -1,35 +1,55 @@
 # include "cub3D.h"
 
-void	destroy_images(t_game *game)
+void	t_path_destroy(t_game *game)
 {
-    if (game->window->main_img.img_ptr)
-        mlx_destroy_image(game->window->mlx_ptr, game->window->main_img.img_ptr);
-	if (game->main_img && game->main_img->img_ptr)
-        mlx_destroy_image(game->window->mlx_ptr, game->main_img->img_ptr);
-	if (game->textures->t_north.img_ptr)
-        	mlx_destroy_image(game->window->mlx_ptr, game->textures->t_north.img_ptr);
-	if (game->textures->t_south.img_ptr)
-			mlx_destroy_image(game->window->mlx_ptr, game->textures->t_south.img_ptr);
-	if (game->textures->t_east.img_ptr)
-			mlx_destroy_image(game->window->mlx_ptr, game->textures->t_east.img_ptr);
-	if (game->textures->t_west.img_ptr)
-			mlx_destroy_image(game->window->mlx_ptr, game->textures->t_west.img_ptr);
-	game->textures->t_south.img_ptr = NULL;	
-	game->textures->t_north.img_ptr = NULL;
-	game->textures->t_east.img_ptr = NULL;
-	game->textures->t_west.img_ptr = NULL;
-	game->window->main_img.img_ptr = NULL;
-	game->main_img->img_ptr = NULL;
+	if (game->textures->t_north.t_path)
+		free(game->textures->t_north.t_path);
+	if (game->textures->t_south.t_path)
+		free(game->textures->t_south.t_path);
+	if (game->textures->t_east.t_path)
+		free(game->textures->t_east.t_path);
+	if (game->textures->t_west.t_path)
+		free(game->textures->t_west.t_path);
 }
 
-game_exit(int exit_nbr, char *msg)
+void	destroy_texture_images(t_game *game)
 {
+	if (game->textures->t_north.img_ptr)
+    	mlx_destroy_image(game->window->mlx_ptr, game->textures->t_north.img_ptr);
+	if (game->textures->t_south.img_ptr)
+		mlx_destroy_image(game->window->mlx_ptr, game->textures->t_south.img_ptr);
+	if (game->textures->t_east.img_ptr)
+		mlx_destroy_image(game->window->mlx_ptr, game->textures->t_east.img_ptr);
+	if (game->textures->t_west.img_ptr)
+		mlx_destroy_image(game->window->mlx_ptr, game->textures->t_west.img_ptr);
+	t_path_destroy(game);
+}
+
+void	game_exit(int exit_nbr, char *msg)
+{
+	t_game *game;
+
+	game = g_game();
+	if (msg)
+		ft_putstr_fd(msg, STDERR_FILENO);
+
+	if (game->map)
+	    free_map(g_game());
+	if (game->config)
+	    free_config(g_game());
+
 	if (g_game()->game->window->mlx_ptr)
 	{
-		// distroy the images
-		destroy_images(g_game());
-		// distroy the window
-		// free the mlx_ptr
+		destroy_texture_images(g_game());
+		destory_window(g_game()->game->window->win_ptr);
 	}
+	if (game->window && game->window->mlx_ptr)
+    {
+        destroy_texture_images(game);
+        if (game->window->win_ptr)
+            mlx_destroy_window(game->window->mlx_ptr, game->window->win_ptr);
+        if (game->window->main_img.img_ptr)
+            mlx_destroy_image(game->window->mlx_ptr, game->window->main_img.img_ptr);
+    }
 	exit(exit_nbr);
 }

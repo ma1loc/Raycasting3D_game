@@ -82,7 +82,7 @@ typedef struct s_config
 
 // bpp; how many bits are used to represent one pixel (32bit)
 // size_line; size_line = how many bytes in one row
-// endian; 
+// endian; 2
 
 typedef struct s_image
 {
@@ -95,6 +95,7 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
+
 // 00000000 00000000 00000000 00000000
 //     T       R        G         B
 // x >> 24  & (0xff) = T
@@ -274,12 +275,14 @@ void err(char *str);
 // -------------------------------------------------------------------------
 
 t_game	*g_game(void);
-void	set_mlx_window(void);
+void	init_mlx_window(void);
 void	init_textures(void);
 void	set_game_textures(void);
 void	init_player_dir(void);
 int		key_press(int key_code);
 int		key_release(int key_code);
+void	game_exit(int exit_nbr, char *msg);
+
 
 // -------------------------------------------------------------------------
 

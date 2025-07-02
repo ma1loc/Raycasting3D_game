@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-void	set_mlx_window()
+void	init_mlx_window()
 {
 	t_game	*game;
 
@@ -13,6 +13,7 @@ void	set_mlx_window()
 		SCREEN_HEIGHT,
 		"Cub3D");
 
+	// main; create the main frame image 
 	game->window->main_img.img_ptr = mlx_new_image(
 		game->window->mlx_ptr,
 		SCREEN_WIDTH,
@@ -23,6 +24,7 @@ void	set_mlx_window()
 		&game->window->main_img.bpp,
 		&game->window->main_img.size_line,
 		&game->window->main_img.endian);
+	// ----------------------------------
 
 	game->window->main_img.width = SCREEN_WIDTH;
 	game->window->main_img.height = SCREEN_HEIGHT;
@@ -49,20 +51,14 @@ void	init_textures()
 	}
 }
 
-t_image	image_loader(char *textures_path)
+void	image_loader(t_image *img)
 {
-	t_image img;
-
 	img.img_ptr = mlx_xpm_file_to_image(g_game()->window->mlx_ptr,
-		textures_path, &img.width, &img.height);
+		img->t_path, &img.width, &img.height);
 	if (!img.img_ptr)
-	{
-		printf("mlx_xpm_file_to_image failed\n");
-		exit(EXIT_FAILURE);
-	}
+		game_exit(EXIT_FAILURE, "mlx_xpm_file_to_image failed\n");
 	img.addr = mlx_get_data_addr(img.img_ptr, &img.bpp,
 		&img.size_line, &img.endian);
-	return (img);
 }
 
 void	set_game_textures()
@@ -70,9 +66,8 @@ void	set_game_textures()
 	t_game *game;
 
 	game = g_game();
-	game->textures->t_north = image_loader(game->textures->t_north.t_path);
-	game->textures->t_south = image_loader(game->textures->t_south.t_path);
-	game->textures->t_east = image_loader(game->textures->t_east.t_path);
-	game->textures->t_west = image_loader(game->textures->t_west.t_path);
+	image_loader(game->textures->t_north);
+	image_loader(game->textures->t_south);
+	image_loader(game->textures->t_east);
+	image_loader(game->textures->t_west);
 }
-

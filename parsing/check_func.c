@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../srcs/cub3D.h"
 
 int check_map_extension(char *str)
 {

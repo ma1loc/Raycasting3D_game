@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "../srcs/cub3D.h"
 
 static char	*ft_read_save(int fd, char *save)
 {

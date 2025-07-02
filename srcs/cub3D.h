@@ -9,7 +9,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
-# include <mlx.h>
+// # include <mlx.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -73,10 +73,10 @@ typedef struct s_ids
 
 typedef struct s_config
 {
-    t_ids	ids[4];
-    int		floor_rgb ;
-    int		ceiling_rgb[3];
-}	t_config;
+    t_ids ids[4];
+    int floor_rgb[3];
+    int ceiling_rgb[3];
+} t_config;
 
 // ----------------------------------------
 
@@ -179,10 +179,10 @@ typedef struct s_game
 	// -----------------
 	t_window		*window;
 	t_player		*player;
-	t_game			*game;
+	// t_game			*game;
 	t_direction		*direction;
 	t_ray_casting	*ray_casting;
-	t_top_view		*top_view;
+	// t_top_view		*top_view;
 	t_image			*main_img;
 	t_textures		*textures;
 
@@ -286,26 +286,26 @@ void	game_exit(int exit_nbr, char *msg);
 
 // -------------------------------------------------------------------------
 
-void	*setup_struct_init(t_game *game);
-// void	init_player_direction(t_setup *setup);
-// int		key_event(int key_code, t_setup *setup);
-double	degrees_to_radians(int degree);
-void	set_player_direction(t_player *player, t_game *game);
+// void	*setup_struct_init(t_game *game);
+// // void	init_player_direction(t_setup *setup);
+// // int		key_event(int key_code, t_setup *setup);
+// double	degrees_to_radians(int degree);
+// void	set_player_direction(t_player *player, t_game *game);
 
-int	key_release(int key_code, t_setup *setup);
+// int	key_release(int key_code, t_setup *setup);
 
-// drawing 2d top view
-void	draw_player_dot(t_player *player, t_game *game);
-void	draw_top_view_map(t_game *game, t_player *player);
-void	load_images_top_view(t_setup *setup);
-void	draw_player_dot(t_player *player, t_game *game);
-void	draw_tile(t_game *game, int col, int row, int color);
-void	draw_map(t_game *game);
-int		double_to_int(double nbr);
-int		game_loop(t_setup *setup);
-int		is_wall_at(t_setup *setup, double x, double y);
-int		is_valid_move(t_setup *setup, double new_x, double new_y);
-void    init_ray_config(t_setup *setup);
-void    cast_rays(t_setup *setup);
+// // drawing 2d top view
+// void	draw_player_dot(t_player *player, t_game *game);
+// void	draw_top_view_map(t_game *game, t_player *player);
+// void	load_images_top_view(t_setup *setup);
+// void	draw_player_dot(t_player *player, t_game *game);
+// void	draw_tile(t_game *game, int col, int row, int color);
+// void	draw_map(t_game *game);
+// int		double_to_int(double nbr);
+// int		game_loop(t_setup *setup);
+// int		is_wall_at(t_setup *setup, double x, double y);
+// int		is_valid_move(t_setup *setup, double new_x, double new_y);
+// void    init_ray_config(t_setup *setup);
+// void    cast_rays(t_setup *setup);
 
 #endif

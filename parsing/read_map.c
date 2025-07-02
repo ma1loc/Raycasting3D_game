@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../srcs/cub3D.h"
 
 int read_map(char *file, t_game *game)
 {

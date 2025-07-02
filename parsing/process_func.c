@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../srcs/cub3D.h"
 
 int process_line(int fd, t_game *game, t_counters *counters)
 {

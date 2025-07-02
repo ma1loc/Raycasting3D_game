@@ -45,3 +45,6 @@
     
     // - how to move to next ray?, this is how, right?; yes
         // >>> ray_casting->ray_angle += ray_casting->angle_step;
+
+// ---------------------------------------------------------------------
+

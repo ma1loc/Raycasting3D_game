@@ -10,7 +10,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_INCLUDE = -I$(LIBFT_DIR)
 
-SRC = ./srcs/main.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c ./parsing/read_map.c ./parsing/utils.c ./parsing/check_func.c\
+SRC = ./srcs/main.c ./gnl/get_next_line.c  ./parsing/read_map.c ./parsing/utils.c ./parsing/check_func.c\
 	  ./parsing/cleanup.c ./parsing/parsing.c ./parsing/count_func.c ./parsing/validate_func.c ./parsing/process_func.c ./parsing/store_func.c\
 
 OBJ = $(SRC:.c=.o)

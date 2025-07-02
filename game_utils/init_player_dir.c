@@ -2,10 +2,7 @@
 
 double	degrees_to_radians(int degree)
 {
-	double	radian;
-
-	radian = degree * M_PI / 180.0;
-	return (radian);
+	return (degree * M_PI / 180);
 }
 
 void	init_dir(double angle)
@@ -26,11 +23,11 @@ void	set_player_dir()
 	game = g_game();
 	if (game->player_pos.player == 'N')
 		init_dir(270);
-	else if (game == 'S')
+	else if (game->player_pos.player == 'S')
 		init_dir(90);
-	else if (game == 'E')
+	else if (game->player_pos.player == 'E')
 		init_dir(0);
-	else if (game == 'W')
+	else if (game->player_pos.player == 'W')
 		init_dir(180);
 }
 

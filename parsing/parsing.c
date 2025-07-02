@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../srcs/cub3D.h"
 
 int get_texture_index(const char *id)
 {

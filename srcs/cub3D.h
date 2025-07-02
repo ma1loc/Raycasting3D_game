@@ -5,20 +5,6 @@
 # define BUFFER_SIZE 1
 # endif
 
-// # include "get_next_line.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <fcntl.h>
-// # include <mlx.h>
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <unistd.h>
-# include <string.h>
-# include <math.h>
-# include <stdbool.h>
-
 // # define GRAY_COLOR 0xAAAAAA
 // # define D_GRAY_COLOR 0x222222
 #define RED_COLOR 0xFF0000
@@ -51,6 +37,20 @@
 # define RIGHT 1
 # define TURN_LEFT -1
 # define TURN_RIGHT 1
+
+// # include "get_next_line.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <fcntl.h>
+# include <mlx.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <unistd.h>
+# include <string.h>
+# include <math.h>
+# include <stdbool.h>
 
 typedef struct s_counters
 {

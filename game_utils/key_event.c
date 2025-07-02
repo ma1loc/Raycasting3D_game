@@ -1,4 +1,4 @@
-# include "cub3D.h"
+# include "../srcs/cub3D.h"
 
 int	key_press(int key_code)
 {

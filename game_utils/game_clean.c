@@ -1,4 +1,4 @@
-# include "cub3D.h"
+# include "../srcs/cub3D.h"
 
 void	t_path_destroy(t_game *game)
 {
@@ -38,10 +38,11 @@ void	game_exit(int exit_nbr, char *msg)
 	if (game->config)
 	    free_config(g_game());
 
-	if (g_game()->game->window->mlx_ptr)
+
+	if (game->window->mlx_ptr)
 	{
 		destroy_texture_images(g_game());
-		destory_window(g_game()->game->window->win_ptr);
+		mlx_destroy_window(game->window->mlx_ptr, game->window->win_ptr);
 	}
 	if (game->window && game->window->mlx_ptr)
     {

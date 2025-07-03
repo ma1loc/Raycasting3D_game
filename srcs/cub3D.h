@@ -73,7 +73,7 @@ typedef struct s_ids
 
 typedef struct s_config
 {
-    t_ids ids[4];
+    t_ids ids[4]; 
     int floor_rgb[3];
     int ceiling_rgb[3];
 } t_config;
@@ -181,7 +181,7 @@ typedef struct s_game
 	t_player		player;
 	t_direction		direction;
 	// t_ray_casting	ray_casting;
-	t_textures		ttop_view;
+	// t_textures		ttop_view;
 	t_textures		textures;
 
 }	t_game;
@@ -285,12 +285,11 @@ int		game_loop(void);
 void	upgrade_player_dir(t_game *game, int dir, bool strafe);
 void	upgrade_player_s_dir(t_game *game, double angle);
 void	handle_key_press(t_game *game);
-// void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-// void	my_mlx_draw_square(int x, int y, int size, int color);
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	draw_square(int x, int y, int size, int color);
-void	main_image_randring(t_game *game);
+void	main_img_randring(t_game *game);
+
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
 

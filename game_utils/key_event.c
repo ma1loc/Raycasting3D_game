@@ -22,7 +22,7 @@ int	key_press(int key_code)
 	if (key_code == LEFT_ARROW)
 		game->direction.turn_dir = TURN_LEFT;
 	if (key_code == RIGHT_ARROW)
-		game->direction.turn_dir = TURN_RIGHT;
+		game->direction.turn_dir = TURN_RIGHT;	
 	return (0);
 }
 
@@ -63,16 +63,15 @@ int	key_release(int key_code)
 	return (0);
 }
 
-// my_mlx_pixel_put(game, 0, 0, RED_COLOR);
-// mlx_put_image_to_window(game->window.mlx_ptr, game->window.win_ptr,
-// 	game->window.main_img.img_ptr, 0, 0);
-
+// main game frame
 int	game_loop()
 {
 	t_game *game;
 
 	game = g_game();
 	handle_key_press(game);
-	main_image_randring(game);
+
+	// to the frame
+	main_img_randring(game);
 	return (0);
 }

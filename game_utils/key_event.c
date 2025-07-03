@@ -26,6 +26,22 @@ int	key_press(int key_code)
 	return (0);
 }
 
+// --------------- updated -----------------------------
+void	upgrade_player_s_dir(t_game *game, double angle)
+{
+	double	new_angle;
+
+	new_angle = game->player.angle + angle;
+	
+	// Proper angle normalization
+	while (new_angle >= 2 * M_PI)
+		new_angle -= 2 * M_PI;
+	while (new_angle < 0)
+		new_angle += 2 * M_PI;
+	
+	game->player.angle = new_angle;
+}
+
 // "DONE"
 void	handle_key_press(t_game *game)
 {
@@ -62,16 +78,84 @@ int	key_release(int key_code)
 		dir->turn_dir = 0;
 	return (0);
 }
+// ------------------------------------------------------------
 
-// main game frame
+
+void	draw_square(int x, int y, int size, int color)
+{
+	t_game	*game;
+	int		i;
+	int		j;
+
+	game = g_game();
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			my_mlx_pixel_put(game, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_2d_map(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (g_game()->map[y])
+	{
+		x = 0;
+		while (g_game()->map[y][x])
+		{
+			if (game->map[y][x] == '1')
+				draw_square(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, D_GRAY_COLOR);
+			else if (game->map[y][x] == '0')
+				draw_square(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, GRAY_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
+
+void	draw_player(t_game *game)
+{
+	int	player_screen_x, player_screen_y;
+	int	player_size;
+
+	player_size = TILE_SIZE / 2;
+	
+	player_screen_x = (int)game->player.pos.p_x - (player_size / 2);
+	player_screen_y = (int)game->player.pos.p_y - (player_size / 2);
+	
+	draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
+}
+
+
+void	main_img_randring(t_game *game)
+{
+	draw_2d_map(game);
+	draw_player(game);
+	
+	mlx_put_image_to_window(game->window.mlx_ptr, 
+		game->window.win_ptr, 
+		game->window.main_img.img_ptr, 0, 0);
+}
+
+
 int	game_loop()
 {
 	t_game *game;
 
 	game = g_game();
-	handle_key_press(game);
 
-	// to the frame
+	handle_key_press(game);
 	main_img_randring(game);
+	
 	return (0);
 }

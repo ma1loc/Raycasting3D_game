@@ -29,9 +29,9 @@ int	main(int argc, char **argv)
 
 	game_init();	// "DONE"
 
-	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);
-	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);
-	mlx_loop_hook(game->window.mlx_ptr, game_loop, NULL);
+	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);	// "DONE"
+	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);	// "DONE"
+	mlx_loop_hook(game->window.mlx_ptr, game_loop, NULL);	// "N_DONE"
 
 	mlx_loop(game->window.mlx_ptr);
 

@@ -12,35 +12,58 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
-// // -------------------------------------------------------------
 
-// void	draw_square(int x, int y, int size, int color)
-// {
-// 	t_game	*game;
-// 	int		i;
-// 	int		j;
 
-// 	game = g_game();
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		j = 0;
-// 		while (j < size)
-// 		{
-// 			my_mlx_pixel_put(game, x + i, y + j, color);
-// 			j++;	
-// 		}
-// 		i++;
-// 	}
-// }
+void	draw_square(int x, int y, int size, int color)
+{
+	t_game	*game;
+	int		i;
+	int		j;
 
-// void	main_img_randring(t_game *game)
-// {
-// 	int px = game->player.pos.p_x;
-// 	int py = game->player.pos.p_y;
+	game = g_game();
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			my_mlx_pixel_put(game, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
 
-// 	draw_square(px, py, 20, RED_COLOR);
+void	draw_2d_map(t_game *game)
+{
+	int	y;
+	int	x;
 
-// 	mlx_put_image_to_window(game->window.mlx_ptr, game->window.win_ptr,
-// 		game->window.main_img.img_ptr, 0, 0);
-// }
+	y = 0;
+	while (g_game()->map[y])
+	{
+		x = 0;
+		while (g_game()->map[y][x])
+		{
+			if (game->map[y][x] == '1')
+				draw_square(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, D_GRAY_COLOR);
+			else if (game->map[y][x] == '0')
+				draw_square(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, GRAY_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_player(t_game *game)
+{
+	int	player_screen_x, player_screen_y;
+	int	player_size;
+
+	player_size = TILE_SIZE / 2;
+	
+	player_screen_x = (int)game->player.pos.p_x - (player_size / 2);
+	player_screen_y = (int)game->player.pos.p_y - (player_size / 2);
+	
+	draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
+}

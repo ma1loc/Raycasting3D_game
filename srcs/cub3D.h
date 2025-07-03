@@ -18,7 +18,7 @@
 # define FOV 60
 
 # define MOVE_SPEED 2
-# define ROT_SPEED 0.1
+# define ROT_SPEED 0.03
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -290,7 +290,10 @@ void	handle_key_press(t_game *game);
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	draw_square(int x, int y, int size, int color);
-void	main_image_randring(t_game *game);
+void	draw_2d_map(t_game *game);
+void	draw_player(t_game *game);
+
+
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
 

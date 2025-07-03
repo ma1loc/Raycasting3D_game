@@ -63,19 +63,16 @@ int	key_release(int key_code)
 	return (0);
 }
 
+// my_mlx_pixel_put(game, 0, 0, RED_COLOR);
+// mlx_put_image_to_window(game->window.mlx_ptr, game->window.win_ptr,
+// 	game->window.main_img.img_ptr, 0, 0);
+
 int	game_loop()
 {
 	t_game *game;
 
 	game = g_game();
 	handle_key_press(game);
-
-	// my_mlx_pixel_put(game, game->player.pos.p_x, game->player.pos.p_y, RED_COLOR);
-	// mlx_put_image_to_window(game->window.mlx_ptr, game->window.win_ptr,
-	// 	game->window.main_img.img_ptr, 0, 0);
-	
-	printf("game->player.pos.p_x -> %.2f\n", game->player.pos.p_x);
-	printf("game->player.pos.p_y -> %.2f\n", game->player.pos.p_y);
-
+	main_image_randring(game);
 	return (0);
 }

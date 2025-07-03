@@ -11,17 +11,6 @@ t_game	*g_game(void)
 
 // ---------------------------------------------
 
-void	image_randring()
-{
-	t_game *game;
-
-	game = g_game();
-	my_mlx_pixel_put(game, 0, 0, RED_COLOR);
-	mlx_put_image_to_window(game->window.mlx_ptr, game->window.win_ptr,
-		game->window.main_img.img_ptr, 0, 0);
-
-}
-
 void	game_init()
 {
 	init_mlx_window();		// "DONE"
@@ -39,15 +28,12 @@ int	main(int argc, char **argv)
 		return (1);	
 
 	game_init();	// "DONE"
-	image_randring();	// >>> get the 2d view first
 
-	
 	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);
 	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);
 	mlx_loop_hook(game->window.mlx_ptr, game_loop, NULL);
 
 	mlx_loop(game->window.mlx_ptr);
 
-	// game_exit(0, NULL);
 	return (0);
 }

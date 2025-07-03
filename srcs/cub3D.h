@@ -5,7 +5,7 @@
 # define BUFFER_SIZE 1
 # endif
 
-// # define GRAY_COLOR 0xAAAAAA
+# define GRAY_COLOR 0xAAAAAA
 # define D_GRAY_COLOR 0x222222
 #define RED_COLOR 0xFF0000
 
@@ -270,7 +270,8 @@ void free_split(char **split);
 void cleanup_game(t_game *game);
 void err(char *str);
 
-// -------------------------------------------------------------------------
+// 
+// -------------------------------- parsing part --------------------------------
 // ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
 void	init_mlx_window(void);
@@ -284,37 +285,14 @@ int		game_loop(void);
 void	upgrade_player_dir(t_game *game, int dir, bool strafe);
 void	upgrade_player_s_dir(t_game *game, double angle);
 void	handle_key_press(t_game *game);
+// void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+// void	my_mlx_draw_square(int x, int y, int size, int color);
 
-// void	my_mlx_pixel_put(void *data, int x, int y, int color);
-// void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-
-
+void	draw_square(int x, int y, int size, int color);
+void	main_image_randring(t_game *game);
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
 
-// -------------------------------------------------------------------------
-
-// void	*setup_struct_init(t_game *game);
-// // void	init_player_direction(t_setup *setup);
-// // int		key_event(int key_code, t_setup *setup);
-// double	degrees_to_radians(int degree);
-// void	set_player_direction(t_player *player, t_game *game);
-
-// int	key_release(int key_code, t_setup *setup);
-
-// // drawing 2d top view
-// void	draw_player_dot(t_player *player, t_game *game);
-// void	draw_top_view_map(t_game *game, t_player *player);
-// void	load_images_top_view(t_setup *setup);
-// void	draw_player_dot(t_player *player, t_game *game);
-// void	draw_tile(t_game *game, int col, int row, int color);
-// void	draw_map(t_game *game);
-// int		double_to_int(double nbr);
-// int		game_loop(t_setup *setup);
-// int		is_wall_at(t_setup *setup, double x, double y);
-// int		is_valid_move(t_setup *setup, double new_x, double new_y);
-// void    init_ray_config(t_setup *setup);
-// void    cast_rays(t_setup *setup);
 
 #endif

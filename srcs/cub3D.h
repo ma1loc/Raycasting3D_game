@@ -6,7 +6,7 @@
 # endif
 
 // # define GRAY_COLOR 0xAAAAAA
-// # define D_GRAY_COLOR 0x222222
+# define D_GRAY_COLOR 0x222222
 #define RED_COLOR 0xFF0000
 
 # define EXIT_SUCCESS 0
@@ -17,7 +17,7 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 2
+# define MOVE_SPEED 0.5
 # define ROT_SPEED 0.1
 
 # define SCREEN_WIDTH 1280
@@ -147,7 +147,7 @@ typedef struct s_ray_data
 	double	wall_dist;
 	double	hit_x;
 	double	hit_y;
-	// Wall orientation (vertical/horizontal)
+	// wall orientation (vertical/horizontal)
 } t_ray_data;
 
 // >>> array of the ray data
@@ -176,15 +176,13 @@ typedef struct s_game
     char			**map;
     t_ppos			player_pos;
     t_config		*config;
-	// -----------------
-	t_window		*window;
-	t_player		*player;
-	// t_game			*game;
-	t_direction		*direction;
-	t_ray_casting	*ray_casting;
-	// t_top_view		*top_view;
-	t_image			*main_img;
-	t_textures		*textures;
+	// ----------------- ray-casting part
+	t_window		window;
+	t_player		player;
+	t_direction		direction;
+	// t_ray_casting	ray_casting;
+	t_textures		ttop_view;
+	t_textures		textures;
 
 }	t_game;
 
@@ -273,7 +271,7 @@ void cleanup_game(t_game *game);
 void err(char *str);
 
 // -------------------------------------------------------------------------
-
+// ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
 void	init_mlx_window(void);
 void	init_textures(void);
@@ -282,7 +280,18 @@ void	init_player_dir(void);
 int		key_press(int key_code);
 int		key_release(int key_code);
 void	game_exit(int exit_nbr, char *msg);
+int		game_loop(void);
+void	upgrade_player_dir(t_game *game, int dir, bool strafe);
+void	upgrade_player_s_dir(t_game *game, double angle);
+void	handle_key_press(t_game *game);
 
+// void	my_mlx_pixel_put(void *data, int x, int y, int color);
+// void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+
+
+// -------------------------------------------------------------------------
+// ------------- ray-casting -----------------
 
 // -------------------------------------------------------------------------
 

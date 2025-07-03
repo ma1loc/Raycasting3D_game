@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:58:04 by ytabia            #+#    #+#             */
-/*   Updated: 2025/07/01 19:18:43 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/07/03 09:56:15 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../srcs/cub3D.h"
+#include "cub3D.h"
 
 int get_texture_index(const char *id)
 {

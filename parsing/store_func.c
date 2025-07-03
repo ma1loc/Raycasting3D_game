@@ -1,4 +1,5 @@
-#include "../srcs/cub3D.h"
+#include "cub3D.h"
+
 
 int store_and_validat_map(char *file, t_game *game)
 {

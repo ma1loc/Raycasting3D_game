@@ -68,8 +68,8 @@ void	draw_line(t_game *game, int line_size)
 
     dx = cos(game->player.angle);
     dy = sin(game->player.angle);
-    px = game->player.pos.p_x;
-    py = game->player.pos.p_y;
+    px = game->player.p_pos.x;
+    py = game->player.p_pos.y;
     for (i = 0; i < line_size; i++)
     {
         draw_x = (int)(px + dx * i);
@@ -81,8 +81,8 @@ void	draw_line(t_game *game, int line_size)
 void draw_player(t_game *game)
 {
     int player_size = TILE_SIZE / 3;
-    int player_screen_x = (int)(game->player.pos.p_x - player_size / 2);
-    int player_screen_y = (int)(game->player.pos.p_y - player_size / 2);
+    int player_screen_x = (int)(game->player.p_pos.x - player_size / 2);
+    int player_screen_y = (int)(game->player.p_pos.y - player_size / 2);
     int line_size = 60;
 
 	draw_line(game, line_size);

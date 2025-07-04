@@ -122,43 +122,28 @@ typedef struct s_direction
 	int		turn_dir;
 }	t_direction;
 
-// typedef struct s_top_view
-// {
-// 	void	*player_img;
-// 	void	*wall_img;
-// 	void	*free_space_img;
-// }	t_top_view;
-
-typedef struct s_player_x_y
+typedef struct s_coord
 {
-	double	p_x;
-	double	p_y;
-} 	t_player_x_y;
-
+	double	x;
+	double	y;
+}	t_coord;
 
 typedef	struct s_player
 {
 	int 			fov;
 	double			angle;
-	t_player_x_y	pos;
+	t_coord			p_pos;
 }	t_player;
 
 typedef struct s_ray_data
 {
+	int		ray_nbr;
+	double	angle_step;
 	double	wall_dist;
-	double	hit_x;
-	double	hit_y;
+	t_coord	hit;
+	
 	// wall orientation (vertical/horizontal)
-} t_ray_data;
-
-// >>> array of the ray data
-typedef struct s_ray_casting
-{
-	int			ray_nbr;
-	// double		ray_angle; // no need here
-	double		angle_step;
-	t_ray_data	*rays;
-}	t_ray_casting;
+}			t_ray_data;
 
 typedef struct s_textures
 {
@@ -181,8 +166,8 @@ typedef struct s_game
 	t_window		window;
 	t_player		player;
 	t_direction		direction;
-	// t_ray_casting	ray_casting;
-	t_textures		ttop_view;
+	t_ray_data		ray_casting;
+	// t_textures		ttop_view;
 	t_textures		textures;
 
 }	t_game;
@@ -275,20 +260,21 @@ void err(char *str);
 // -------------------------------- parsing part --------------------------------
 // ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
+int		game_loop(void);
 void	init_mlx_window(void);
 void	init_textures(void);
 void	set_game_textures(void);
 void	init_player_dir(void);
 int		key_press(int key_code);
 int		key_release(int key_code);
-void	game_exit(int exit_nbr, char *msg);
-int		game_loop(void);
-void	upgrade_player_dir(t_game *game, int dir, bool strafe);
-void	upgrade_player_s_dir(t_game *game, double angle);
 void	handle_key_press(t_game *game);
+double	degrees_to_radians(int degree);
+void	game_exit(int exit_nbr, char *msg);
+void	draw_square(int x, int y, int size, int color);
+void	upgrade_player_s_dir(t_game *game, double angle);
+void	upgrade_player_dir(t_game *game, int dir, bool strafe);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
-void	draw_square(int x, int y, int size, int color);
 
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);
@@ -296,5 +282,6 @@ void	draw_player(t_game *game);
 
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
+
 
 #endif

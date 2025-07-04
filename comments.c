@@ -50,5 +50,18 @@
 
 // 				to-do
 // >>> draw the player casing line.
+
 // >>> start the ray-casting.
+	// You start from: player_angle - (FOV / 2)
+	// End at: player_angle + (FOV / 2)
+	// Ray angle
+	// Hit point (x, y)
+	// Tile hit (map coordinates)
+	// Was it vertical or horizontal?
+	// Distance to hit
+	// Texture offset (for drawing)
+	// How DDA/grid stepping works?
+	// How to detect vertical vs horizontal hits?
+	// How to apply textures cleanly?
+
 // >>> fix the up and down key behaver.

@@ -17,12 +17,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_INCLUDE = -I$(LIBFT_DIR)
 
 SRC = ./srcs/main.c ./gnl/get_next_line.c  ./parsing/read_map.c ./parsing/utils.c ./parsing/check_func.c \
-	  ./parsing/cleanup.c ./parsing/parsing.c ./parsing/count_func.c ./parsing/validate_func.c \
-	  ./parsing/process_func.c ./parsing/store_func.c \
-	  ./game_utils/game_clean.c ./game_utils/game_init.c \
-	  ./game_utils/init_player_dir.c ./game_utils/key_event.c \
-	  ./game_utils/player_movements.c ./game_utils/top_view_textures.c \
-	  ./game_randring/img_randring.c ./game_randring/game_loop.c
+	./parsing/cleanup.c ./parsing/parsing.c ./parsing/count_func.c ./parsing/validate_func.c \
+	./parsing/process_func.c ./parsing/store_func.c ./game_utils/game_clean.c ./game_utils/game_init.c \
+	./game_utils/key_event.c ./game_utils/player_movements.c ./game_randring/img_randring.c \
+	./game_randring/game_loop.c
 
 OBJ = $(SRC:.c=.o)
 

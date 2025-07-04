@@ -1,7 +1,12 @@
 # include "cub3D.h"
 
-// >>> wall colision later on will be DONE
+// "DONE"
+double	degrees_to_radians(int degree)
+{
+	return (degree * M_PI / 180);
+}
 
+// >>> wall colision later on will be DONE
 int	is_wall(t_game *game, double x, double y)
 {
 	int	map_x;
@@ -37,8 +42,8 @@ int	check_collision(t_game *game, double new_x, double new_y)
 // "N_DONE"
 void	upgrade_player_dir(t_game *game, int dir, bool strafe)
 {
-	t_player_x_y	new_pp;
-	double			move_step;
+	t_coord		new_pp;
+	double		move_step;
 
 	if (strafe)
 		move_step = game->player.angle + (dir * M_PI / 2);
@@ -47,15 +52,13 @@ void	upgrade_player_dir(t_game *game, int dir, bool strafe)
 	// the up and down is working correctly intel i strafe the playe 
 	// the up and down key not behave like it be.
 
-	printf("game->player.angle * dir -> %f\n", game->player.angle * dir);
-	
-	new_pp.p_x = game->player.pos.p_x + cos(move_step) * MOVE_SPEED;
-	new_pp.p_y = game->player.pos.p_y + sin(move_step) * MOVE_SPEED;
+	new_pp.x = game->player.p_pos.x + cos(move_step) * MOVE_SPEED;
+	new_pp.y = game->player.p_pos.y + sin(move_step) * MOVE_SPEED;
 
-	if (!check_collision(game, new_pp.p_x, new_pp.p_y))
+	if (!check_collision(game, new_pp.x, new_pp.y))
 	{
-		game->player.pos.p_x = new_pp.p_x;
-		game->player.pos.p_y = new_pp.p_y;
+		game->player.p_pos.x = new_pp.x;
+		game->player.p_pos.y = new_pp.y;
 	}
 }
 

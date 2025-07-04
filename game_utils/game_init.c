@@ -64,6 +64,29 @@ void	image_loader(t_image *img)
 }
 
 // "DONE"
+void	init_player_dir()
+{
+	t_game *game;
+
+	game = g_game();
+	if (*game->player_pos.player == 'N')
+		game->player.angle = degrees_to_radians(270);
+	else if (*game->player_pos.player == 'S')
+		game->player.angle = degrees_to_radians(90);
+	else if (*game->player_pos.player == 'E')
+		game->player.angle = degrees_to_radians(0);
+	else if (*game->player_pos.player == 'W')
+		game->player.angle = degrees_to_radians(180);
+	game->player.p_pos.x = (game->player_pos.width * TILE_SIZE
+		+ (TILE_SIZE / 2));
+	game->player.p_pos.y = (game->player_pos.height * TILE_SIZE
+		+ (TILE_SIZE / 2));
+	game->direction.turn_dir = 0;
+	game->direction.walk_dir = 0;
+	game->direction.side_dir = 0;
+}
+
+// "DONE"
 void	set_game_textures()
 {
 	t_game *game;

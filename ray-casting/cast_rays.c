@@ -1,21 +1,17 @@
 # include "cub3D.h"
 
-void    init_ray_config(t_setup *setup)
-{
-    t_ray_casting   *ray_casting;
+// to remove
+// void    init_ray_config()
+// {
 
-    ray_casting = setup->ray_casting;
-    ray_casting->ray_nbr = SCREEN_WIDTH;
-    ray_casting->fov_angle = degrees_to_radians(FOV);
-    ray_casting->angle_step = ray_casting->fov_angle / ray_casting->ray_nbr;
+//     ray_casting = setup->ray_casting;
 
-    ray_casting->rays = malloc(sizeof(t_ray_data) * ray_casting->ray_nbr);
-    if (!ray_casting->rays)
-        return (printf("rays mallocation filed\n"), exit(EXIT_FAILURE));
-    ft_memset(ray_casting->rays, 0, sizeof(t_ray_data) * ray_casting->ray_nbr);
-}
+//     ray_casting->ray_nbr = SCREEN_WIDTH;
+//     // ray_casting->fov_angle = degrees_to_radians(FOV);
+//     ray_casting->angle_step = ray_casting->fov_angle / ray_casting->ray_nbr;
+// }
 
-void cast_rays(t_setup *setup)
+void cast_rays()
 {
     int column;
     t_player *player;

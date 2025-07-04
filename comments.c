@@ -51,3 +51,4 @@
 // 				to-do
 // >>> draw the player casing line.
 // >>> start the ray-casting.
+// >>> fix the up and down key behaver.

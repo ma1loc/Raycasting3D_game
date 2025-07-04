@@ -7,7 +7,8 @@
 
 # define GRAY_COLOR 0xAAAAAA
 # define D_GRAY_COLOR 0x222222
-#define RED_COLOR 0xFF0000
+# define RED_COLOR 0xFF0000
+# define GREEN_CLOOR 0x00FF00
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -17,7 +18,7 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 2
+# define MOVE_SPEED 1
 # define ROT_SPEED 0.03
 
 # define SCREEN_WIDTH 1280

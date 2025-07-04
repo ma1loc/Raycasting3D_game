@@ -1,6 +1,8 @@
 # include "cub3D.h"
 
-// 2D from 30D
+// 3D from 30D
+
+// drow player facing direction
 
 t_game	*g_game(void)
 {

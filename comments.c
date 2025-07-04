@@ -47,3 +47,7 @@
         // >>> ray_casting->ray_angle += ray_casting->angle_step;
 
 // ---------------------------------------------------------------------
+
+// 				to-do
+// >>> draw the player casing line.
+// >>> start the ray-casting.

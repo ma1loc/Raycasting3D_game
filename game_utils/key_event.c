@@ -12,7 +12,7 @@ int	key_press(int key_code)
 	if (key_code == UP_KEY)
 		game->direction.walk_dir = FORWARD;
 	if (key_code == DOWN_KEY)
-		game->direction.walk_dir = BACKWARD;	// back key most be fix
+		game->direction.walk_dir = BACKWARD;
 
 	if (key_code == LEFT_KEY)
 		game->direction.side_dir = LEFT;
@@ -35,7 +35,7 @@ void	handle_key_press(t_game *game)
 	if (dir->walk_dir == FORWARD)
 		upgrade_player_dir(game, FORWARD, false);
 	if (dir->walk_dir == BACKWARD)
-		upgrade_player_dir(game, BACKWARD, false);	// back key most be fix
+		upgrade_player_dir(game, BACKWARD, false);
 
 	if (dir->side_dir == LEFT)
 		upgrade_player_dir(game, LEFT, true);
@@ -56,31 +56,12 @@ int	key_release(int key_code)
 	dir = &g_game()->direction;
 	if (key_code == UP_KEY || key_code == DOWN_KEY)
 		dir->walk_dir = 0;
+
 	else if (key_code == LEFT_KEY || key_code == RIGHT_KEY)
 		dir->side_dir = 0;
-	else if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
+
+		else if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
 		dir->turn_dir = 0;
 	return (0);
 }
 
-void	main_img_randring(t_game *game)
-{
-	draw_2d_map(game);
-	draw_player(game);
-	
-	mlx_put_image_to_window(game->window.mlx_ptr, 
-		game->window.win_ptr, 
-		game->window.main_img.img_ptr, 0, 0);
-}
-
-int	game_loop()
-{
-	t_game *game;
-
-	game = g_game();
-
-	handle_key_press(game);
-	main_img_randring(game);
-	
-	return (0);
-}

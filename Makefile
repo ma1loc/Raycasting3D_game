@@ -22,7 +22,7 @@ SRC = ./srcs/main.c ./gnl/get_next_line.c  ./parsing/read_map.c ./parsing/utils.
 	  ./game_utils/game_clean.c ./game_utils/game_init.c \
 	  ./game_utils/init_player_dir.c ./game_utils/key_event.c \
 	  ./game_utils/player_movements.c ./game_utils/top_view_textures.c \
-	  ./game_randring/img_randring.c
+	  ./game_randring/img_randring.c ./game_randring/game_loop.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -39,27 +39,27 @@ int	check_collision(t_game *game, double new_x, double new_y)
 	return (0);
 }
 
-// "N_DONE"
 void	upgrade_player_dir(t_game *game, int dir, bool strafe)
 {
-	t_coord		new_pp;
-	double		move_step;
+    t_coord		new_pp;
+    double		move_angle;
+    int			move_dir;
 
-	if (strafe)
-		move_step = game->player.angle + (dir * M_PI / 2);
-	else
-		move_step = (game->player.angle);
-	// the up and down is working correctly intel i strafe the playe 
-	// the up and down key not behave like it be.
-
-	new_pp.x = game->player.p_pos.x + cos(move_step) * MOVE_SPEED;
-	new_pp.y = game->player.p_pos.y + sin(move_step) * MOVE_SPEED;
-
-	if (!check_collision(game, new_pp.x, new_pp.y))
-	{
-		game->player.p_pos.x = new_pp.x;
-		game->player.p_pos.y = new_pp.y;
-	}
+	move_dir = 1;
+    if (strafe)
+        move_angle = game->player.angle + (dir * M_PI / 2);
+    else
+    {
+        move_angle = game->player.angle;
+        move_dir = dir;
+    }
+    new_pp.x = game->player.p_pos.x + cos(move_angle) * MOVE_SPEED * move_dir;
+    new_pp.y = game->player.p_pos.y + sin(move_angle) * MOVE_SPEED * move_dir;
+    if (!check_collision(game, new_pp.x, new_pp.y))
+    {
+        game->player.p_pos.x = new_pp.x;
+        game->player.p_pos.y = new_pp.y;
+    }
 }
 
 // // "DONE"

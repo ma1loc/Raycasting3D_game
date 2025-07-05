@@ -260,7 +260,7 @@ void err(char *str);
 // -------------------------------- parsing part --------------------------------
 // ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
-int		game_loop(void);
+int		game_loop(t_game *game);
 void	init_mlx_window(void);
 void	init_textures(void);
 void	set_game_textures(void);

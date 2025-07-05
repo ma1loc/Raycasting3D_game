@@ -10,14 +10,10 @@ void	main_img_randring(t_game *game)
 		game->window.main_img.img_ptr, 0, 0);
 }
 
-int	game_loop()
+int	game_loop(t_game *game)
 {
-	t_game *game;
-
-	game = g_game();
-
 	handle_key_press(game);
 	main_img_randring(game);
-	
 	return (0);
 }
+

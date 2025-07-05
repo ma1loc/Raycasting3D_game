@@ -83,7 +83,7 @@ void draw_player(t_game *game)
     int player_size = TILE_SIZE / 3;
     int player_screen_x = (int)(game->player.p_pos.x - player_size / 2);
     int player_screen_y = (int)(game->player.p_pos.y - player_size / 2);
-    int line_size = 60;
+    int line_size = 30;
 
 	draw_line(game, line_size);
     draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);

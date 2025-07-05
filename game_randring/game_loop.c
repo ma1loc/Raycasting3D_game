@@ -13,7 +13,7 @@ void	main_img_randring(t_game *game)
 int	game_loop(t_game *game)
 {
 	handle_key_press(game);
-	main_img_randring(game);
+	main_img_randring(game);	// 2d-game
 	return (0);
 }
 

@@ -139,11 +139,11 @@ typedef struct s_ray_data
 {
 	int		ray_nbr;
 	double	angle_step;
-	t_coord	hit;
-	t_coord	hor_hit;
-	t_coord	ver_hit;
+	t_coord	hor_hit;		// >>> init the horizontal hit with wall
+	t_coord	ver_hit;		// >>> init the vertical hit with wall
+	t_coord	final_hit;		// >>> hold the close intersection to the wall
 	double	wall_dist;
-	int		hit_vertical; // >>> flag-> 1 = vertical hit, 0 = horizontal
+	int		hit_vertical;	// >>> flag-> 1 = vertical hit, 0 = horizontal
 }			t_ray_data;
 
 typedef struct s_textures

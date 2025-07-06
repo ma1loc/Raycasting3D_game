@@ -28,3 +28,6 @@ void cast_rays(t_game *game)
         column++;
     }
 }
+
+void    get_vertical_intersection();
+void    get_horizontal_intersection();

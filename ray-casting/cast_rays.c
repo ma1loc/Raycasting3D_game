@@ -1,16 +1,5 @@
 # include "cub3D.h"
 
-// to remove
-// void    init_ray_config()
-// {
-
-//     ray_casting = setup->ray_casting;
-
-//     ray_casting->ray_nbr = SCREEN_WIDTH;
-//     // ray_casting->fov_angle = degrees_to_radians(FOV);
-//     ray_casting->angle_step = ray_casting->fov_angle / ray_casting->ray_nbr;
-// }
-
 void cast_rays()
 {
     int column;

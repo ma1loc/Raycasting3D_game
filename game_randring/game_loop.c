@@ -8,12 +8,13 @@ void	main_img_randring(t_game *game)
 	mlx_put_image_to_window(game->window.mlx_ptr, 
 		game->window.win_ptr, 
 		game->window.main_img.img_ptr, 0, 0);
+	// >>> the x/y -> 0, 0 means that postio that will start puting the img to the window
 }
 
 int	game_loop(t_game *game)
 {
-	handle_key_press(game);
-	main_img_randring(game);	// 2d-game
+	handle_key_press(game);		// key-hadling
+	main_img_randring(game);	// 2D-top-view
 	return (0);
 }
 

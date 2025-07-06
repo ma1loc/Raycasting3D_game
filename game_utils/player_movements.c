@@ -15,7 +15,6 @@ int	is_wall(t_game *game, double x, double y)
 	map_x = (int)(x / TILE_SIZE);
 	map_y = (int)(y / TILE_SIZE);
 
-	// for later check, i have to check this at first
 	if (map_x < 0 || map_x >= SCREEN_WIDTH || 
 		map_y < 0 || map_y >= SCREEN_HEIGHT)
 		return (1);
@@ -40,6 +39,7 @@ int	check_collision(t_game *game, double new_x, double new_y)
 	return (0);
 }
 
+// "DONE"
 void	upgrade_player_dir(t_game *game, int dir, bool strafe)
 {
     t_coord		new_pp;

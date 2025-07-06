@@ -1,8 +1,8 @@
 
-NO textures/square_dark_gray.xpm
-EA textures/square_dark_gray.xpm
-SO textures/square_dark_gray.xpm
-WE textures/square_dark_gray.xpm
+NO textures/xpm/NO.xpm
+EA textures/xpm/EA.xpm
+SO textures/xpm/SO.xpm
+WE textures/xpm/WE.xpm
 
 F 0,0,255
 C 204,0,102

@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 3D from 30D
+// 4D 30D
 
 t_game	*g_game(void)
 {
@@ -36,8 +36,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);
 	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);
 	mlx_loop_hook(game->window.mlx_ptr, game_loop, game);	// "N_DONE"
-
 	mlx_loop(game->window.mlx_ptr);
-
 	return (0);
 }

@@ -49,7 +49,7 @@
 // ---------------------------------------------------------------------
 
 // 				to-do
-// >>> draw the player fasing line.	"DONE"
+// >>> draw the player casing line.
 
 // >>> start the ray-casting.
 	// You start from: player_angle - (FOV / 2)
@@ -65,7 +65,3 @@
 	// How to apply textures cleanly?
 
 // >>> fix the up and down key behaver.
-
-// >>> Done the F/C
-	// F -> 0,0,255
-	// C -> 204,0,102

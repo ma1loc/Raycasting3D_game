@@ -139,10 +139,11 @@ typedef struct s_ray_data
 {
 	int		ray_nbr;
 	double	angle_step;
-	double	wall_dist;
 	t_coord	hit;
-	
-	// wall orientation (vertical/horizontal)
+	t_coord	hor_hit;
+	t_coord	ver_hit;
+	double	wall_dist;
+	int		hit_vertical; // >>> flag-> 1 = vertical hit, 0 = horizontal
 }			t_ray_data;
 
 typedef struct s_textures
@@ -279,9 +280,9 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);
 
-
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
-
+// void	casting_rays(t_game *game);
+void cast_rays(t_game *game);
 
 #endif

@@ -15,6 +15,10 @@ int	game_loop(t_game *game)
 {
 	handle_key_press(game);		// key-hadling
 	main_img_randring(game);	// 2D-top-view
+
+	// ray-cating test
+	cast_rays(game);
+
 	return (0);
 }
 

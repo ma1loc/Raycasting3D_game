@@ -57,11 +57,18 @@
 	// Ray angle
 	// Hit point (x, y)
 	// Tile hit (map coordinates)
-	// Was it vertical or horizontal?
-	// Distance to hit
+	
+	// Was it vertical or horizontal?	"DONE"
+	// Distance to hit					"DONE"
 	// Texture offset (for drawing)
+
 	// How DDA/grid stepping works?
 	// How to detect vertical vs horizontal hits?
+		// 	if (hit_vertical)
+		//     apply_vertical_texture_logic();
+		// else
+		//     apply_horizontal_texture_logic();
+
 	// How to apply textures cleanly?
 
 // >>> fix the up and down key behaver.

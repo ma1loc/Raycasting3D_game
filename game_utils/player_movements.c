@@ -63,7 +63,7 @@ void	upgrade_player_dir(t_game *game, int dir, bool strafe)
     }
 }
 
-// // "DONE"
+// // "N_DONE" think soo
 void	upgrade_player_s_dir(t_game *game, double angle)
 {
 	double 	new_angle;

@@ -43,7 +43,7 @@ void	handle_key_press(t_game *game)
 		upgrade_player_dir(game, RIGHT, true);
 
 	if (dir->turn_dir == TURN_LEFT)
-		upgrade_player_s_dir(game, -ROT_SPEED);
+		upgrade_player_s_dir(game, -ROT_SPEED);	// >>> here's problem to fix with the rot to left
 	if (dir->turn_dir == TURN_RIGHT)
 		upgrade_player_s_dir(game, ROT_SPEED);
 }

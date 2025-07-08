@@ -38,7 +38,7 @@ void    get_horizontal_intersection(t_game *game, double ray_angle)
     // else
     //     write(1, "Up\n", 3);
 
-    // ----------- start the horizontal intersection -----------
+    // ----------- start the horizontal intersection ----------- 
     double      slope;
     t_coord     *p_pos;
     t_coord     intercept;

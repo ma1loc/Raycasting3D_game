@@ -135,7 +135,7 @@ typedef	struct s_player
 	t_coord			p_pos;
 }	t_player;
 
-typedef struct s_ray_data
+typedef struct s_cast_data
 {
 	int		ray_nbr;
 	double	angle_step;
@@ -144,7 +144,7 @@ typedef struct s_ray_data
 	t_coord	final_hit;		// >>> hold the close intersection to the wall
 	double	wall_dist;
 	int		hit_vertical;	// >>> flag-> 1 = vertical hit, 0 = horizontal
-}			t_ray_data;
+}			t_cast_data;
 
 typedef struct s_textures
 {
@@ -163,12 +163,12 @@ typedef struct s_game
     char			**map;
     t_ppos			player_pos;
     t_config		*config;
+
 	// ----------------- ray-casting part
 	t_window		window;
 	t_player		player;
 	t_direction		direction;
-	t_ray_data		ray_casting;
-	// t_textures		ttop_view;
+	t_cast_data		cast_data;
 	t_textures		textures;
 
 }	t_game;

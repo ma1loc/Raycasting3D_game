@@ -38,7 +38,7 @@ void    get_horizontal_intersection(t_game *game, double ray_angle)
     // else
     //     write(1, "Up\n", 3);
 
-    // ----------- start the horizontal intersection ----------- 
+    // ----------- start the horizontal intersection -----------
     double      slope;
     t_coord     *p_pos;
     t_coord     intercept;
@@ -52,22 +52,38 @@ void    get_horizontal_intersection(t_game *game, double ray_angle)
         intercept.y = p_pos->y / TILE_SIZE * TILE_SIZE + 0.0001;
     intercept.x = p_pos->x + (intercept.y - p_pos->y) / slope;
 
-    // >>> now i have to get the step(delta) to jumpe to the next intercept
-    step.y = intercept.y / TILE_SIZE * TILE_SIZE;
-    step.x = intercept.x + (step.y - intercept.y) / slope;
+    // get the ystep, based on ystep get the xstep
+    // >>> step(delta) to jumpe to the next intercept
+    step.y = TILE_SIZE;
+    step.x = step.y / slope;
+    // -----------------------
 
     // last check
-    game->ray_casting.hor_hit.y = intercept.y;
-    game->ray_casting.hor_hit.x = intercept.x;
-    while (!is_wall(game, game->ray_casting.hor_hit.y, game->ray_casting.hor_hit.y))
+    game->cast_data.hor_hit.y = intercept.y;
+    game->cast_data.hor_hit.x = intercept.x;
+    while (!is_wall(game, game->cast_data.hor_hit.y, game->cast_data.hor_hit.y))
     {
-        game->ray_casting.hor_hit.y += step.y;
-        game->ray_casting.hor_hit.x += step.x;
+        game->cast_data.hor_hit.y += step.y;
+        game->cast_data.hor_hit.x += step.x;
     }
-    my_mlx_pixel_put(game, game->ray_casting.hor_hit.x, game->ray_casting.hor_hit.x, RED_COLOR);
+    my_mlx_pixel_put(game, game->cast_data.hor_hit.x, game->cast_data.hor_hit.x, RED_COLOR);
 }
 
-// void    get_vertical_intersection();
+void    get_vertical_intersection(t_game *game, double ray_angle)
+{
+    double  slope;
+    t_coord *p_pos;
+    t_coord step;
+    // t_coord intercept;
+
+    slope = tan(ray_angle);
+    p_pos = &game->player.p_pos;
+
+    // get the xstep, based on xstep get the ystep
+    step.x = TILE_SIZE;
+    step.y = step.x / slope;
+    // -----------------------
+}
 
 void cast_rays(t_game *game)
 {
@@ -78,13 +94,13 @@ void cast_rays(t_game *game)
     // >>> that ray_angle is the angle of the first ray will start from (left-most)
     ray_angle = game->player.angle - (game->player.fov / 2);    // "DONE"
 
-    while (column < game->ray_casting.ray_nbr)
+    while (column < game->cast_data.ray_nbr)
     {
 		// >>> just a test
         get_horizontal_intersection(game, ray_angle);
 
         // >>> get the next angle for the next ray
-        ray_angle += game->ray_casting.angle_step;
+        ray_angle += game->cast_data.angle_step;
         column++;
     }
 }

@@ -11,15 +11,15 @@ t_game	*g_game(void)
 
 void	game_init()
 {
-	t_ray_data	*ray_data;
+	t_cast_data	*cast_data;
 	t_player	*player;
 
 	player = &g_game()->player;
 	player->fov = degrees_to_radians(FOV);
-	ray_data = &g_game()->ray_casting;
-	ray_data->ray_nbr = SCREEN_WIDTH;
+	cast_data = &g_game()->cast_data;
+	cast_data->ray_nbr = SCREEN_WIDTH;
 	// >>> angle_step -> distance between each ray
-	ray_data->angle_step = (player->fov / ray_data->ray_nbr);
+	cast_data->angle_step = (player->fov / cast_data->ray_nbr);
 	init_mlx_window();
 	init_textures();
 	set_game_textures();

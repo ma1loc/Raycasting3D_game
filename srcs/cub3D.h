@@ -146,13 +146,27 @@ typedef struct s_cast_data
 	bool	hit_hor;	// >>> flag-> 1 = horizontal hit, 0 = vertical
 }			t_cast_data;
 
-typedef struct s_textures
+typedef struct	s_textures
 {
 	t_image		t_north;
 	t_image		t_south;
 	t_image		t_east;
 	t_image		t_west;
 }				t_textures;
+
+typedef enum	s_dir
+{
+	North,
+	South,
+	East,
+	West
+}	t_dir;
+
+typedef	struct	s_intercept_hit
+{
+	t_coord	intercept;
+	t_dir	inter_dir;
+}	t_intercept_hit;
 
 typedef struct s_game
 {

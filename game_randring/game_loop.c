@@ -1,5 +1,16 @@
 # include "cub3D.h"
 
+void	drow_front_view()
+{
+	t_game *game
+	int	column;
+
+	column = 0;
+	while (column <)
+
+	cast_rays(game);
+}
+
 void	main_img_randring(t_game *game)
 {
 	draw_2d_map(game);
@@ -14,10 +25,11 @@ void	main_img_randring(t_game *game)
 int	game_loop(t_game *game)
 {
 	handle_key_press(game);		// key-hadling
+	
 	main_img_randring(game);	// 2D-top-view
 
-	// ray-cating test
-	cast_rays(game);
+
+
 
 	return (0);
 }

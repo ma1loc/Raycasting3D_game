@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 5D 30D
+// 6D 30D
 
 t_game	*g_game(void)
 {

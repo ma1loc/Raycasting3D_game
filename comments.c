@@ -72,3 +72,24 @@
 	// How to apply textures cleanly?
 
 // >>> fix the up and down key behaver.
+
+// |||||||||||||||||||| ray-casting |||||||||||||||||||||||||
+// what you need to start the ray-casting?
+	// >>> ray_nbr -> how much rays to cast
+	// >>> angle_step -> distance between each ray
+    // >>> befor casting any ray we have (player direction)
+        // and we need to get the left most ray to cast the first ray to right most
+        // ray_angle = player->rot_angle - (rc->fov_angle / 2);
+        // ray_angle =         45        -       60       / 2
+        // ray_angle = 15 (left-most)
+    // >>> horizontal check <<<
+        //  x_intersection | y_intersection
+        //  A_y = P_y / TILE_SIZE * TILE_SIZE;
+        //  A_x = P_x + P_y - A_y / tan(ray_angle)
+        //  ---------------------------------------
+        //  x_step = TILE_SIZE / tan(ray_angle)
+        //  y_step = TILE_SIZE;
+    // >>> vertical check <<<
+        //  x_intersection | y_intersection
+        //  x_step = TILE_SIZE
+        //  y_step = TILE_SIZE * tan(ray_angle)

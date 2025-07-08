@@ -143,7 +143,7 @@ typedef struct s_cast_data
 	t_coord	ver_hit;		// >>> init the vertical hit with wall
 	t_coord	final_hit;		// >>> hold the close intersection to the wall
 	double	wall_dist;
-	int		hit_vertical;	// >>> flag-> 1 = vertical hit, 0 = horizontal
+	bool	hit_hor;	// >>> flag-> 1 = horizontal hit, 0 = vertical
 }			t_cast_data;
 
 typedef struct s_textures

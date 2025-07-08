@@ -33,10 +33,18 @@ void    get_horizontal_intersection(t_game *game, double ray_angle)
     // last check
     hor_hit->y = intercept.y;
     hor_hit->x = intercept.x;
-    while (!is_wall(game, hor_hit->x, hor_hit->y))
+    while (true)
     {
-        hor_hit->y += step.y;
-        hor_hit->x += step.x;
+        if (!is_wall(game, hor_hit->x, hor_hit->y))
+        {
+            hor_hit->y += step.y;
+            hor_hit->x += step.x;
+        }
+        else
+        {
+            game->cast_data.hit_hor = true;
+            break ;
+        }
     }
 }
 

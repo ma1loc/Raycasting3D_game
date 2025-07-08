@@ -275,7 +275,7 @@ void	draw_square(int x, int y, int size, int color);
 void	upgrade_player_s_dir(t_game *game, double angle);
 void	upgrade_player_dir(t_game *game, int dir, bool strafe);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-
+int		is_wall(t_game *game, double x, double y);
 
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);

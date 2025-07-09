@@ -93,3 +93,5 @@
         //  x_intersection | y_intersection
         //  x_step = TILE_SIZE
         //  y_step = TILE_SIZE * tan(ray_angle)
+
+// ---------------------------------------------------------------------------

@@ -1,11 +1,5 @@
 # include "cub3D.h"
 
-// "DONE"
-double	degrees_to_radians(int degree)
-{
-	return (degree * M_PI / 180);
-}
-
 // >>> wall colision later on will be DONE
 int	is_wall(t_game *game, double x, double y)
 {
@@ -15,12 +9,11 @@ int	is_wall(t_game *game, double x, double y)
 	map_x = (int)(x / TILE_SIZE);
 	map_y = (int)(y / TILE_SIZE);
 
-	if (map_x < 0 || map_x >= SCREEN_WIDTH || 
-		map_y < 0 || map_y >= SCREEN_HEIGHT)
-		return (1);
+    // to-do; check later on
+	// if (map_x < 0 || map_x >= SCREEN_WIDTH || 
+	// 	map_y < 0 || map_y >= SCREEN_HEIGHT)
+	// 	return (1);
 	
-	printf("map_y -> %d\n", map_y);
-	printf("map_x -> %d\n", map_x);
 	if (game->map[map_y][map_x] == '1')
 		return (1);
 	
@@ -58,11 +51,11 @@ void	upgrade_player_dir(t_game *game, int dir, bool strafe)
     }
     new_pp.x = game->player.p_pos.x + cos(move_angle) * MOVE_SPEED * move_dir;
     new_pp.y = game->player.p_pos.y + sin(move_angle) * MOVE_SPEED * move_dir;
-    // if (!check_collision(game, new_pp.x, new_pp.y))
-    // {
+    if (!check_collision(game, new_pp.x, new_pp.y))
+    {
         game->player.p_pos.x = new_pp.x;
         game->player.p_pos.y = new_pp.y;
-    // }
+    }
 }
 
 // "DONE"

@@ -139,9 +139,9 @@ typedef struct s_cast_data
 {
 	int		ray_nbr;
 	double	angle_step;
-	t_coord	hor_hit;		// >>> init the horizontal hit with wall
-	t_coord	ver_hit;		// >>> init the vertical hit with wall
-	t_coord	final_hit;		// >>> hold the close intersection to the wall
+	// t_coord	hor_hit;		// >>> init the horizontal hit with wall
+	// t_coord	ver_hit;		// >>> init the vertical hit with wall
+	// t_coord	final_hit;		// >>> hold the close intersection to the wall
 	double	wall_dist;
 	bool	hit_hor;	// >>> flag-> 1 = horizontal hit, 0 = vertical
 }			t_cast_data;
@@ -290,13 +290,15 @@ void	upgrade_player_s_dir(t_game *game, double angle);
 void	upgrade_player_dir(t_game *game, int dir, bool strafe);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int		is_wall(t_game *game, double x, double y);
+double	get_distance(t_coord p_pos, t_coord hit);
 
+// ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);
 
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
 // void	casting_rays(t_game *game);
-void cast_rays(t_game *game);
+void	cast_rays(t_game *game, double ray_angle);
 
 #endif

@@ -95,3 +95,171 @@
         //  y_step = TILE_SIZE * tan(ray_angle)
 
 // ---------------------------------------------------------------------------
+
+double	get_distance(t_coord p_pos, t_coord hit)
+{
+	double	dx;
+	double	dy;
+
+	// no matter of the p_pos.x or the hit.x orderd
+	dx = p_pos.x - hit.x;
+	dy = p_pos.y - hit.y;
+	return (sqrt((dx * dx) + (dy * dy)));
+}
+
+void    get_closest_distance(
+    t_game *game, t_coord horizontal, t_coord vertical)
+{
+    t_coord p_pos;
+    double  horizontal_dist;
+    double  vertical_dist;
+
+    p_pos = game->player.p_pos;
+
+    horizontal_dist = get_distance(p_pos, horizontal);
+    vertical_dist = get_distance(p_pos, vertical);
+    if (horizontal_dist < vertical_dist)
+        game->cast_data.horizontal_hit = true;
+    else
+        game->cast_data.horizontal_hit = false;
+}
+
+int     is_hit(t_game *game, t_coord intercept)
+{
+    int map_x;
+    int map_y;
+
+    map_x = (int)(intercept.x / TILE_SIZE);
+    map_y = (int)(intercept.y / TILE_SIZE);
+
+    if (map_x < 0 || map_x >= game->player_pos.width ||
+		map_y < 0 || map_y >= game->player_pos.height)
+		return (1);
+    return (game->map[map_y][map_x] == '1');
+}
+
+t_intercept_hit	check_intersection_hit(
+    t_game *game, t_intercept_hit *intercept, t_coord step)
+{
+    while (true)
+    {
+        if (!is_hit(game, intercept->intercept))
+        {
+            intercept->intercept.x += step.x;
+            intercept->intercept.y += step.y;
+        }
+        else
+            break ;
+    }
+    return (*intercept);
+}
+
+// ----------- horizontal intersection -----------
+t_intercept_hit	get_horizontal_intersection(
+    t_game *game, t_coord p_pos, double ray_angle)
+{
+    double          slope;
+    t_intercept_hit intercept;
+    t_coord         step;
+
+    slope = tan(ray_angle);
+    if (ray_angle > 0 && ray_angle < M_PI)
+    {
+        intercept.intercept.y = floor(
+            p_pos.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
+        intercept.inter_dir = South;
+        step.y = TILE_SIZE;
+    }
+    else
+    {
+		intercept.intercept.y = floor(
+            p_pos.y / TILE_SIZE) * TILE_SIZE;
+        intercept.inter_dir = North;
+        step.y = -TILE_SIZE;
+    }
+    intercept.intercept.x = p_pos.x + (
+        intercept.intercept.y - p_pos.y) / slope;
+    step.x = step.y / slope;
+	return (check_intersection_hit(game, &intercept, step));
+}
+
+
+
+// ----------- vertical intersection -----------
+t_intercept_hit get_vertical_intersection(
+    t_game *game, t_coord p_pos, double ray_angle)
+{
+    double          slope;
+    t_intercept_hit intercept;
+    t_coord         step;
+
+    slope = tan(ray_angle);
+    if (ray_angle < M_PI / 2 || ray_angle > (M_PI * 3) / 2)
+    {
+        intercept.intercept.x = floor(
+            p_pos.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
+        intercept.inter_dir = East;
+        step.x = TILE_SIZE;
+    }
+    else
+    {
+        intercept.intercept.x = floor(
+            p_pos.x / TILE_SIZE) * TILE_SIZE;
+        intercept.inter_dir = West;
+        step.x = -TILE_SIZE;
+    }
+    intercept.intercept.y = p_pos.y + (
+        intercept.intercept.x - p_pos.x) * slope;
+    step.y = step.x * slope;
+    return (check_intersection_hit(game, &intercept, step));
+}
+
+t_intercept_hit cast_rays(t_game *game, double ray_angle)
+{
+    t_intercept_hit	horizontal_hit;
+	t_intercept_hit vertical_hit;
+
+    horizontal_hit = get_horizontal_intersection(
+        game, game->player.p_pos, ray_angle);
+    vertical_hit = get_vertical_intersection(
+        game, game->player.p_pos, ray_angle);
+    get_closest_distance(
+        game, horizontal_hit.intercept, vertical_hit.intercept);
+    if (game->cast_data.horizontal_hit)
+        return (horizontal_hit);
+    return (vertical_hit);
+}
+
+
+void	draw_front_view(t_game *game)
+{
+	int				column;
+	double			ray_angle;
+	t_intercept_hit	intercept;
+
+	column = 0;
+	ray_angle = game->player.angle - (game->player.fov / 2);
+	while (column < game->cast_data.ray_nbr)
+	{
+		intercept = cast_rays(game, ray_angle);
+		ray_angle += game->cast_data.angle_step;
+		column++;
+	}
+}
+
+int	game_loop(t_game *game)
+{
+	handle_key_press(game);		// key-hadling
+
+	// 2D-top-view
+	draw_2d_map(game);
+	draw_player(game);
+
+	draw_front_view(game);		// 3D-from-view
+	
+	mlx_put_image_to_window(game->window.mlx_ptr, 
+		game->window.win_ptr, 
+		game->window.main_img.img_ptr, 0, 0);
+
+	return (0);
+}

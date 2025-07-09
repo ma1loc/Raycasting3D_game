@@ -74,7 +74,6 @@ t_intercept_hit get_vertical_intersection(
             p_pos.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
         intercept.inter_dir = East;
         step.x = TILE_SIZE;
-
     }
     else
     {
@@ -89,19 +88,18 @@ t_intercept_hit get_vertical_intersection(
     return (check_intersection_hit(game, &intercept, step));
 }
 
-
-void cast_rays(t_game *game, double ray_angle)
+t_intercept_hit cast_ray(t_game *game, double ray_angle)
 {
     t_intercept_hit	horizontal_hit;
 	t_intercept_hit vertical_hit;
-    t_intercept_hit final_hit;
 
     horizontal_hit = get_horizontal_intersection(
         game, game->player.p_pos, ray_angle);
     vertical_hit = get_vertical_intersection(
         game, game->player.p_pos, ray_angle);
-    
-    
-    // >>> get the close distance between hor and ver
-
+    get_closest_distance(
+        game, horizontal_hit.intercept, vertical_hit.intercept);
+    if (game->cast_data.horizontal_hit)
+        return (horizontal_hit);
+    return (vertical_hit);
 }

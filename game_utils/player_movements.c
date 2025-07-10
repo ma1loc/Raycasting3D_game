@@ -8,15 +8,9 @@ int	is_wall(t_game *game, double x, double y)
 
 	map_x = (int)(x / TILE_SIZE);
 	map_y = (int)(y / TILE_SIZE);
-
-    // to-do; check later on
-	// if (map_x < 0 || map_x >= SCREEN_WIDTH || 
-	// 	map_y < 0 || map_y >= SCREEN_HEIGHT)
-	// 	return (1);
 	
 	if (game->map[map_y][map_x] == '1')
 		return (1);
-	
 	return (0);
 }
 

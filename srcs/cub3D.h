@@ -5,6 +5,9 @@
 # define BUFFER_SIZE 1
 # endif
 
+# define BLUE_COLOR 0x0000FF
+# define WAITE_COLOR 0xFFFFFF
+# define YELLOW_COLOR 0xFFFF00
 # define GRAY_COLOR 0xAAAAAA
 # define D_GRAY_COLOR 0x222222
 # define RED_COLOR 0xFF0000
@@ -18,8 +21,8 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 1
-# define ROT_SPEED 0.01
+# define MOVE_SPEED 1.5
+# define ROT_SPEED 0.05
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -130,7 +133,7 @@ typedef struct s_coord
 
 typedef	struct s_player
 {
-	int 			fov;
+	double 			fov;
 	double			angle;
 	t_coord			p_pos;
 }	t_player;
@@ -141,6 +144,8 @@ typedef struct s_cast_data
 	double	angle_step;
 	double	wall_dist;
 	bool	horizontal_hit;
+	int		map_x;
+	int		map_y;
 }			t_cast_data;
 
 typedef struct	s_textures

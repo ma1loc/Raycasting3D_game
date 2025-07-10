@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 7D 30D
+// 8D 30D
 
 t_game	*g_game(void)
 {
@@ -9,7 +9,21 @@ t_game	*g_game(void)
 	return (&game);
 }
 
-// to check this function have a lot of thinks not set correctly
+// ----------------------------------------------------
+void	set_map_size(t_game *game)
+{
+	int	y;
+
+	y = 0;
+	while (game->map[y])
+		y++;
+
+	game->cast_data.map_y = y;                       // map height (rows)
+	game->cast_data.map_x = ft_strlen(game->map[0]); // map width (cols)
+
+}
+// ----------------------------------------------------
+
 void	game_init(t_game *game)
 {
 	t_player	*player;
@@ -17,18 +31,15 @@ void	game_init(t_game *game)
 
 	player = &game->player;
 	cast_data = &game->cast_data;
-	player->fov = degrees_to_radians(FOV);	// to check
-	cast_data->ray_nbr = SCREEN_WIDTH;		// to check
-	// angle_step not done to fix later
-	cast_data->angle_step = (player->fov / cast_data->ray_nbr);
+	player->fov = degrees_to_radians(FOV);
+	cast_data->ray_nbr = SCREEN_WIDTH;
+	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
+	
+	set_map_size(game);
 	init_mlx_window();
 	init_textures();
 	set_game_textures();
 	init_player_dir();
-
-	printf("player->fov -> %d\n", player->fov);
-	printf("cast_data->angle_step %f\n", cast_data->angle_step);
-	printf("game->cast_data.angle_step %f\n", game->cast_data.angle_step);
 
 }
 
@@ -39,7 +50,7 @@ int	main(int argc, char **argv)
 	game = g_game();
 	if (parsing(argc, argv, game))
 		return (1);	
-	game_init(game);	// >>> the init to fix here
+	game_init(game);
 	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);
 	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);
 	mlx_loop_hook(game->window.mlx_ptr, game_loop, game);	// "N_DONE"

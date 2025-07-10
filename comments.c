@@ -107,6 +107,7 @@ double	get_distance(t_coord p_pos, t_coord hit)
 	return (sqrt((dx * dx) + (dy * dy)));
 }
 
+
 void    get_closest_distance(
     t_game *game, t_coord horizontal, t_coord vertical)
 {
@@ -124,17 +125,15 @@ void    get_closest_distance(
         game->cast_data.horizontal_hit = false;
 }
 
+
 int     is_hit(t_game *game, t_coord intercept)
 {
-    int map_x;
-    int map_y;
+    int map_x = (int)(intercept.x / TILE_SIZE);
+    int map_y = (int)(intercept.y / TILE_SIZE);
 
-    map_x = (int)(intercept.x / TILE_SIZE);
-    map_y = (int)(intercept.y / TILE_SIZE);
-
-    if (map_x < 0 || map_x >= game->player_pos.width ||
-		map_y < 0 || map_y >= game->player_pos.height)
-		return (1);
+    if (map_x < 0 || map_x >= game->width ||
+        map_y < 0 || map_y >= game->map_height)
+        return (1);
     return (game->map[map_y][map_x] == '1');
 }
 
@@ -143,13 +142,10 @@ t_intercept_hit	check_intersection_hit(
 {
     while (true)
     {
-        if (!is_hit(game, intercept->intercept))
-        {
-            intercept->intercept.x += step.x;
-            intercept->intercept.y += step.y;
-        }
-        else
-            break ;
+        if (is_hit(game, intercept->intercept))
+            break;
+        intercept->intercept.x += step.x;
+        intercept->intercept.y += step.y;
     }
     return (*intercept);
 }
@@ -173,7 +169,7 @@ t_intercept_hit	get_horizontal_intersection(
     else
     {
 		intercept.intercept.y = floor(
-            p_pos.y / TILE_SIZE) * TILE_SIZE;
+            p_pos.y / TILE_SIZE) * TILE_SIZE - 0.0001;
         intercept.inter_dir = North;
         step.y = -TILE_SIZE;
     }
@@ -182,8 +178,6 @@ t_intercept_hit	get_horizontal_intersection(
     step.x = step.y / slope;
 	return (check_intersection_hit(game, &intercept, step));
 }
-
-
 
 // ----------- vertical intersection -----------
 t_intercept_hit get_vertical_intersection(
@@ -204,7 +198,7 @@ t_intercept_hit get_vertical_intersection(
     else
     {
         intercept.intercept.x = floor(
-            p_pos.x / TILE_SIZE) * TILE_SIZE;
+            p_pos.x / TILE_SIZE) * TILE_SIZE - 0.0001;
         intercept.inter_dir = West;
         step.x = -TILE_SIZE;
     }
@@ -214,7 +208,7 @@ t_intercept_hit get_vertical_intersection(
     return (check_intersection_hit(game, &intercept, step));
 }
 
-t_intercept_hit cast_rays(t_game *game, double ray_angle)
+t_intercept_hit cast_ray(t_game *game, double ray_angle)
 {
     t_intercept_hit	horizontal_hit;
 	t_intercept_hit vertical_hit;
@@ -230,23 +224,55 @@ t_intercept_hit cast_rays(t_game *game, double ray_angle)
     return (vertical_hit);
 }
 
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+void	x_draw_line(t_game *game, double x0, double y0, double x1, double y1, int color)
+{
+	double	dx = x1 - x0;
+	double	dy = y1 - y0;
+	int		steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+	double	x_inc = dx / steps;
+	double	y_inc = dy / steps;
+	double	x = x0;
+	double	y = y0;
+	int		i = 0;
+
+	while (i <= steps)
+	{
+		my_mlx_pixel_put(game, (int)x, (int)y, color);
+		x += x_inc;
+		y += y_inc;
+		i++;
+	}
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+// --------------------------------------------------------------
 
 void	draw_front_view(t_game *game)
 {
 	int				column;
 	double			ray_angle;
-	t_intercept_hit	intercept;
+	t_coord			p_pos;
+	t_intercept_hit	ray_hit;
 
 	column = 0;
+	p_pos = game->player.p_pos;
 	ray_angle = game->player.angle - (game->player.fov / 2);
 	while (column < game->cast_data.ray_nbr)
 	{
-		intercept = cast_rays(game, ray_angle);
+		ray_hit = cast_ray(game, ray_angle);
+
+		// >>> this like just an test of the ray is cast correctly before the 3d set
+		x_draw_line(game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, GREEN_CLOOR);
+
 		ray_angle += game->cast_data.angle_step;
 		column++;
 	}
 }
 
+// >>> main game randring engine start here
 int	game_loop(t_game *game)
 {
 	handle_key_press(game);		// key-hadling
@@ -255,7 +281,7 @@ int	game_loop(t_game *game)
 	draw_2d_map(game);
 	draw_player(game);
 
-	draw_front_view(game);		// 3D-from-view
+	draw_front_view(game);		// >>> currently working here <<<
 	
 	mlx_put_image_to_window(game->window.mlx_ptr, 
 		game->window.win_ptr, 

@@ -4,11 +4,10 @@ int     is_hit(t_game *game, t_coord intercept)
 {
     int map_x;
     int map_y;
-	
+
 	map_x = (int)(intercept.x / TILE_SIZE);
 	map_y = (int)(intercept.y / TILE_SIZE);
 
-	// every time return from here
     if (map_x < 0 || map_x >= game->cast_data.map_x ||
         map_y < 0 || map_y >= game->cast_data.map_y)
         return (1);
@@ -18,10 +17,9 @@ int     is_hit(t_game *game, t_coord intercept)
 t_intercept_hit	check_intersection_hit(
     t_game *game, t_intercept_hit intercept, t_coord step)
 {
-	// int i = 1;
     while (true)
-    {	
-        if (is_hit(game, intercept.intercept))	// here we go i think is here
+    {
+        if (is_hit(game, intercept.intercept))
             break;
 		intercept.intercept.x += step.x;
         intercept.intercept.y += step.y;
@@ -49,7 +47,7 @@ t_intercept_hit	get_horizontal_intersection(
     else
     {
 		intercept.intercept.y = floor(
-            p_pos.y / TILE_SIZE) * TILE_SIZE - 0.0001;
+            p_pos.y / TILE_SIZE) * TILE_SIZE - 0.001;
         intercept.inter_dir = North;
         step.y = -TILE_SIZE;
     }
@@ -81,7 +79,7 @@ t_intercept_hit get_vertical_intersection(
     else
     {
         intercept.intercept.x = floor(
-            p_pos.x / TILE_SIZE) * TILE_SIZE - 0.0001;
+            p_pos.x / TILE_SIZE) * TILE_SIZE - 0.001;
         intercept.inter_dir = West;
         step.x = -TILE_SIZE;
     }
@@ -102,11 +100,10 @@ t_intercept_hit cast_ray(t_game *game, double ray_angle)
     vertical_hit = get_vertical_intersection(
         game, game->player.p_pos, ray_angle);
 	
-	// to-do; >>> have to check <<<
 	get_closest_distance(
         game, horizontal_hit.intercept, vertical_hit.intercept);
     
-	if (game->cast_data.horizontal_hit)
+    if (game->cast_data.horizontal_hit)
         return (horizontal_hit);
     return (vertical_hit);
 }

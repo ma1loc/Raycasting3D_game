@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 8D 30D
+// 9D 30D
 
 t_game	*g_game(void)
 {
@@ -8,21 +8,6 @@ t_game	*g_game(void)
 
 	return (&game);
 }
-
-// ----------------------------------------------------
-void	set_map_size(t_game *game)
-{
-	int	y;
-
-	y = 0;
-	while (game->map[y])
-		y++;
-
-	game->cast_data.map_y = y;                       // map height (rows)
-	game->cast_data.map_x = ft_strlen(game->map[0]); // map width (cols)
-
-}
-// ----------------------------------------------------
 
 void	game_init(t_game *game)
 {
@@ -35,7 +20,7 @@ void	game_init(t_game *game)
 	cast_data->ray_nbr = SCREEN_WIDTH;
 	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
 	
-	set_map_size(game);
+	get_map_size(game);
 	init_mlx_window();
 	init_textures();
 	set_game_textures();

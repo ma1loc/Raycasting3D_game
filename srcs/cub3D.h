@@ -279,6 +279,7 @@ void err(char *str);
 t_game	*g_game(void);
 int		game_loop(t_game *game);
 void	init_mlx_window(void);
+void	get_map_size(t_game *game);
 void	init_textures(void);
 void	set_game_textures(void);
 void	init_player_dir(void);
@@ -297,11 +298,10 @@ void    get_closest_distance(
     t_game *game, t_coord horizontal, t_coord vertical);
 	
 	
-	
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);
-	
+void	draw_rays_view(t_game *game);
 // -------------------------------------------------------------------------
 // ------------- ray-casting -----------------
 // void	casting_rays(t_game *game);

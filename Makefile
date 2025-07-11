@@ -21,7 +21,7 @@ SRC = ./srcs/main.c ./gnl/get_next_line.c  ./parsing/read_map.c ./parsing/utils.
 	./parsing/process_func.c ./parsing/store_func.c ./game_utils/game_clean.c ./game_utils/game_init.c \
 	./game_utils/key_event.c ./game_utils/player_movements.c ./game_randring/img_randring.c \
 	./game_randring/game_loop.c ./ray-casting/cast_rays.c ./game_utils/trig_calculator.c \
-	./ray-casting/get_intersection.c
+	./ray-casting/get_intersection.c ./game_randring/top_view_draw.c ./game_utils/game_init_utils.c
 
 OBJ = $(SRC:.c=.o)
 

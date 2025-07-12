@@ -47,7 +47,7 @@ t_intercept_hit	get_horizontal_intersection(
     else
     {
 		intercept.intercept.y = floor(
-            p_pos.y / TILE_SIZE) * TILE_SIZE - 0.001;
+            p_pos.y / TILE_SIZE) * TILE_SIZE - EPS;
         intercept.inter_dir = North;
         step.y = -TILE_SIZE;
     }
@@ -79,7 +79,7 @@ t_intercept_hit get_vertical_intersection(
     else
     {
         intercept.intercept.x = floor(
-            p_pos.x / TILE_SIZE) * TILE_SIZE - 0.001;
+            p_pos.x / TILE_SIZE) * TILE_SIZE - EPS;
         intercept.inter_dir = West;
         step.x = -TILE_SIZE;
     }
@@ -90,6 +90,10 @@ t_intercept_hit get_vertical_intersection(
     return (check_intersection_hit(game, intercept, step));
 }
 
+/* 
+    this func is tha ray-casting start from
+    
+*/
 t_intercept_hit cast_ray(t_game *game, double ray_angle)
 {
     t_intercept_hit	horizontal_hit;

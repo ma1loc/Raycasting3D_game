@@ -17,7 +17,8 @@
 # define EXIT_FAILURE 1
 
 # define TILE_SIZE 64
-// # define TILE_SIZE 128
+# define EPS 0.0001
+// # define EPS 0
 
 # define FOV 60
 
@@ -296,7 +297,7 @@ int		is_wall(t_game *game, double x, double y);
 double	get_distance(t_coord p_pos, t_coord hit);
 void    get_closest_distance(
     t_game *game, t_coord horizontal, t_coord vertical);
-	
+double	normalize_angle(double angle);
 	
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);

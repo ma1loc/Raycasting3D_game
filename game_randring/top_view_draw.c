@@ -83,38 +83,25 @@ void draw_player(t_game *game)
     draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
 }
 
-
-// ---------------------------------------------------------
-// to-remove later on
-// ---------------------------------------------------------
-
-void	x_draw_line(t_game *game, double x0, double y0, double x1, double y1, int color)
-{
-	double	dx = x1 - x0;
-	double	dy = y1 - y0;
-	int		steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
-	double	x_inc = dx / steps;
-	double	y_inc = dy / steps;
-	double	x = x0;
-	double	y = y0;
-	int		i = 0;
-
-	while (i <= steps)
-	{
-		my_mlx_pixel_put(game, (int)x, (int)y, color);
-		x += x_inc;
-		y += y_inc;
-		i++;
-	}
+double distance_between_points(double x, double y, double x1, double y1) {
+    double dx = x1 - x;
+    double dy = y1 - y;
+    return sqrt(dx * dx + dy * dy);
 }
+void x_draw_line(double ray_angle, t_game *game, double x0, double y0, double x1, double y1, int color)
+{
+    double dis = distance_between_points(x0, y0, x1, y1);
 
-// void	x_draw_line(t_game *game, double x0, double y0, double x1, double y1, int color)
-// {
-// 	(void)x0;
-// 	(void)y0;
-// 	my_mlx_pixel_put(game, (int)x1, (int)y1, color);
-// }
-
+    double step_x = cos(ray_angle);
+    double step_y = sin(ray_angle);
+    double x = x0;
+    double y = y0;
+    for (double r = 0; r <= dis; r += 1.0) {
+        my_mlx_pixel_put(game, (int)x, (int)y, color);
+        x += step_x;
+        y += step_y;
+    }
+}
 
 void	draw_rays_view(t_game *game)
 {
@@ -126,21 +113,20 @@ void	draw_rays_view(t_game *game)
 	column = 0;
 	p_pos = game->player.p_pos;
 	ray_angle = game->player.angle - (game->player.fov / 2);
+	
 	while (column < game->cast_data.ray_nbr)
 	{
-
-		// to-do; >>> check the cast-ray <<<
+		ray_angle = normalize_angle(ray_angle);
 		ray_hit = cast_ray(game, ray_angle);
 
-		// >>> this like just an test of the ray is cast correctly before the 3d set
 		if (ray_hit.inter_dir == North)
-			x_draw_line(game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, BLUE_COLOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, BLUE_COLOR);
 		if (ray_hit.inter_dir == South)
-			x_draw_line(game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, YELLOW_COLOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, YELLOW_COLOR);
 		if (ray_hit.inter_dir == East)
-			x_draw_line(game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, WAITE_COLOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, WAITE_COLOR);
 		if (ray_hit.inter_dir == West)
-			x_draw_line(game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, GREEN_CLOOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, GREEN_CLOOR);
 
 		ray_angle += game->cast_data.angle_step;
 		column++;

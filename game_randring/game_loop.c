@@ -8,15 +8,15 @@
 // >>> main game randring engine start here <<<
 int	game_loop(t_game *game)
 {
-	handle_key_press(game);		// key-hadling -> "DONE"
+	handle_key_press(game);	// key-hadling
 
-	// >>> 2D-top-view	-> just a test
+	// >>> 2D-top-view
 	draw_2d_map(game);
-	draw_player(game);
-	// ---------------------------
-
-	// >>> draw rays of 2d player
-	draw_rays_view(game);		// >>> currently working here <<<
+	draw_player(game);	
+	draw_rays_view(game);
+	
+	// >>> 3D-front view
+	
 
 	mlx_put_image_to_window(game->window.mlx_ptr, 
 		game->window.win_ptr, 

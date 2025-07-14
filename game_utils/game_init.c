@@ -1,11 +1,8 @@
 # include "cub3D.h"
 
 // "DONE"
-void	init_mlx_window()
+void	init_mlx_window(t_game *game)
 {
-	t_game	*game;
-
-	game = g_game();
 	game->window.mlx_ptr = mlx_init();
 
 	game->window.win_ptr = mlx_new_window( 
@@ -32,13 +29,12 @@ void	init_mlx_window()
 }
 
 // "DONE"
-void	init_textures()
+// void	init_textures()
+void	init_textures(t_game *game)
 {
 	int		i;
-	t_game	*game;
 
 	i = -1;
-	game = g_game();
 	while (++i < 4)
 	{
 		if (!ft_strncmp(game->config->ids[i].id, "NO", 2))
@@ -64,11 +60,8 @@ void	image_loader(t_image *img)
 }
 
 // "DONE"
-void	init_player_dir()
+void	init_player_dir(t_game *game)
 {
-	t_game *game;
-
-	game = g_game();
 	if (*game->player_pos.player == 'N')
 		game->player.angle = degrees_to_radians(270);
 	else if (*game->player_pos.player == 'S')
@@ -87,11 +80,8 @@ void	init_player_dir()
 }
 
 // "DONE"
-void	set_game_textures()
+void	set_game_textures(t_game *game)
 {
-	t_game *game;
-
-	game = g_game();
 	image_loader(&game->textures.t_north);
 	image_loader(&game->textures.t_south);
 	image_loader(&game->textures.t_east);

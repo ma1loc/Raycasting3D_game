@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 10D 30D
+// 11D 30D
 
 t_game	*g_game(void)
 {
@@ -21,10 +21,11 @@ void	game_init(t_game *game)
 	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
 	
 	get_map_size(game);
-	init_mlx_window();
-	init_textures();
-	set_game_textures();
-	init_player_dir();
+	init_floor_ceiling_rgb(game);
+	init_mlx_window(game);
+	init_textures(game);
+	set_game_textures(game);
+	init_player_dir(game);
 
 }
 

@@ -11,8 +11,6 @@ void	get_map_size(t_game *game)
 	game->cast_data.map_x = ft_strlen(game->map[0]);
 }
 
-// this function normalize the ray_angle when is nigative
-// rotat it to (PI * 2)
 double	normalize_angle(double angle)
 {
     double new_angle;
@@ -21,4 +19,31 @@ double	normalize_angle(double angle)
     if (new_angle < 0)
         new_angle += 2 * M_PI;
     return (new_angle);
+}
+
+int	hex_into_color(t_game *game, bool floor)
+{
+	int	r;
+	int g;
+	int b;
+
+	if (floor)
+	{
+		r = game->config->floor_rgb[0];
+		g = game->config->floor_rgb[1];
+		b = game->config->floor_rgb[2];
+	}
+	else
+	{
+		r = game->config->ceiling_rgb[0];
+		g = game->config->ceiling_rgb[1];
+		b = game->config->ceiling_rgb[2];
+	}
+	return ((r << 16) | (g << 8) | b);
+}
+
+void	init_floor_ceiling_rgb(t_game *game)
+{
+	game->window.floor_color = hex_into_color(game, true);
+	game->window.ceiling_color = hex_into_color(game, false);
 }

@@ -80,7 +80,8 @@ void draw_player(t_game *game)
 	line_size = 60;
 
 	draw_line(game, line_size);
-    draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
+    // draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
+    draw_square(player_screen_x, player_screen_y, player_size, game->window.floor_color);
 }
 
 double distance_between_points(double x, double y, double x1, double y1) {
@@ -88,6 +89,7 @@ double distance_between_points(double x, double y, double x1, double y1) {
     double dy = y1 - y;
     return sqrt(dx * dx + dy * dy);
 }
+
 void x_draw_line(double ray_angle, t_game *game, double x0, double y0, double x1, double y1, int color)
 {
     double dis = distance_between_points(x0, y0, x1, y1);
@@ -102,6 +104,14 @@ void x_draw_line(double ray_angle, t_game *game, double x0, double y0, double x1
         y += step_y;
     }
 }
+
+// void x_draw_line(double ray_angle, t_game *game, double x0, double y0, double x1, double y1, int color)
+// {
+// 	(void)x0;
+// 	(void)y0;
+// 	(void)ray_angle;
+// 	my_mlx_pixel_put(game, (int)x1, (int)y1, color);
+// }
 
 void	draw_rays_view(t_game *game)
 {

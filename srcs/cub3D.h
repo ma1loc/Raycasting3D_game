@@ -5,6 +5,7 @@
 # define BUFFER_SIZE 1
 # endif
 
+# define WALL_COLOR 0xFF0000
 # define BLUE_COLOR 0x0000FF
 # define WAITE_COLOR 0xFFFFFF
 # define YELLOW_COLOR 0xFFFF00
@@ -18,12 +19,11 @@
 
 # define TILE_SIZE 64
 # define EPS 0.0001
-// # define EPS 0
 
 # define FOV 60
 
 # define MOVE_SPEED 1.5
-# define ROT_SPEED 0.05
+# define ROT_SPEED 0.01
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -115,6 +115,8 @@ typedef struct s_window
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_image	main_img;	// >>>  main image frame
+	int		floor_color;
+	int		ceiling_color;
 }	t_window;
 
 // ----------------------------------------
@@ -144,6 +146,7 @@ typedef struct s_cast_data
 	int		ray_nbr;
 	double	angle_step;
 	double	wall_dist;
+	double	wall_height;
 	bool	horizontal_hit;
 	int		map_x;
 	int		map_y;
@@ -279,11 +282,11 @@ void err(char *str);
 // ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
 int		game_loop(t_game *game);
-void	init_mlx_window(void);
+void	init_textures(t_game *game);
+void	set_game_textures(t_game *game);
+void	init_mlx_window(t_game *game);
+void	init_player_dir(t_game *game);
 void	get_map_size(t_game *game);
-void	init_textures(void);
-void	set_game_textures(void);
-void	init_player_dir(void);
 int		key_press(int key_code);
 int		key_release(int key_code);
 void	handle_key_press(t_game *game);
@@ -298,7 +301,7 @@ double	get_distance(t_coord p_pos, t_coord hit);
 void    get_closest_distance(
     t_game *game, t_coord horizontal, t_coord vertical);
 double	normalize_angle(double angle);
-	
+void	init_floor_ceiling_rgb(t_game *game);
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);

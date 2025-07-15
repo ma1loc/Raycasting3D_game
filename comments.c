@@ -95,3 +95,7 @@
         //  y_step = TILE_SIZE * tan(ray_angle)
 
 // ---------------------------------------------------------------------------
+
+	// get the projection plane distance by getting the adjacent side?
+	// adjacent						= 		opposite 	 /	 tan(angle)
+	// proj_plane_dist = (SCREEN_WIDTH / 2) / tan(game->player.fov / 2);

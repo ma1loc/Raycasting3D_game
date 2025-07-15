@@ -22,8 +22,8 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 1.5
-# define ROT_SPEED 0.01
+# define MOVE_SPEED 3
+# define ROT_SPEED 0.05
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -146,7 +146,8 @@ typedef struct s_cast_data
 	int		ray_nbr;
 	double	angle_step;
 	double	wall_dist;
-	double	wall_height;
+	double	proj_plane_dist;
+	// double	wall_height;
 	bool	horizontal_hit;
 	int		map_x;
 	int		map_y;
@@ -302,6 +303,8 @@ void    get_closest_distance(
     t_game *game, t_coord horizontal, t_coord vertical);
 double	normalize_angle(double angle);
 void	init_floor_ceiling_rgb(t_game *game);
+void	front_view_randring(t_game *game);
+
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);

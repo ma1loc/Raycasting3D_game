@@ -1,5 +1,35 @@
 # include "cub3D.h"
 
+void	front_view_randring(t_game *game)
+{
+	int				column;
+	double			ray_angle;
+	t_cast_data		*cast_data;
+	t_intercept_hit obj_hit;
+	double			wall_height;
+
+	column = -1;
+	cast_data = &game->cast_data;
+
+	ray_angle = game->player.angle - (game->player.fov / 2);
+	
+	while (++column < game->cast_data.ray_nbr)
+	{
+		ray_angle = normalize_angle(ray_angle);
+		obj_hit = cast_ray(game, ray_angle);
+
+		// to do; get it
+		wall_height = ((TILE_SIZE / cast_data->wall_dist)
+			* cast_data->proj_plane_dist);
+		
+		// >>> drawing the 3d projection
+		draw_column_line(game, obj_hit, column, wall_height);
+
+		ray_angle += game->cast_data.angle_step;
+	}
+}
+
+
 // >>> main game randring engine start here <<<
 int	game_loop(t_game *game)
 {

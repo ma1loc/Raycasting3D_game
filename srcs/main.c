@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 13D 30D
+// 14D 30D
 
 t_game	*g_game(void)
 {
@@ -20,6 +20,8 @@ void	game_init(t_game *game)
 	player->fov = degrees_to_radians(FOV);
 	cast_data->ray_nbr = SCREEN_WIDTH;
 	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
+	
+	// to-do; get it
 	cast_data->proj_plane_dist = (
 		SCREEN_WIDTH / 2) / tan(player->fov / 2);
 

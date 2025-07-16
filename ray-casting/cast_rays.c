@@ -106,9 +106,6 @@ t_intercept_hit cast_ray(t_game *game, double ray_angle)
     if (game->cast_data.horizontal_hit)
         result = horizontal_hit;
     else
-        result = vertical_hit;
-    
-    game->cast_data.wall_dist = get_distance(game->player.p_pos, result.intercept);
-    
+        result = vertical_hit;    
     return (result);
 }

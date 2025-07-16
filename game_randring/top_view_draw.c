@@ -62,7 +62,7 @@ void	draw_line(t_game *game, int line_size)
     {
         draw_x = (int)(px + dx * i);
         draw_y = (int)(py + dy * i);
-        my_mlx_pixel_put(game, draw_x, draw_y, GREEN_CLOOR);
+        my_mlx_pixel_put(game, draw_x, draw_y, GREEN_COLOR);
 		i++;
 	}
 }
@@ -134,9 +134,9 @@ void	draw_rays_view(t_game *game)
 		if (ray_hit.inter_dir == South)
 			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, YELLOW_COLOR);
 		if (ray_hit.inter_dir == East)
-			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, WAITE_COLOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, WHITE_COLOR);
 		if (ray_hit.inter_dir == West)
-			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, GREEN_CLOOR);
+			x_draw_line(ray_angle,game, p_pos.x, p_pos.y, ray_hit.intercept.x, ray_hit.intercept.y, GREEN_COLOR);
 
 		ray_angle += game->cast_data.angle_step;
 		column++;

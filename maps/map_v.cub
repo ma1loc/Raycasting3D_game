@@ -4,8 +4,8 @@ EA textures/xpm/EA.xpm
 SO textures/xpm/SO.xpm
 WE textures/xpm/WE.xpm
 
-F 0,0,255
-C 204,0,102
+F 161, 161, 160
+C 0, 255, 255
 
 1111111111111
 1000000000001

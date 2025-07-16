@@ -7,12 +7,12 @@
 
 # define WALL_COLOR 0xFF0000
 # define BLUE_COLOR 0x0000FF
-# define WAITE_COLOR 0xFFFFFF
+# define WHITE_COLOR 0xFFFFFF
 # define YELLOW_COLOR 0xFFFF00
 # define GRAY_COLOR 0xAAAAAA
 # define D_GRAY_COLOR 0x222222
 # define RED_COLOR 0xFF0000
-# define GREEN_CLOOR 0x00FF00
+# define GREEN_COLOR 0x00FF00
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -304,6 +304,8 @@ void    get_closest_distance(
 double	normalize_angle(double angle);
 void	init_floor_ceiling_rgb(t_game *game);
 void	front_view_randring(t_game *game);
+// void	draw_column_line(t_game *game, int x, int wall_height, t_intercept_hit ray_hit);
+void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
 
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);

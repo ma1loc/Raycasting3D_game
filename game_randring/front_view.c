@@ -74,14 +74,10 @@ void	front_view_randring(t_game *game)
 	ray_angle = game->player.angle - (game->player.fov / 2);
 	while (column < game->cast_data.ray_nbr)
 	{
-		while (ray_angle < 0)
-			ray_angle += 2 * M_PI;
-		while (ray_angle >= 2 * M_PI)
-			ray_angle -= 2 * M_PI;
+		ray_angle = normalize_angle(ray_angle);
 		
 		obj_hit = cast_ray(game, ray_angle);
 
-		// wall_height = (TILE_SIZE / game->cast_data.wall_dist) * ((SCREEN_WIDTH / 2)  / tan(game->player.fov));
 		wall_height = (TILE_SIZE / game->cast_data.wall_dist) * ((SCREEN_HEIGHT / 2) / tan(game->player.fov / 2));
 		
 		draw_vertical_line(game, column, wall_height, obj_hit);

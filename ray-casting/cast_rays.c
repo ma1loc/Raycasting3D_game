@@ -89,29 +89,6 @@ t_intercept_hit get_vertical_intersection(
     return (check_intersection_hit(game, intercept, step));
 }
 
-
-// t_intercept_hit cast_ray(t_game *game, double ray_angle)
-// {
-//     t_intercept_hit	horizontal_hit;
-// 	t_intercept_hit vertical_hit;
-// 	t_intercept_hit re
-
-//     horizontal_hit = get_horizontal_intersection(
-//         game, game->player.p_pos, ray_angle);
-//     vertical_hit = get_vertical_intersection(
-//         game, game->player.p_pos, ray_angle);
-	
-    
-// 	get_closest_distance(
-//         game, horizontal_hit.intercept, vertical_hit.intercept);
-    
-
-//     if (game->cast_data.horizontal_hit)
-//         horizontal_hit);
-// 	else
-//     return (vertical_hit);
-// }
-
 t_intercept_hit cast_ray(t_game *game, double ray_angle)
 {
     t_intercept_hit	horizontal_hit;

@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 14D 30D
+// 15D 30D
 
 t_game	*g_game(void)
 {
@@ -31,7 +31,6 @@ void	game_init(t_game *game)
 	init_textures(game);
 	set_game_textures(game);
 	init_player_dir(game);
-
 }
 
 int	main(int argc, char **argv)
@@ -40,7 +39,25 @@ int	main(int argc, char **argv)
 
 	game = g_game();
 	if (parsing(argc, argv, game))
-		return (1);	
+		return (1);
+
+	// int i;
+	// int j;
+
+	// i = 0;
+	// while (game->map[i])
+	// {
+	// 	j = 0;
+	// 	while (game->map[i][j])
+	// 		{
+	// 		printf("%c", game->map[i][j]);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+
+	// exit(1);
+
 	game_init(game);
 	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);
 	mlx_hook(game->window.win_ptr, KeyRelease, 1L << 1, key_release, NULL);

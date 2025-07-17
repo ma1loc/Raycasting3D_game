@@ -36,12 +36,12 @@ int	game_loop(t_game *game)
 	handle_key_press(game);	// key-hadling
 
 	// >>> 2D-top-view
-	// /*
-		// draw_2d_map(game);
-		// draw_player(game);	
-		// draw_rays_view(game);
-	// */
-	
+	/*
+		draw_2d_map(game);
+		draw_player(game);	
+		draw_rays_view(game);
+	*/
+
 	// >>> 3D-front view (projection)
 	front_view_randring(game);
 	

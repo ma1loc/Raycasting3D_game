@@ -1,15 +1,27 @@
 # include "cub3D.h"
 
+#define MAX_WIDTH 2944
+#define MAX_HEIGHT 1088
+
 // "DONE"
 void	init_mlx_window(t_game *game)
 {
 	game->window.mlx_ptr = mlx_init();
 
+	// calling the testing function here
 	game->window.win_ptr = mlx_new_window( 
 		game->window.mlx_ptr,
-		SCREEN_WIDTH,
-		SCREEN_HEIGHT,
+		MAX_WIDTH,
+		MAX_HEIGHT,
 		"Cub3D");
+
+	// game->window.win_ptr = mlx_new_window( 
+	// 	game->window.mlx_ptr,
+	// 	SCREEN_WIDTH,
+	// 	SCREEN_HEIGHT,
+	// 	"Cub3D");
+
+
 
 	// -- main; create the main frame image --
 	game->window.main_img.img_ptr = mlx_new_image(

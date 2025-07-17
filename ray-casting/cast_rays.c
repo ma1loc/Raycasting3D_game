@@ -11,7 +11,12 @@ int     is_hit(t_game *game, t_coord intercept)
     if (map_x < 0 || map_x >= game->cast_data.map_x ||
         map_y < 0 || map_y >= game->cast_data.map_y)
         return (1);
+
+    if (map_x > (int)(ft_strlen(game->map[map_y])))
+        return (1);
+
     return (game->map[map_y][map_x] == '1');
+
 }
 
 t_intercept_hit	check_intersection_hit(

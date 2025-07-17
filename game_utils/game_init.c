@@ -8,20 +8,11 @@ void	init_mlx_window(t_game *game)
 {
 	game->window.mlx_ptr = mlx_init();
 
-	// calling the testing function here
 	game->window.win_ptr = mlx_new_window( 
 		game->window.mlx_ptr,
-		MAX_WIDTH,
-		MAX_HEIGHT,
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
 		"Cub3D");
-
-	// game->window.win_ptr = mlx_new_window( 
-	// 	game->window.mlx_ptr,
-	// 	SCREEN_WIDTH,
-	// 	SCREEN_HEIGHT,
-	// 	"Cub3D");
-
-
 
 	// -- main; create the main frame image --
 	game->window.main_img.img_ptr = mlx_new_image(

@@ -41,20 +41,14 @@ int	main(int argc, char **argv)
 	if (parsing(argc, argv, game))
 		return (1);
 
-	// int i;
-	// int j;
+	int i;
 
-	// i = 0;
-	// while (game->map[i])
-	// {
-	// 	j = 0;
-	// 	while (game->map[i][j])
-	// 		{
-	// 		printf("%c", game->map[i][j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	i = 0;
+	while (game->map[i])
+	{
+		printf("%s", game->map[i]);
+		i++;
+	}
 
 	// exit(1);
 

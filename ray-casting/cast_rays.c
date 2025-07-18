@@ -8,13 +8,12 @@ int     is_hit(t_game *game, t_coord intercept)
 	map_x = (int)(intercept.x / TILE_SIZE);
 	map_y = (int)(intercept.y / TILE_SIZE);
 
-    if (map_x < 0 || map_x >= game->cast_data.map_x ||
-        map_y < 0 || map_y >= game->cast_data.map_y)
+    if (map_x < 0 || map_y < 0 || map_y >= game->map_height)
         return (1);
 
     if (map_x > (int)(ft_strlen(game->map[map_y])))
         return (1);
-
+    
     return (game->map[map_y][map_x] == '1');
 
 }
@@ -40,7 +39,6 @@ t_intercept_hit	get_horizontal_intersection(
     t_intercept_hit intercept;
     t_coord         step;
 
-	(void)game;
     slope = tan(ray_angle);
     if (ray_angle > 0 && ray_angle < M_PI)  // facing down (South)
     {
@@ -72,7 +70,6 @@ t_intercept_hit get_vertical_intersection(
     t_coord         step;
 
     slope = tan(ray_angle);
-
     if (ray_angle < M_PI / 2 || ray_angle > (M_PI * 3) / 2)  // facing right (East)
     {
         intercept.intercept.x = floor(

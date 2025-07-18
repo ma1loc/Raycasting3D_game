@@ -178,3 +178,53 @@
         10100000W01
         11111111111
 */
+
+/*
+    i have a problem to fix with the function is_hit i get the map_y and map_x at the first initalization
+    that i think the lines of the map is rectangle but is not that mean's i have to get
+    a diffrent logic hit intersection becousse the map it can be like this:
+        11
+        11111111111
+        10000000001
+        10100000W01
+        11111111111
+        11
+    and what i i've done is this 
+    void	get_map_size(t_game *game)
+    {
+        int	y;
+
+        y = 0;
+        while (game->map[y])
+            y++;
+        game->cast_data.map_y = y;
+        game->cast_data.map_x = ft_strlen(game->map[0]);
+    }
+    i don't even know that the map most be  sometimes not rectangle
+    and i based on the first line and check the hit like this
+    
+    int     is_hit(t_game *game, t_coord intercept)
+    {
+        int map_x;
+        int map_y;
+
+        map_x = (int)(intercept.x / TILE_SIZE);
+        map_y = (int)(intercept.y / TILE_SIZE);
+        printf("---------------------------------------------------------------------\n");
+        printf("map_x -> %d | game->cast_data.map_x -> %d\n", map_x, game->cast_data.map_x);
+        printf("map_y -> %d | game->cast_data.map_y -> %d\n", map_y, game->cast_data.map_y);
+        printf("---------------------------------------------------------------------\n");
+
+        if (map_x < 0 || map_x >= game->cast_data.map_x ||
+            map_y < 0 || map_y >= game->cast_data.map_y)
+            return (1);
+
+        if (map_x > (int)(ft_strlen(game->map[map_y])))
+            return (1);
+        
+        return (game->map[map_y][map_x] == '1');
+
+    }
+
+    that make the intersection is not correct at all
+    */

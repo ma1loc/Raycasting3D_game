@@ -25,7 +25,7 @@ void	game_init(t_game *game)
 	cast_data->proj_plane_dist = (
 		SCREEN_WIDTH / 2) / tan(player->fov / 2);
 
-	get_map_size(game);
+	// get_map_size(game);
 	init_floor_ceiling_rgb(game);
 	init_mlx_window(game);
 	init_textures(game);

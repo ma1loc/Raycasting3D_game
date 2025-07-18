@@ -1,18 +1,5 @@
 # include "cub3D.h"
 
-/*
-    - have wall distance    "DONE"
-
-	note; projection plane represent full FOV
-    - 1# get projection plane distance
-		>>> i have to get first the (projection plane distance) and
-			after that i can get the wall hieght, to draw it
-
-    -  2# get wall hieght
-
-	- wall projection
-*/
-
 void draw_ceiling(t_game *game, int row, int column, int ceiling)
 {
 	int	ceiling_color;

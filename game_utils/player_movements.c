@@ -25,7 +25,10 @@ int	check_collision(t_game *game, double new_x, double new_y)
 		is_wall(game, new_x + player_radius, new_y + player_radius))
 		return (1);
 
-	return (0);
+    // if (is_wall(game, new_x, new_y))
+        // return (1);
+    
+    return (0);
 }
 
 // "DONE"

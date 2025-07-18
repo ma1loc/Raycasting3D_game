@@ -86,6 +86,26 @@ char **allocate_map(t_game *game)
     }
     return (map);
 }
+int ft_isspace(char c)
+{
+    if(c == ' ' || c == '\t' ||
+        c == '\n' || c == '\v' ||
+        c == '\f' || c == '\r')
+        return(1);
+    return(0);
+}
+
+int check_white_spaces(char *str)
+{
+    int i = 0;
+    while (str[i])
+    {
+        if (!ft_isspace(str[i]))
+            return (1);
+        i++;
+    }
+    return (0);
+}
 
 int read_map_lines(int fd, char **map, t_game *game)
 {
@@ -106,6 +126,11 @@ int read_map_lines(int fd, char **map, t_game *game)
                 free_this_map(map, map_index);
                 return (-1);
             }
+            continue;
+        }
+        if (!check_white_spaces(line))
+        {
+            free(line);
             continue;
         }
         map[map_index] = line;

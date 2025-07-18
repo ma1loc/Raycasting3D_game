@@ -20,6 +20,7 @@
 # define TILE_SIZE 64
 # define EPS 0.00001
 
+
 # define FOV 60
 
 # define MOVE_SPEED 5
@@ -100,15 +101,6 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
-
-// 00000000 00000000 00000000 00000000
-//     T       R        G         B
-// x >> 24  & (0xff) = T
-// x >> 16 = R
-// x >> 8  = G
-// x       = B
-// ff ff ff ff
-// ----------------------------------------
 
 typedef struct s_window
 {

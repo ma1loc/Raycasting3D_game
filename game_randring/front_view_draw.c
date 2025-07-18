@@ -24,7 +24,8 @@ void draw_floor(t_game *game, int row, int column)
     }
 }
 
-void draw_wall(t_game *game, t_intercept_hit ray_hit, int row, int start, int end)
+void draw_wall(
+    t_game *game, t_intercept_hit ray_hit, int row, int start, int end)
 {
     while (start < end)
     {
@@ -40,17 +41,24 @@ void draw_wall(t_game *game, t_intercept_hit ray_hit, int row, int start, int en
     }
 }
 
-void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height)
+void draw_column_line(
+    t_game *game, t_intercept_hit ray_hit, int row, int wall_height)
 {
     int ceiling;
     int floor;
     
+    (void)ray_hit;
+
+    // >>> if the wall height then screen_height limitaion to SCREEN_HEIGHT
     if (wall_height > SCREEN_HEIGHT)
         wall_height = SCREEN_HEIGHT;
     
+    // >>> ceiling gives you ceiling space column to draw
     ceiling = (SCREEN_HEIGHT / 2) - (wall_height / 2);
+    // >>> floor gives you floor space column to draw
     floor = (SCREEN_HEIGHT / 2) + (wall_height / 2);
     
+    // >>> if, set to defult
     if (ceiling < 0)
         ceiling = 0;
     if (floor >= SCREEN_HEIGHT)

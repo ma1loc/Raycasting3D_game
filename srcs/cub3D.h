@@ -18,11 +18,11 @@
 # define EXIT_FAILURE 1
 
 # define TILE_SIZE 64
-# define EPS 0.0001
+# define EPS 0.00001
 
 # define FOV 60
 
-# define MOVE_SPEED 2
+# define MOVE_SPEED 5
 # define ROT_SPEED 0.015
 
 # define SCREEN_WIDTH 1280

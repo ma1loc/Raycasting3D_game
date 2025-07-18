@@ -16,6 +16,13 @@ void	front_view_randring(t_game *game)
 	{
 		ray_angle = normalize_angle(ray_angle);
 		obj_hit = cast_ray(game, ray_angle);
+
+		/*
+			cast_data->wall_dist gives the hypotenuse distance
+				taht makes the fish eye effect
+			converting to the adjacent distance that what makes
+				the correction of that
+		*/
 		correct_wall_dist = (cast_data->wall_dist * 
 			cos(ray_angle - game->player.angle));
 		wall_height = ((TILE_SIZE / correct_wall_dist)
@@ -25,7 +32,6 @@ void	front_view_randring(t_game *game)
 		draw_column_line(game, obj_hit, column, wall_height);
 		ray_angle += game->cast_data.angle_step;
 	}
-	// exit(0);	
 }
 
 
@@ -38,7 +44,7 @@ int	game_loop(t_game *game)
 	/*
 		draw_2d_map(game);
 		draw_player(game);	
-		// draw_rays_view(game);
+		draw_rays_view(game);
 	*/
 
 	// >>> 3D-front view (projection)

@@ -43,7 +43,7 @@ int	game_loop(t_game *game)
 	// >>> 2D-top-view
 	/*
 		draw_2d_map(game);
-		draw_player(game);	
+		draw_player(game);
 		draw_rays_view(game);
 	*/
 

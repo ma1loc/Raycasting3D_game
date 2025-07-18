@@ -80,8 +80,8 @@ void draw_player(t_game *game)
 	line_size = 60;
 
 	draw_line(game, line_size);
-    // draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
-    draw_square(player_screen_x, player_screen_y, player_size, game->window.floor_color);
+    // draw_square(player_screen_x, player_screen_y, player_size, game->window.floor_color);
+    draw_square(player_screen_x, player_screen_y, player_size, RED_COLOR);
 }
 
 double distance_between_points(double x, double y, double x1, double y1) {

@@ -17,6 +17,8 @@ void	game_init(t_game *game)
 
 	player = &game->player;
 	cast_data = &game->cast_data;
+
+	// >>> set the fov to radians
 	player->fov = degrees_to_radians(FOV);
 	cast_data->ray_nbr = SCREEN_WIDTH;
 	// >>> angle_step is the distance between rays
@@ -32,7 +34,7 @@ void	game_init(t_game *game)
 			>>> cast_data->proj_plane_dist -> adjacent side
 	*/
 	cast_data->proj_plane_dist = (
-		SCREEN_WIDTH / 2) / tan(player->fov / 2);	// >>> DONE
+		SCREEN_WIDTH / 2) / tan(player->fov / 2);
 
 	init_floor_ceiling_rgb(game);
 	init_mlx_window(game);

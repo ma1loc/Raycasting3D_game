@@ -36,7 +36,7 @@ void	front_view_randring(t_game *game)
 
 		// the height of the projected wall slice
 		wall_height = ((TILE_SIZE / correct_wall_dist)
-			* cast_data->proj_plane_dist);
+			* cast_data->proj_plane_dist);	
 
 		// >>> drawing the 3d projection
 		draw_column_line(game, obj_hit, column, wall_height);

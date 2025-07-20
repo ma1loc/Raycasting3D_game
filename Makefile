@@ -4,9 +4,6 @@ CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LDFLAGS = -Isrcs
 RM = rm -rf
 
-# MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-# MLX_INCLUDE = -Iminilibx-linux
-
 MLX_DIR = minilibx-linux
 MLX_INCLUDE = -I$(MLX_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
@@ -22,7 +19,7 @@ SRC = ./srcs/main.c ./gnl/get_next_line.c  ./parsing/read_map.c ./parsing/utils.
 	./game_utils/key_event.c ./game_utils/player_movements.c ./game_randring/img_randring.c \
 	./game_randring/game_loop.c ./ray-casting/cast_rays.c ./game_utils/trig_calculator.c \
 	./ray-casting/get_intersection.c ./game_randring/top_view_draw.c ./game_utils/game_init_utils.c \
-	./game_randring/front_view_draw.c
+	./game_randring/front_view_draw.c ./game_randring/wall_textures.c
 
 OBJ = $(SRC:.c=.o)
 

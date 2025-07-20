@@ -24,6 +24,11 @@ void draw_floor(t_game *game, int row, int column)
     }
 }
 
+/*
+    >>> the next process is set the texture to the wall
+        in all the direction (n, s, e, w)
+        you need to stretch or shrink the texture vertically
+*/
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int start, int end)
 {

@@ -41,13 +41,17 @@ void	init_textures(t_game *game)
 	while (++i < 4)
 	{
 		if (!ft_strncmp(game->config->ids[i].id, "NO", 2))
-			game->textures.t_north.t_path = ft_strdup(game->config->ids[i].path);
+			game->textures.t_north.t_path = ft_strdup(
+				game->config->ids[i].path);
 		else if (!ft_strncmp(game->config->ids[i].id, "SO", 2))
-			game->textures.t_south.t_path = ft_strdup(game->config->ids[i].path);
+			game->textures.t_south.t_path = ft_strdup(
+				game->config->ids[i].path);
 		else if (!ft_strncmp(game->config->ids[i].id, "EA", 2))
-			game->textures.t_east.t_path = ft_strdup(game->config->ids[i].path);
+			game->textures.t_east.t_path = ft_strdup(
+				game->config->ids[i].path);
 		else if (!ft_strncmp(game->config->ids[i].id, "WE", 2))
-			game->textures.t_west.t_path = ft_strdup(game->config->ids[i].path);
+			game->textures.t_west.t_path = ft_strdup(
+				game->config->ids[i].path);
 	}
 }
 

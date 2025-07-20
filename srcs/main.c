@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 16D 30D
+// 17D 30D
 
 t_game	*g_game(void)
 {
@@ -19,11 +19,20 @@ void	game_init(t_game *game)
 	cast_data = &game->cast_data;
 	player->fov = degrees_to_radians(FOV);
 	cast_data->ray_nbr = SCREEN_WIDTH;
+	// >>> angle_step is the distance between rays
 	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
 	
 	// to-do; get it
+	/*
+		player look straight ahead (center of the screeen)
+		half of the screen width (distance from center to the edge)
+		half of the FOV is the angle of the half of the screen width
+			>>> screen_width / 2 -> opposite side.
+			>>> fov / 2 -> angle of the screen_width / 2
+			>>> cast_data->proj_plane_dist -> adjacent side
+	*/
 	cast_data->proj_plane_dist = (
-		SCREEN_WIDTH / 2) / tan(player->fov / 2);
+		SCREEN_WIDTH / 2) / tan(player->fov / 2);	// >>> DONE
 
 	init_floor_ceiling_rgb(game);
 	init_mlx_window(game);
@@ -39,17 +48,6 @@ int	main(int argc, char **argv)
 	game = g_game();
 	if (parsing(argc, argv, game))
 		return (1);
-
-	int i;
-
-	i = 0;
-	while (game->map[i])
-	{
-		printf("%s", game->map[i]);
-		i++;
-	}
-
-	// exit(1);
 
 	game_init(game);
 	mlx_hook(game->window.win_ptr, KeyPress, 1L << 0, key_press, NULL);

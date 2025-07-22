@@ -94,10 +94,10 @@ typedef struct s_image
 {
 	char	*t_path;
 	void	*img_ptr;
-	char	*addr;		// "DONE"
-	int		bpp;		// "DONE" to see
-	int		size_line;	// "DONE" to see
-	int		endian;		// ""
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 	int		width;
 	int		height;
 }	t_image;

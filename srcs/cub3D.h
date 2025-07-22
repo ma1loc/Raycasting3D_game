@@ -298,6 +298,10 @@ void	init_floor_ceiling_rgb(t_game *game);
 void	front_view_randring(t_game *game);
 // void	draw_column_line(t_game *game, int x, int wall_height, t_intercept_hit ray_hit);
 void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
+// void	set_wall_textures(t_game *game, void *img_add);
+void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
+
+
 
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);

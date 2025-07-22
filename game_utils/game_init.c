@@ -54,12 +54,14 @@ void	init_textures(t_game *game)
 // "DONE"
 void	image_loader(t_image *img)
 {
+	// >>> load img from dist to memory
 	img->img_ptr = mlx_xpm_file_to_image(g_game()->window.mlx_ptr,
 		img->t_path, &img->width, &img->height);
 	
 	if (!img->img_ptr)
 		game_exit(EXIT_FAILURE, "mlx_xpm_file_to_image failed\n");
 	
+	// >>> get access to the row pixel
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp,
 		&img->size_line, &img->endian);
 }

@@ -139,7 +139,6 @@ typedef struct s_cast_data
 	double	angle_step;
 	double	wall_dist;
 	double	proj_plane_dist;
-	// double	wall_height;
 	bool	horizontal_hit;
 	int		map_x;
 	int		map_y;
@@ -299,7 +298,9 @@ void	front_view_randring(t_game *game);
 // void	draw_column_line(t_game *game, int x, int wall_height, t_intercept_hit ray_hit);
 void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
 // void	set_wall_textures(t_game *game, void *img_add);
-void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
+// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
+t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
+void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
 
 
 

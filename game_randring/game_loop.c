@@ -44,6 +44,7 @@ void	front_view_randring(t_game *game)
 		
 		ray_angle += game->cast_data.angle_step;
 	}
+	exit(1);
 }
 
 

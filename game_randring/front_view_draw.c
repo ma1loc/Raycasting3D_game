@@ -29,38 +29,22 @@ void draw_floor(t_game *game, int row, int column)
         in all the direction (n, s, e, w)
         you need to stretch or shrink the texture vertically
 */
+
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int column, int end)
 {
-//     while (start < end)
-//     {
-//         if (ray_hit.inter_dir == North)
-//             my_mlx_pixel_put(game, row, start, RED_COLOR);
-//         if (ray_hit.inter_dir == South)
-//             my_mlx_pixel_put(game, row, start, YELLOW_COLOR);
-//         if (ray_hit.inter_dir == East)
-//             my_mlx_pixel_put(game, row, start, GREEN_COLOR);
-//         if (ray_hit.inter_dir == West)
-//             my_mlx_pixel_put(game, row, start, BLUE_COLOR);
-//         start++;
-//     }
-
-	// t_textures *textures;
-	// (void)row;
-
-	// textures = &game->textures;
-    // while (column < end)
-    // {
-    //     if (ray_hit.inter_dir == North)
-    //     	set_wall_textures(game, textures->t_north.img_ptr);
-    //     if (ray_hit.inter_dir == South)
-    //     	set_wall_textures(game, textures->t_south.img_ptr);
-    //     if (ray_hit.inter_dir == East)
-    //     	set_wall_textures(game, textures->t_east.img_ptr);
-    //     if (ray_hit.inter_dir == West)
-    //     	set_wall_textures(game, textures->t_west.img_ptr);
-    //     column++;
-    // }
+    while (column < end)
+    {
+        if (ray_hit.inter_dir == North)
+            my_mlx_pixel_put(game, row, column, RED_COLOR);
+        if (ray_hit.inter_dir == South)
+            my_mlx_pixel_put(game, row, column, YELLOW_COLOR);
+        if (ray_hit.inter_dir == East)
+            my_mlx_pixel_put(game, row, column, GREEN_COLOR);
+        if (ray_hit.inter_dir == West)
+            my_mlx_pixel_put(game, row, column, BLUE_COLOR);
+        column++;
+    }
 }
 
 void draw_column_line(
@@ -88,8 +72,8 @@ void draw_column_line(
     draw_ceiling(game, row, 0, ceiling);
 	
 	// >>> set texture to the wall <<<
-    // draw_wall(game, ray_hit, row, ceiling, floor);
-	set_wall_textures(game, obj_hit, row, ceiling);
+    // draw_wall(game, obj_hit, row, ceiling, floor);
+	set_wall_textures(game, obj_hit, row, ceiling, floor);
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
 	draw_floor(game, row, floor);

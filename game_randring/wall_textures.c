@@ -30,6 +30,7 @@ void	set_wall_textures(
 	int		y;
 
 	tex_pos = 0;
+    img = get_img_ptr(game, obj_hit);	// >>> DONE
 	/*
 		stretching detail
 		shrinking less detail
@@ -37,21 +38,17 @@ void	set_wall_textures(
 		and that all done by the step
 	    step = (double)img->height / (floor - ceiling);
 	*/
-	img = get_img_ptr(game, obj_hit);	// >>> DONE
+
     step = (double)img->height / (bottom - top);
 	y = top;
 
     if (game->cast_data.horizontal_hit)
         tex_offset_x = (int)obj_hit.intercept.x % img->width;
     else
-	{
-        tex_offset_x = (int)obj_hit.intercept.x % img->width;
-
-        // tex_offset_x = (int)obj_hit.intercept.y % img->width;
-	}
+        tex_offset_x = (int)obj_hit.intercept.y % img->width;
     while (y < bottom)
     {
-        tex_offset_y = (int)tex_pos;
+        tex_offset_y = (int)tex_pos;    // >>> row
 
 		color = (*(int *)(img->addr + 
 			(tex_offset_y * img->size_line) +

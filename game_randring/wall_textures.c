@@ -14,29 +14,51 @@ t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit)
     return (&textures->t_west);
 }
 
-void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor)
+// Y -> row
+// X -> column
+
+// >>> set_wall_texture is for draw a vertical strip of wall
+void	set_wall_textures(
+	t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom)
 {
-    (void)floor;   
     t_image *img;
+    double  step;
+    int		tex_offset_y;
+    int		tex_offset_x;
+    double  tex_pos;
     int     color;
-    double  tex_offset_x;   // >>> get the column
+	int		y;
 
+	tex_pos = 0;
+	/*
+		stretching detail
+		shrinking less detail
+		stretching && shrinking based on the wall the wall is be and how far wall is
+		and that all done by the step
+	    step = (double)img->height / (floor - ceiling);
+	*/
+	img = get_img_ptr(game, obj_hit);	// >>> DONE
+    step = (double)img->height / (bottom - top);
+	y = top;
 
-    img = get_img_ptr(game, obj_hit);
-    color = *(int *)(img->addr + (row * img->size_line) + (column * (img->bpp / 8)));
-    
-    // >>> tex_offset_y -> static <<<
+    if (game->cast_data.horizontal_hit)
+        tex_offset_x = (int)obj_hit.intercept.x % img->width;
+    else
+	{
+        tex_offset_x = (int)obj_hit.intercept.x % img->width;
 
-    // Y -> row
-    // X -> column
+        // tex_offset_x = (int)obj_hit.intercept.y % img->width;
+	}
+    while (y < bottom)
+    {
+        tex_offset_y = (int)tex_pos;
 
-    // the tex_offset will stay the same (static value) unlike the tex_offset_y
-    if (game->cast_data.horizontal_hit) // >>> hor
-        tex_offset_x = fmod(obj_hit.intercept.x, (double)TILE_SIZE);
-    else                                // >>> ver
-        tex_offset_x = fmod(obj_hit.intercept.y, (double)TILE_SIZE);
-    
-    // printf("tex_offset_x -> %f\n", tex_offset_x);
-    
-    // exit(1);
+		color = (*(int *)(img->addr + 
+			(tex_offset_y * img->size_line) +
+			(tex_offset_x * (img->bpp / 8))));
+
+        my_mlx_pixel_put(game, x, y, color);
+        tex_pos += step;
+        y++;
+    }
 }

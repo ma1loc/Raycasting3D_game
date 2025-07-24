@@ -41,10 +41,10 @@ void	front_view_randring(t_game *game)
 		// >>> drawing the 3d projection
 		draw_column_line(game, obj_hit, column, wall_height);
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		
+
 		ray_angle += game->cast_data.angle_step;
 	}
-	exit(1);
+	// exit(1);
 }
 
 

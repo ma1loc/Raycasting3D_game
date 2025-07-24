@@ -301,6 +301,7 @@ void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_h
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
 void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
+// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 
 
 

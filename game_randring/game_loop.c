@@ -29,7 +29,6 @@ void	front_view_randring(t_game *game)
 				the correction of that
 		*/
 		// fish eye correction
-
 		// >>> projected slice height == wall_height <<<
 		correct_wall_dist = (cast_data->wall_dist * 
 			cos(ray_angle - game->player.angle));
@@ -38,13 +37,14 @@ void	front_view_randring(t_game *game)
 		wall_height = ((TILE_SIZE / correct_wall_dist)
 			* cast_data->proj_plane_dist);	
 
+
+
 		// >>> drawing the 3d projection
 		draw_column_line(game, obj_hit, column, wall_height);
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		ray_angle += game->cast_data.angle_step;
 	}
-	// exit(1);
 }
 
 

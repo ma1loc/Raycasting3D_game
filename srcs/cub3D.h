@@ -302,7 +302,8 @@ void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_h
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
 void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
-
+void draw_wall(
+    t_game *game, t_intercept_hit ray_hit, int row, int column, int end);
 
 
 // ------------------------- top-view --------------------

@@ -65,7 +65,7 @@ int	game_loop(t_game *game)
 
 	// >>> main image frame
 	mlx_put_image_to_window(game->window.mlx_ptr, 
-		game->window.win_ptr, 
+		game->window.win_ptr,
 		game->window.main_img.img_ptr, 0, 0);
 
 	return (0);

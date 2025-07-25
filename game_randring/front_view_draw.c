@@ -30,10 +30,6 @@ void draw_column_line(
 	int top;
 	int bottom;
 
-	// >>> if the wall height then screen_height limitaion to SCREEN_HEIGHT
-	if (wall_height > SCREEN_HEIGHT)
-		wall_height = SCREEN_HEIGHT;
-
 	// >>> ceiling gives you ceiling space column to draw
 	top = (SCREEN_HEIGHT / 2) - (wall_height / 2);
 	// >>> floor gives you floor space column to draw
@@ -46,6 +42,6 @@ void draw_column_line(
 		bottom = SCREEN_HEIGHT - 1;
 
 	draw_ceiling(game, row, 0, top);
-	set_wall_textures(game, obj_hit, row, top, bottom);
+	set_wall_textures(game, obj_hit, row, top, bottom, wall_height);
 	draw_floor(game, row, bottom);
 }

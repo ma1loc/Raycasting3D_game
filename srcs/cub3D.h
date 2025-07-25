@@ -34,7 +34,7 @@
 # define LEFT_KEY  XK_a
 # define RIGHT_KEY XK_d
 # define LEFT_ARROW XK_Left
-# define RIGHT_ARROW XK_Right  
+# define RIGHT_ARROW XK_Right
 # define ESC_KEY   XK_Escape
 
 # define FORWARD 1
@@ -269,7 +269,7 @@ void free_split(char **split);
 void cleanup_game(t_game *game);
 void err(char *str);
 
-// 
+//
 // -------------------------------- parsing part --------------------------------
 // ------------- init game (movements, textures, other stuff... ) -----------------
 t_game	*g_game(void);
@@ -300,7 +300,8 @@ void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_h
 // void	set_wall_textures(t_game *game, void *img_add);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
-void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
+// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
+void set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int column, int end);

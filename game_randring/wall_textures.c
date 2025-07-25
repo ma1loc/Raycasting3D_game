@@ -16,106 +16,62 @@ t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit)
 
 // Y -> row
 // X -> column
-
-// // >>> set_wall_texture is for draw a vertical strip of wall
-// void	set_wall_textures(
-// 	t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom)
-// {
-//     t_image *img;
-//     double  step;
-//     int		tex_offset_y;
-//     int		tex_offset_x;
-//     double  tex_pos;
-//     int     color;
-// 	int		y;
-
-// 	tex_pos = 0;
-//     img = get_img_ptr(game, obj_hit);	// >>> DONE
-// 	/*
-// 		stretching detail
-// 		shrinking less detail
-// 		stretching && shrinking based on the wall the wall is be and how far wall is
-// 		and that all done by the step
-// 	    step = (double)img->height / (floor - ceiling);
-// 	*/
-
-//     step = (double)img->height / (bottom - top);
-// 	y = top;
-
-
-// 	// if (game->cast_data.horizontal_hit)
-// 	// 	tex_offset_x = (int)(fmod(obj_hit.intercept.x, TILE_SIZE) * img->width / TILE_SIZE);
-// 	// else
-// 	// 	tex_offset_x = (int)(fmod(obj_hit.intercept.y, TILE_SIZE) * img->width / TILE_SIZE);
-
-
-// 	double wall_x;
-
-// 	if (game->cast_data.horizontal_hit)
-// 	{
-// 		wall_x = obj_hit.intercept.x;
-// 		if (obj_hit.inter_dir == South)
-// 			wall_x = TILE_SIZE - fmod(wall_x, TILE_SIZE);
-// 		else
-// 			wall_x = fmod(wall_x, TILE_SIZE);
-// 	}
-// 	else
-// 	{
-// 		wall_x = obj_hit.intercept.y;
-// 		if (obj_hit.inter_dir == West)
-// 			wall_x = TILE_SIZE - fmod(wall_x, TILE_SIZE);
-// 		else
-// 			wall_x = fmod(wall_x, TILE_SIZE);
-// 	}
-
-// tex_offset_x = (int)(wall_x * img->width / TILE_SIZE);
-
-// 	while (y < bottom)
-//     {
-//         tex_offset_y = (int)tex_pos;    // >>> row
-
-// 		color = (*(int *)(img->addr + 
-// 			(tex_offset_y * img->size_line) +
-// 			(tex_offset_x * (img->bpp / 8))));
-
-//         my_mlx_pixel_put(game, x, y, color);
-//         tex_pos += step;
-//         y++;
-//     }
-// }
-
+// >>> set_wall_texture is for draw a vertical strip of wall
 void set_wall_textures(
-    t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom)
+    t_game *game, t_intercept_hit obj_hit, int x, int top,
+    int bottom, int wall_height)
 {
-    t_image *img;
-    double step;
-    int tex_offset_y;
-    int tex_offset_x;
-    double tex_pos;
-    int color;
     int y;
-
-    tex_pos = 0;
-    img = get_img_ptr(game, obj_hit);
-    step = (double)img->height / (bottom - top);
+    double step;
+    t_image *img;
+    int color;
+    int tex_offset_x;
+    int tex_offset_y;
+    double hit_pos;
+    
+    
     y = top;
+    /*
+		stretching detail
+		shrinking less detail
+		stretching && shrinking based on the wall the wall is be and how far wall is
+		and that all done by the step
+	    step = (double)img->height / (floor - ceiling);
+	*/
+    img = get_img_ptr(game, obj_hit);
+    step = (double)img->height / wall_height;
 
-    // Simple texture coordinate calculation
-    if (game->cast_data.horizontal_hit)
-        tex_offset_x = (int)obj_hit.intercept.x & 63;  // & 63 is same as % 64
+    // Calculate how many pixels are clipped at the top of the wall slice
+    int wall_top_clipped = (SCREEN_HEIGHT / 2) - (wall_height / 2);
+    double tex_pos = 0;
+
+    if (wall_top_clipped < 0)
+        tex_pos = (-wall_top_clipped) * step;
     else
-        tex_offset_x = (int)obj_hit.intercept.y & 63;
+        tex_pos = 0;
+
+    // Calculate texture X coordinate properly (fractional position on tile)
+    if (game->cast_data.horizontal_hit)
+        hit_pos = fmod(obj_hit.intercept.x, TILE_SIZE);
+    else
+        hit_pos = fmod(obj_hit.intercept.y, TILE_SIZE);
+    // if (hit_pos < 0)
+    //     hit_pos += TILE_SIZE;
+
+    if (hit_pos < 0)
+        printf("hit_pos -> %f\n", hit_pos);
+    tex_offset_x = (int)((hit_pos / TILE_SIZE) * img->width);
 
     while (y < bottom)
     {
-        tex_offset_y = (int)tex_pos & 63;  // & 63 is same as % 64
+        tex_offset_y = (int)tex_pos % img->height;
         
-        color = (*(int *)(img->addr +
-            (tex_offset_y * img->size_line) +
-            (tex_offset_x * (img->bpp / 8))));
-        
+        color = *(int *)(img->addr +
+            tex_offset_y * img->size_line +
+            tex_offset_x * (img->bpp / 8));
+
         my_mlx_pixel_put(game, x, y, color);
-        tex_pos += step;
+        tex_pos += step; 
         y++;
     }
 }

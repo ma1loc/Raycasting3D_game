@@ -1,8 +1,8 @@
 
-NO textures/xpm/NO.xpm
-EA textures/xpm/EA.xpm
-SO textures/xpm/SO.xpm
-WE textures/xpm/WE.xpm
+EA textures/xpm/bluestone.xpm
+NO textures/xpm/eagle.xpm
+SO textures/xpm/colorstone.xpm
+WE textures/xpm/purplestone.xpm
 
 F 59,59,59
 C 50,167,255

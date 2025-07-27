@@ -1,6 +1,7 @@
 # include "cub3D.h"
 
 // "DONE"
+//  1,242 allocs, 1,161 frees
 void	init_mlx_window(t_game *game)
 {
 	game->window.mlx_ptr = mlx_init();

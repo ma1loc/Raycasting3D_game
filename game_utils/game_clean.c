@@ -22,6 +22,8 @@ void	destroy_texture_images(t_game *game)
 		mlx_destroy_image(game->window.mlx_ptr, game->textures.t_east.img_ptr);
 	if (game->textures.t_west.img_ptr)
 		mlx_destroy_image(game->window.mlx_ptr, game->textures.t_west.img_ptr);
+	if (game->window.main_img.img_ptr)
+		mlx_destroy_image(game->window.mlx_ptr, game->window.main_img.img_ptr);
 	t_path_destroy(game);
 }
 
@@ -37,14 +39,16 @@ void	game_exit(int exit_nbr, char *msg)
 	    free_map(g_game());
 	if (game->config)
 	    free_config(g_game());
-
 	if (game->window.mlx_ptr)
     {
         destroy_texture_images(game);
         if (game->window.win_ptr)
             mlx_destroy_window(game->window.mlx_ptr, game->window.win_ptr);
-        if (game->window.main_img.img_ptr)
-            mlx_destroy_image(game->window.mlx_ptr, game->window.main_img.img_ptr);
-    }
+	}
+	if (game->window.mlx_ptr)
+	{
+		mlx_destroy_display(game->window.mlx_ptr);
+		free(game->window.mlx_ptr);
+	}
 	exit(exit_nbr);
 }

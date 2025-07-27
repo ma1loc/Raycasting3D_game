@@ -3,14 +3,15 @@
 // >>> main 3D projection function
 void front_view_randring(t_game *game)
 {
-    int column;
-    double ray_angle;
-    t_cast_data *cast_data = &game->cast_data;
-    t_intercept_hit obj_hit;
-    double wall_height;
-    double correct_wall_dist;
+    int				column;
+    double			ray_angle;
+    t_cast_data		*cast_data;
+    t_intercept_hit	obj_hit;
+    double			wall_height;
+    double			correct_wall_dist;
 
     column = -1;
+    cast_data = &game->cast_data;
     // >>>  subtract 30 degrees (half of my FOV) to start from left most
     ray_angle = game->player.angle - (game->player.fov / 2);
 
@@ -33,14 +34,12 @@ void front_view_randring(t_game *game)
 		// >>> projected slice height == wall_height <<<
         correct_wall_dist = (cast_data->wall_dist
             * cos(ray_angle - game->player.angle));
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        cast_data->wall_dist = correct_wall_dist;   // not there
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        cast_data->wall_dist = correct_wall_dist;
 
         // calculate wall height with corrected distance
 		// the height of the projected wall slice
-        wall_height = ((TILE_SIZE / correct_wall_dist)
-            * cast_data->proj_plane_dist);
+		wall_height = ((TILE_SIZE / correct_wall_dist)
+			* cast_data->proj_plane_dist);
 
         // draw vertical slice with texture mapping
         draw_column_line(game, obj_hit, column, wall_height);

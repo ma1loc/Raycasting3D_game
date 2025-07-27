@@ -1,6 +1,6 @@
 # include "cub3D.h"
 
-// 20D 30D
+// 23D 30D
 
 t_game	*g_game(void)
 {
@@ -38,7 +38,6 @@ void	game_init(t_game *game)
 
 	init_floor_ceiling_rgb(game);
 	init_mlx_window(game);
-	// game_exit(1, NULL);
 	init_textures(game);
 	set_game_textures(game);
 	init_player_dir(game);

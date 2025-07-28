@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 13:40:27 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 13:41:40 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:10:41 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ void	game_exit(int exit_nbr, char *msg)
 		free(game->window.mlx_ptr);
 	}
 	exit(exit_nbr);
+}
+
+int	close_window(int key_code)
+{
+	(void)key_code;
+	game_exit(0, NULL);
+	return (0);
 }

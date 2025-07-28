@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 09:56:00 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 13:31:54 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:28:23 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	front_view_randring(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	handle_key_press(game);
+	handle_key_press(game);		// done_n
 	front_view_randring(game);
 	mlx_put_image_to_window(game->window.mlx_ptr,
 		game->window.win_ptr,

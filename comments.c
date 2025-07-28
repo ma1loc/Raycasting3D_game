@@ -228,3 +228,13 @@
 
     that make the intersection is not correct at all
     */
+
+// ---------------- learning push ------------------------
+
+// 1# about the projection plane calculation
+/*
+    having the angle of the ray and
+    the opposite side
+    using the tan() function
+    to get the distance from the playe to the projectin plane
+*/

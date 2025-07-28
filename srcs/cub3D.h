@@ -19,15 +19,11 @@
 
 # define TILE_SIZE 64
 # define EPS 0.00001
-
-
 # define FOV 60
 
 # define MOVE_SPEED 1.0
 # define ROT_SPEED 0.01
 
-// # define SCREEN_WIDTH 1280
-// # define SCREEN_HEIGHT 720
 # define SCREEN_WIDTH 850
 # define SCREEN_HEIGHT 600
 
@@ -85,12 +81,6 @@ typedef struct s_config
     int ceiling_rgb[3];
 } t_config;
 
-// ----------------------------------------
-
-// bpp; how many bits are used to represent one pixel (32bit)
-// size_line; size_line = how many bytes in one row
-// endian; 2
-
 typedef struct s_image
 {
 	char	*t_path;
@@ -107,12 +97,10 @@ typedef struct s_window
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_image	main_img;	// >>>  main image frame
+	t_image	main_img;
 	int		floor_color;
 	int		ceiling_color;
 }	t_window;
-
-// ----------------------------------------
 
 typedef struct s_direction
 {
@@ -181,8 +169,6 @@ typedef struct s_game
     char			**map;
     t_ppos			player_pos;
     t_config		*config;
-
-	// ----------------- ray-casting part
 	t_window		window;
 	t_player		player;
 	t_direction		direction;
@@ -190,8 +176,6 @@ typedef struct s_game
 	t_textures		textures;
 
 }	t_game;
-
-// ----------------------------------------
 
 int		ft_isalpha(int c);
 int     ft_isdigit(char *str);
@@ -227,9 +211,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-
-// ----------------------------------------
-
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *str);
@@ -275,9 +256,7 @@ void free_split(char **split);
 void cleanup_game(t_game *game);
 void err(char *str);
 
-//
-// -------------------------------- parsing part --------------------------------
-// ------------- init game (movements, textures, other stuff... ) -----------------
+
 t_game	*g_game(void);
 int		game_loop(t_game *game);
 void	init_textures(t_game *game);
@@ -301,33 +280,19 @@ void    get_closest_distance(
 double	normalize_angle(double angle);
 void	init_floor_ceiling_rgb(t_game *game);
 void	front_view_randring(t_game *game);
-// void	draw_column_line(t_game *game, int x, int wall_height, t_intercept_hit ray_hit);
-// void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
-// void	set_wall_textures(t_game *game, void *img_add);
-// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
-// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
-// void set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
-// void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int column, int end);
-// void draw_column_line(t_game *game, t_intercept_hit obj_hit, int row);
-// void	set_wall_textures(
-// 	t_game *game, t_intercept_hit obj_hit, int x, int top,
-// 	int bottom);
 void draw_column_line(t_game *game, int row);
 void	set_wall_textures(t_game *game, int x, int top, int bottom);
-
+t_intercept_hit cast_ray(t_game *game, double ray_angle);
+int		close_window(int key_code);
+// void	upgrade_player_s_dir(t_game *game, int angle);
 
 
 // ------------------------- top-view --------------------
 void	draw_2d_map(t_game *game);
 void	draw_player(t_game *game);
 void	draw_rays_view(t_game *game);
-// -------------------------------------------------------------------------
-// ------------- ray-casting -----------------
-// void	casting_rays(t_game *game);
-// void	cast_rays(t_game *game, double ray_angle);
-t_intercept_hit cast_ray(t_game *game, double ray_angle);
 
 #endif

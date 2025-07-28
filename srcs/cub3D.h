@@ -23,11 +23,13 @@
 
 # define FOV 60
 
-# define MOVE_SPEED 3
+# define MOVE_SPEED 1.0
 # define ROT_SPEED 0.01
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+// # define SCREEN_WIDTH 1280
+// # define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 850
+# define SCREEN_HEIGHT 600
 
 # define UP_KEY    XK_w
 # define DOWN_KEY  XK_s
@@ -44,7 +46,6 @@
 # define TURN_LEFT -1
 # define TURN_RIGHT 1
 
-// # include "get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -133,17 +134,6 @@ typedef	struct s_player
 	t_coord			p_pos;
 }	t_player;
 
-typedef struct s_cast_data
-{
-	int		ray_nbr;
-	double	angle_step;
-	double	wall_dist;
-	double	proj_plane_dist;
-	bool	horizontal_hit;
-	int		map_x;
-	int		map_y;
-}			t_cast_data;
-
 typedef struct	s_textures
 {
 	t_image		t_north;
@@ -165,6 +155,22 @@ typedef	struct	s_intercept_hit
 	t_coord	intercept;
 	t_dir	inter_dir;
 }	t_intercept_hit;
+
+typedef struct s_cast_data
+{
+	int				ray_nbr;
+	double			angle_step;
+	double			wall_dist;
+	double			proj_plane_dist;
+	bool			horizontal_hit;
+	int				map_x;
+	int				map_y;
+	int				tex_offset_x;
+	int				tex_offset_y;
+	int				wall_height;
+	t_intercept_hit	obj_hit;
+	int				color;
+}					t_cast_data;
 
 typedef struct s_game
 {
@@ -296,15 +302,22 @@ double	normalize_angle(double angle);
 void	init_floor_ceiling_rgb(t_game *game);
 void	front_view_randring(t_game *game);
 // void	draw_column_line(t_game *game, int x, int wall_height, t_intercept_hit ray_hit);
-void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
+// void draw_column_line(t_game *game, t_intercept_hit ray_hit, int row, int wall_height);
 // void	set_wall_textures(t_game *game, void *img_add);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column);
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int row, int column, int floor);
-void set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
+// void set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 // void	set_wall_textures(t_game *game, t_intercept_hit obj_hit, int x, int top, int bottom, int wall_height);
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int column, int end);
+// void draw_column_line(t_game *game, t_intercept_hit obj_hit, int row);
+// void	set_wall_textures(
+// 	t_game *game, t_intercept_hit obj_hit, int x, int top,
+// 	int bottom);
+void draw_column_line(t_game *game, int row);
+void	set_wall_textures(t_game *game, int x, int top, int bottom);
+
 
 
 // ------------------------- top-view --------------------

@@ -1,73 +1,49 @@
-# include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 09:56:00 by yanflous          #+#    #+#             */
+/*   Updated: 2025/07/28 13:31:54 by yanflous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// >>> main 3D projection function
-void front_view_randring(t_game *game)
+#include "cub3D.h"
+
+void	front_view_randring(t_game *game)
 {
-    int				column;
-    double			ray_angle;
-    t_cast_data		*cast_data;
-    t_intercept_hit	obj_hit;
-    double			wall_height;
-    double			correct_wall_dist;
+	int				column;
+	double			ray_angle;
+	t_cast_data		*cast_data;
+	double			wall_height;
+	double			correct_wall_dist;
 
-    column = -1;
-    cast_data = &game->cast_data;
-    // >>>  subtract 30 degrees (half of my FOV) to start from left most
-    ray_angle = game->player.angle - (game->player.fov / 2);
-
-    while (++column < cast_data->ray_nbr)
-    {
-    	// >>> normalize the angle before casting the ray
-        ray_angle = normalize_angle(ray_angle);
-		// >>> casting the ray based on the ray_angle of the player
-        obj_hit = cast_ray(game, ray_angle);
-
-        // fisheye correction — IMPORTANT: update cast_data->wall_dist so all funcs use corrected distance
-        
-        	/*
-			>>> cast_data->wall_dist gives the hypotenuse distance
-				taht makes the fish eye effect
-			>>>> converting to the adjacent distance that what makes
-				the correction of that
-		*/
-		// fish eye correction
-		// >>> projected slice height == wall_height <<<
-        correct_wall_dist = (cast_data->wall_dist
-            * cos(ray_angle - game->player.angle));
-        cast_data->wall_dist = correct_wall_dist;
-
-        // calculate wall height with corrected distance
-		// the height of the projected wall slice
+	column = -1;
+	cast_data = &game->cast_data;
+	ray_angle = game->player.angle - (game->player.fov / 2);
+	while (++column < cast_data->ray_nbr)
+	{
+		ray_angle = normalize_angle(ray_angle);
+		cast_data->obj_hit = cast_ray(game, ray_angle);
+		correct_wall_dist = (cast_data->wall_dist
+				* cos(ray_angle - game->player.angle));
+		cast_data->wall_dist = correct_wall_dist;
 		wall_height = ((TILE_SIZE / correct_wall_dist)
-			* cast_data->proj_plane_dist);
-
-        // draw vertical slice with texture mapping
-        draw_column_line(game, obj_hit, column, wall_height);
-
-        ray_angle += cast_data->angle_step;
-    }
+				* cast_data->proj_plane_dist);
+		game->cast_data.wall_height = wall_height;
+		draw_column_line(game, column);
+		ray_angle += cast_data->angle_step;
+	}
 }
 
-
-// >>> main game randring engine start here <<<
 int	game_loop(t_game *game)
 {
-	handle_key_press(game);	// >>> key-hadling
-
-	// >>> 2D-top-view
-	/*
-		draw_2d_map(game);
-		draw_player(game);
-		draw_rays_view(game);
-	*/
-
-	// >>> 3D-front view (projection)
+	handle_key_press(game);
 	front_view_randring(game);
-
-	// >>> main image frame
 	mlx_put_image_to_window(game->window.mlx_ptr,
 		game->window.win_ptr,
 		game->window.main_img.img_ptr, 0, 0);
-
 	return (0);
 }

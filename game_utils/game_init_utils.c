@@ -1,20 +1,32 @@
-# include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 13:42:51 by yanflous          #+#    #+#             */
+/*   Updated: 2025/07/28 13:43:40 by yanflous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3D.h"
 
 double	normalize_angle(double angle)
 {
-    double new_angle;
+	double	new_angle;
 
-    new_angle = fmod(angle, 2 * M_PI);
-    if (new_angle < 0)
-        new_angle += 2 * M_PI;
-    return (new_angle);
+	new_angle = fmod(angle, 2 * M_PI);
+	if (new_angle < 0)
+		new_angle += 2 * M_PI;
+	return (new_angle);
 }
 
 int	hex_into_color(t_game *game, bool floor)
 {
 	int	r;
-	int g;
-	int b;
+	int	g;
+	int	b;
 
 	if (floor)
 	{

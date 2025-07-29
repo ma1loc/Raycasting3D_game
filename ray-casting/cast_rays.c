@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:01:16 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 14:09:24 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:54:10 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ t_intercept_hit	get_horizontal_intersection(
 	t_coord			step;
 
 	slope = tan(ray_angle);
-	if (ray_angle > 0 && ray_angle < M_PI)
+	if (ray_angle > 0 && ray_angle < M_PI)	// south
 	{
 		intercept.intercept.y = floor(
 				p_pos.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
 		intercept.inter_dir = South;
 		step.y = TILE_SIZE;
 	}
-	else
+	else									// north
 	{
 		intercept.intercept.y = floor(
-				p_pos.y / TILE_SIZE) * TILE_SIZE - EPS;
+				p_pos.y / TILE_SIZE) * TILE_SIZE - EPS;	// opposit side
 		intercept.inter_dir = North;
-		step.y = -TILE_SIZE;
+		step.y = -TILE_SIZE;	// opposit side
 	}
 	intercept.intercept.x = p_pos.x + (
-			intercept.intercept.y - p_pos.y) / slope;
-	step.x = step.y / slope;
+			intercept.intercept.y - p_pos.y) / slope;	// adjacent side
+	step.x = step.y / slope;	// adjacent side
 	return (check_intersection_hit(game, intercept, step));
 }
 
@@ -75,23 +75,23 @@ t_intercept_hit	get_vertical_intersection(
 	t_coord			step;
 
 	slope = tan(ray_angle);
-	if (ray_angle < M_PI / 2 || ray_angle > (M_PI * 3) / 2)
+	if (ray_angle < M_PI / 2 || ray_angle > (M_PI * 3) / 2) // right
 	{
 		intercept.intercept.x = floor(
-				p_pos.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
+				p_pos.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;	// adjacent side
 		intercept.inter_dir = East;
-		step.x = TILE_SIZE;
+		step.x = TILE_SIZE;		// adjacent side
 	}
-	else
+	else													// left
 	{
 		intercept.intercept.x = floor(
-				p_pos.x / TILE_SIZE) * TILE_SIZE - EPS;
+				p_pos.x / TILE_SIZE) * TILE_SIZE - EPS;		// adjacent side
 		intercept.inter_dir = West;
-		step.x = -TILE_SIZE;
+		step.x = -TILE_SIZE;	// adjacent side
 	}
 	intercept.intercept.y = p_pos.y + (
-			intercept.intercept.x - p_pos.x) * slope;
-	step.y = step.x * slope;
+			intercept.intercept.x - p_pos.x) * slope;	// opposit side
+	step.y = step.x * slope;	// opposit side
 	return (check_intersection_hit(game, intercept, step));
 }
 

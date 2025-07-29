@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 09:46:35 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 18:30:24 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:28:41 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	game_init(t_game *game)
 	cast_data->ray_nbr = SCREEN_WIDTH;
 	// angle_step = distance between rays
 	cast_data->angle_step = (double)player->fov / cast_data->ray_nbr;
-	// proj_plane_dist = distance from the player to the projection_plane
+	// proj_plane_dist = distance from the player to the projection_plane(adjacent side)
 	cast_data->proj_plane_dist = (
 			SCREEN_WIDTH / 2) / tan(player->fov / 2);
 	init_floor_ceiling_rgb(game);	// done

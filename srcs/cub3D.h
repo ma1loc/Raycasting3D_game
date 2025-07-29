@@ -256,7 +256,6 @@ void free_split(char **split);
 void cleanup_game(t_game *game);
 void err(char *str);
 
-
 t_game	*g_game(void);
 int		game_loop(t_game *game);
 void	init_textures(t_game *game);

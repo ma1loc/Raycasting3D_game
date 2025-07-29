@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 09:56:00 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 20:28:23 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/29 20:42:44 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,30 @@ void	front_view_randring(t_game *game)
 	int				column;
 	double			ray_angle;
 	t_cast_data		*cast_data;
-	double			wall_height;
 	double			correct_wall_dist;
+	double			angle_difference;
 
 	column = -1;
 	cast_data = &game->cast_data;
-	ray_angle = game->player.angle - (game->player.fov / 2);
+	ray_angle = game->player.angle - (game->player.fov / 2);	// get the left-most ray
 	while (++column < cast_data->ray_nbr)
 	{
-		ray_angle = normalize_angle(ray_angle);
-		cast_data->obj_hit = cast_ray(game, ray_angle);
-		correct_wall_dist = (cast_data->wall_dist
-				* cos(ray_angle - game->player.angle));
+		ray_angle = normalize_angle(ray_angle);	// correct the ray_angle
+		cast_data->obj_hit = cast_ray(game, ray_angle);	// ray_casting func
+
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// >>> NOTE. wall_dist is in the hypotenuse
+		angle_difference = game->player.angle - ray_angle;
+		correct_wall_dist = (cast_data->wall_dist * cos(angle_difference));
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		
 		cast_data->wall_dist = correct_wall_dist;
-		wall_height = ((TILE_SIZE / correct_wall_dist)
+		game->cast_data.wall_height = ((TILE_SIZE / correct_wall_dist)
 				* cast_data->proj_plane_dist);
-		game->cast_data.wall_height = wall_height;
+
+		// game->cast_data.wall_height = wall_height;
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 		draw_column_line(game, column);
 		ray_angle += cast_data->angle_step;
 	}
@@ -40,8 +48,8 @@ void	front_view_randring(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	handle_key_press(game);		// done_n
-	front_view_randring(game);
+	handle_key_press(game);			// done
+	front_view_randring(game);		// n_done
 	mlx_put_image_to_window(game->window.mlx_ptr,
 		game->window.win_ptr,
 		game->window.main_img.img_ptr, 0, 0);

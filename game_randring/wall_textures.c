@@ -26,15 +26,15 @@ t_image	*get_img_ptr(t_game *game, t_intercept_hit obj_hit)
 	return (&textures->t_west);
 }
 
-double	get_hit_pos(t_game *game, t_intercept_hit obj_hit)
+double	get_tex_slice_hit(t_game *game, t_intercept_hit obj_hit)
 {
-	double	hit_pos;
+	double tex_slice_hit;
 
 	if (game->cast_data.horizontal_hit)
-		hit_pos = fmod(obj_hit.intercept.x, TILE_SIZE);
+		tex_slice_hit = fmod(obj_hit.intercept.x, TILE_SIZE);
 	else
-		hit_pos = fmod(obj_hit.intercept.y, TILE_SIZE);
-	return (hit_pos);
+		tex_slice_hit = fmod(obj_hit.intercept.y, TILE_SIZE);
+	return (tex_slice_hit);
 }
 
 double	get_texture_y_offset(int wall_height, double step)
@@ -51,26 +51,30 @@ double	get_texture_y_offset(int wall_height, double step)
 	return (tex_pos);
 }
 
+
 void	set_wall_textures(t_game *game, int row_slice, int ceiling, int floor)
 {
-	t_image		*img;
-	double		tex_step_per_pixel;
-	double		hit_pos;
+	t_image		*img;				// done
+	double		tex_step_per_pixel;	// done
+	double		tex_slice_hit;		// done
 	double		tex_pos;
-	int			y;
 
-	y = ceiling;
 	img = get_img_ptr(game, game->cast_data.obj_hit);	// get image addr (to access there px)
+	
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	/*
 		tex_step_per_pixel calculation helps to (streatch or shrenk) the img in the wall
 		it's all about how much pixel in the image 
 	*/
 	tex_step_per_pixel = (double)img->height / game->cast_data.wall_height;
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	tex_slice_hit = get_tex_slice_hit(game, game->cast_data.obj_hit);
+	game->cast_data.tex_offset_x = (int)((tex_slice_hit / img->width) * img->width);
+	
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	
+	// tex_offset_y
 	tex_pos = get_texture_y_offset(game->cast_data.wall_height, tex_step_per_pixel);
-	hit_pos = get_hit_pos(game, game->cast_data.obj_hit);
-	game->cast_data.tex_offset_x = (int)((hit_pos / TILE_SIZE) * img->width);
-	while (y < floor)
+	while (ceiling < floor)
 	{
 		game->cast_data.tex_offset_y = (int)tex_pos % img->height;
 		
@@ -78,9 +82,10 @@ void	set_wall_textures(t_game *game, int row_slice, int ceiling, int floor)
 		game->cast_data.color = *(int *)(img->addr
 				+ game->cast_data.tex_offset_y * img->size_line
 				+ game->cast_data.tex_offset_x * (img->bpp / 8));
-		my_mlx_pixel_put(game, row_slice, y, game->cast_data.color);
+				// + game->cast_data.tex_offset_x * 1);
+		my_mlx_pixel_put(game, row_slice, ceiling, game->cast_data.color);
 		// ------------------------------------------------------------------
 		tex_pos += tex_step_per_pixel;
-		y++;
+		ceiling++;
 	}
 }

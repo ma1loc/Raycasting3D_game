@@ -1,5 +1,16 @@
-#include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/29 17:05:04 by ytabia            #+#    #+#             */
+/*   Updated: 2025/07/29 17:05:45 by ytabia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3D.h"
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
@@ -19,47 +30,49 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	return (0);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(s1[i] && s2[i] && s1[i] == s2[i])
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	return (unsigned char)s1[i] - (unsigned char)s2[i];
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-char *ft_strncpy(char *dest, const char *src, int n)
+char	*ft_strncpy(char *dest, const char *src, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
-	while(i < n && src[i])
+	while (i < n && src[i])
 	{
 		dest[i] = src[i];
 		i++;
 	}
 	while (i < n)
-    {
-        dest[i] = '\0';
-        i++;
-    }
-	return(dest);
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }
-int is_texture_line(char *line)
+
+int	is_texture_line(char *line)
 {
-    return (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3));
+	return (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
+		|| !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3));
 }
-const char *get_texture_id(const char *line)
+
+const char	*get_texture_id(const char *line)
 {
-    if (ft_strncmp(line, "NO", 2) == 0)
-        return "NO";
-    if (ft_strncmp(line, "SO", 2) == 0)
-        return "SO";
-    if (ft_strncmp(line, "WE", 2) == 0)
-        return "WE";
-    if (ft_strncmp(line, "EA", 2) == 0)
-        return "EA";
-    return NULL;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return ("NO");
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return ("SO");
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return ("WE");
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return ("EA");
+	return (NULL);
 }

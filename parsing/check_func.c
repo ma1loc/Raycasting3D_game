@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_func.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/29 16:46:01 by ytabia            #+#    #+#             */
+/*   Updated: 2025/07/29 16:47:50 by ytabia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-int check_map_extension(char *str)
+int	check_map_extension(char *str)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(str);
 	if (i >= 1)
@@ -15,11 +27,10 @@ int check_map_extension(char *str)
 	return (0);
 }
 
-// func to check first and last row
-int check_row_walls(char *row)
+int	check_row_walls(char *row)
 {
-	int j;
-	int row_len;
+	int	j;
+	int	row_len;
 
 	if (!row)
 		return (1);
@@ -32,7 +43,7 @@ int check_row_walls(char *row)
 		if (row[j] == ' ' || row[j] == '\n')
 		{
 			j++;
-			continue;
+			continue ;
 		}
 		if (row[j] != '1')
 			return (1);
@@ -41,11 +52,10 @@ int check_row_walls(char *row)
 	return (0);
 }
 
-// check middle rows
-int check_middle_row_walls(char *row)
+int	check_middle_row_walls(char *row)
 {
-	int j;
-	int row_len;
+	int	j;
+	int	row_len;
 
 	if (!row)
 		return (1);
@@ -65,10 +75,10 @@ int check_middle_row_walls(char *row)
 	return (0);
 }
 
-int check_map_wall(t_game *game)
+int	check_map_wall(t_game *game)
 {
-	int i;
-	int map_height;
+	int	i;
+	int	map_height;
 
 	if (!game || !game->map || !game->map[0])
 		return (1);
@@ -89,9 +99,10 @@ int check_map_wall(t_game *game)
 	return (0);
 }
 
-int check_map_chars(t_game *game)
+int	check_map_chars(t_game *game)
 {
-	int player_count;
+	int	player_count;
+
 	if (!game->map || !game->map[0])
 		return (1);
 	if (validate_map_char(game))

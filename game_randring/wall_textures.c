@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 10:58:00 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 13:27:52 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:28:52 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,36 @@ double	get_texture_y_offset(int wall_height, double step)
 	return (tex_pos);
 }
 
-// Y -> row
-// X -> column
-
-void	set_wall_textures(t_game *game, int x, int top, int bottom)
+void	set_wall_textures(t_game *game, int row_slice, int ceiling, int floor)
 {
 	t_image		*img;
-	int			y;
-	double		step;
+	double		tex_step_per_pixel;
 	double		hit_pos;
 	double		tex_pos;
+	int			y;
 
-	y = top;
-	img = get_img_ptr(game, game->cast_data.obj_hit);
-	step = (double)img->height / game->cast_data.wall_height;
-	tex_pos = get_texture_y_offset(game->cast_data.wall_height, step);
+	y = ceiling;
+	img = get_img_ptr(game, game->cast_data.obj_hit);	// get image addr (to access there px)
+	/*
+		tex_step_per_pixel calculation helps to (streatch or shrenk) the img in the wall
+		it's all about how much pixel in the image 
+	*/
+	tex_step_per_pixel = (double)img->height / game->cast_data.wall_height;
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	tex_pos = get_texture_y_offset(game->cast_data.wall_height, tex_step_per_pixel);
 	hit_pos = get_hit_pos(game, game->cast_data.obj_hit);
 	game->cast_data.tex_offset_x = (int)((hit_pos / TILE_SIZE) * img->width);
-	while (y < bottom)
+	while (y < floor)
 	{
 		game->cast_data.tex_offset_y = (int)tex_pos % img->height;
+		
+		// ---------------- just adding pixel to the main frame -------------
 		game->cast_data.color = *(int *)(img->addr
 				+ game->cast_data.tex_offset_y * img->size_line
 				+ game->cast_data.tex_offset_x * (img->bpp / 8));
-		my_mlx_pixel_put(game, x, y, game->cast_data.color);
-		tex_pos += step;
+		my_mlx_pixel_put(game, row_slice, y, game->cast_data.color);
+		// ------------------------------------------------------------------
+		tex_pos += tex_step_per_pixel;
 		y++;
 	}
 }

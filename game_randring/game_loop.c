@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 09:56:00 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/29 20:42:44 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/30 11:03:32 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,25 @@
 
 void	front_view_randring(t_game *game)
 {
-	int				column;
+	int				slice;
 	double			ray_angle;
 	t_cast_data		*cast_data;
-	double			correct_wall_dist;
 	double			angle_difference;
 
-	column = -1;
+	slice = -1;
 	cast_data = &game->cast_data;
 	ray_angle = game->player.angle - (game->player.fov / 2);	// get the left-most ray
-	while (++column < cast_data->ray_nbr)
+	while (++slice < cast_data->ray_nbr)
 	{
 		ray_angle = normalize_angle(ray_angle);	// correct the ray_angle
 		cast_data->obj_hit = cast_ray(game, ray_angle);	// ray_casting func
 
-		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		// >>> NOTE. wall_dist is in the hypotenuse
 		angle_difference = game->player.angle - ray_angle;
-		correct_wall_dist = (cast_data->wall_dist * cos(angle_difference));
-		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		
-		cast_data->wall_dist = correct_wall_dist;
-		game->cast_data.wall_height = ((TILE_SIZE / correct_wall_dist)
+		cast_data->wall_dist = (cast_data->wall_dist * cos(angle_difference));
+		game->cast_data.wall_height = ((TILE_SIZE / cast_data->wall_dist)
 				* cast_data->proj_plane_dist);
-
-		// game->cast_data.wall_height = wall_height;
-		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-		draw_column_line(game, column);
+		draw_slice(game, slice);	// n_done
 		ray_angle += cast_data->angle_step;
 	}
 }

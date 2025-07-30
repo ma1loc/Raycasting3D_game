@@ -6,50 +6,51 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 09:55:55 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/28 13:31:15 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:01:17 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_ceiling(t_game *game, int row, int column, int ceiling)
+void	draw_ceiling(t_game *game, int row_slice, int column, int ceiling)
 {
 	int	ceiling_color;
 
 	ceiling_color = game->window.ceiling_color;
 	while (column < ceiling)
 	{
-		my_mlx_pixel_put(game, row, column, ceiling_color);
+		my_mlx_pixel_put(game, row_slice, column, ceiling_color);
 		column++;
 	}
 }
 
-void	draw_floor(t_game *game, int row, int column)
+void	draw_floor(t_game *game, int row_slice, int column)
 {
 	int	floor_color;
 
 	floor_color = game->window.floor_color;
 	while (column < SCREEN_HEIGHT)
 	{
-		my_mlx_pixel_put(game, row, column, floor_color);
+		my_mlx_pixel_put(game, row_slice, column, floor_color);
 		column++;
 	}
 }
 
-void	draw_column_line(t_game *game, int row)
+void	draw_slice(t_game *game, int row_slice)
 {
-	int	top;
-	int	bottom;
+	int	ceiling;
+	int	floor;
 	int	wall_height;
 
 	wall_height = game->cast_data.wall_height;
-	top = (SCREEN_HEIGHT / 2) - (wall_height / 2);
-	bottom = (SCREEN_HEIGHT / 2) + (wall_height / 2);
-	if (top < 0)
-		top = 0;
-	if (bottom >= SCREEN_HEIGHT)
-		bottom = SCREEN_HEIGHT - 1;
-	draw_ceiling(game, row, 0, top);
-	set_wall_textures(game, row, top, bottom);
-	draw_floor(game, row, bottom);
+	ceiling = (SCREEN_HEIGHT / 2) - (wall_height / 2);
+	floor = (SCREEN_HEIGHT / 2) + (wall_height / 2);
+	if (ceiling < 0)
+		ceiling = 0;
+	if (floor >= SCREEN_HEIGHT)
+		floor = SCREEN_HEIGHT - 1;
+	
+	draw_ceiling(game, row_slice, 0, ceiling);	// draw the ceiling
+	set_wall_textures(game, row_slice, ceiling, floor);	// n_done
+	draw_floor(game, row_slice, floor);			// draw the floor
 }

@@ -282,7 +282,8 @@ void	front_view_randring(t_game *game);
 t_image *get_img_ptr(t_game *game, t_intercept_hit obj_hit);
 void draw_wall(
     t_game *game, t_intercept_hit ray_hit, int row, int column, int end);
-void draw_column_line(t_game *game, int row);
+void	draw_slice(t_game *game, int row);
+
 void	set_wall_textures(t_game *game, int x, int top, int bottom);
 t_intercept_hit cast_ray(t_game *game, double ray_angle);
 int		close_window(int key_code);

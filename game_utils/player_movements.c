@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 13:55:10 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/29 10:23:33 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:26:17 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	upgrade_player_dir(t_game *game, int dir, bool strafe)
 
 	move_dir = 1;
 	if (strafe)
-		move_angle = game->player.angle + (dir * M_PI / 2);	// use the (dir) to change the angle
+		move_angle = game->player.angle + (dir * M_PI / 2);
 	else
 	{
 		move_angle = game->player.angle;
-		move_dir = dir;		// use the (move_dir) to change the direction
+		move_dir = dir;
 	}
 	new_pp.x = game->player.p_pos.x + cos(move_angle) * MOVE_SPEED * move_dir;
 	new_pp.y = game->player.p_pos.y + sin(move_angle) * MOVE_SPEED * move_dir;

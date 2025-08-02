@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:47:03 by ytabia            #+#    #+#             */
-/*   Updated: 2025/05/26 16:21:02 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/02 13:37:03 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 
 int		ft_isalpha(int c);
-int     ft_isdigit(char *str);
+int		ft_isdigit(char *str);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);

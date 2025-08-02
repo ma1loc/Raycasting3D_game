@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 13:51:36 by yanflous          #+#    #+#             */
-/*   Updated: 2025/07/29 09:15:06 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:26:51 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	handle_key_press(t_game *game)
 		upgrade_player_dir(game, FORWARD, false);
 	if (dir->walk_dir == BACKWARD)
 		upgrade_player_dir(game, BACKWARD, false);
-
 	if (dir->side_dir == LEFT)
 		upgrade_player_dir(game, LEFT, true);
 	if (dir->side_dir == RIGHT)

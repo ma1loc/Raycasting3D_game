@@ -37,7 +37,8 @@ clean:
 	$(RM) $(OBJ)
 	make -C $(LIBFT_DIR) clean
 
-fclean: clean
+fclean:
+	$(RM) $(OBJ)
 	$(RM) $(NAME)
 	make -C $(LIBFT_DIR) fclean
 

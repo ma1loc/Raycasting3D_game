@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:05:54 by ytabia            #+#    #+#             */
-/*   Updated: 2025/07/29 17:09:01 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/05 17:11:37 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	validate_textures(t_config *config)
 		if (config->ids[i].id[0] == '\0')
 		{
 			err("Error:\nmissing or invalid texture\n");
-			exit(1);
+			return (1);
 		}
 		i++;
 	}

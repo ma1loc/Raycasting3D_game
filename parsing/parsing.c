@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:58:04 by ytabia            #+#    #+#             */
-/*   Updated: 2025/07/29 16:52:29 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/05 20:04:49 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	pars_textures(char *line, t_config *config, const char *id)
 	index = get_texture_index(id);
 	if (index == -1)
 		return (1);
-	check_dub_texture_id(config, index);
+	if (check_dub_texture_id(config, index))
+		return (1);
 	ft_strncpy(config->ids[index].id, id, 2);
 	config->ids[index].id[2] = '\0';
 	while (*line == ' ' || *line == '\t')
@@ -43,9 +44,11 @@ int	pars_textures(char *line, t_config *config, const char *id)
 	if (!config->ids[index].path)
 		return (1);
 	extension = ft_strrchr(config->ids[index].path, '.');
-	check_texture_extension(extension);
+	if (check_texture_extension(extension))
+		return (1);
 	fd = open(config->ids[index].path, O_RDONLY);
-	check_texture_path(fd);
+	if (check_texture_path(fd))
+		return (1);
 	return (close(fd), 0);
 }
 
@@ -85,7 +88,7 @@ int	parsing(int argc, char **argv, t_game *game)
 	if (check_map_extension(argv[1]))
 		return (err("Error:\nmap extension not correct\n"), 1);
 	if (read_map(argv[1], game))
-		return (err("Error:\nunable to read map\n"), cleanup_game(game), 1);
+		return (cleanup_game(game), 1);
 	if (check_map_wall(game))
 		return (err("Error:\nmap wall not closed\n"), cleanup_game(game), 1);
 	if (check_map_chars(game))

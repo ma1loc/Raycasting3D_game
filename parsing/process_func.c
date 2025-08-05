@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:53:44 by ytabia            #+#    #+#             */
-/*   Updated: 2025/07/29 16:56:39 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/05 19:55:49 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	process_line(int fd, t_game *game, t_counters *counters)
 	s = get_next_line(fd);
 	if (!s)
 		return (-1);
-	line = ft_strtrim(s, "\n");
+	line = ft_strtrim(s, "\n\t ");
 	free(s);
 	if (line[0] == '\0')
 	{
@@ -51,6 +51,8 @@ int	process_config_line(char *line, t_game *game, t_counters *counters)
 	else if (ft_isalpha(line[0]))
 	{
 		err("Error:\nmissing or invalid texture\n");
+		free(line);
+		cleanup_game(game);
 		exit(1);
 	}
 	else

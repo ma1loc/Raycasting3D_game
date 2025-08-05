@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:48:11 by ytabia            #+#    #+#             */
-/*   Updated: 2025/07/29 16:48:37 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/05 20:05:16 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,17 @@ void	free_map(t_game *game)
 void	free_config(t_game *game)
 {
 	int	i;
-	int	num_ids;
 
+	if (!game || !game->config)
+		return ;
 	i = 0;
-	num_ids = 0;
 	while (i < 4)
 	{
-		if (game->config->ids[i].id[0] != '\0')
-			num_ids++;
-		i++;
-	}
-	i = 0;
-	while (i < num_ids && game->config->ids[i].path != NULL)
-	{
-		free(game->config->ids[i].path);
+		if (game->config->ids[i].path != NULL)
+		{
+			free(game->config->ids[i].path);
+			game->config->ids[i].path = NULL;
+		}
 		i++;
 	}
 	free(game->config);
@@ -81,6 +78,8 @@ void	cleanup_game(t_game *game)
 {
 	if (!game)
 		return ;
+	if (game->config->fd)
+		close(game->config->fd);
 	if (game->map)
 		free_map(game);
 	if (game->config)

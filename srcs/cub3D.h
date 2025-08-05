@@ -6,7 +6,7 @@
 /*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:07:37 by yanflous          #+#    #+#             */
-/*   Updated: 2025/08/05 20:31:44 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/08/06 00:45:44 by yanflous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_ids
 
 typedef struct s_config
 {
+	int		fd;
 	t_ids	ids[4];
 	int		floor_rgb[3];
 	int		ceiling_rgb[3];
@@ -184,7 +185,8 @@ typedef struct s_game
 char			*get_next_line(int fd);
 int				parsing(int argc, char **argv, t_game *game);
 int				read_map(char *file, t_game *game);
-int				init_game_config(t_game *game);
+// int				init_game_config(t_game *game);
+int				init_game_config(t_game *game, int fd);
 int				check_map_extension(char *str);
 int				check_map_chars(t_game *game);
 int				check_map_wall(t_game *game);
@@ -226,9 +228,9 @@ void			free_config(t_game *game);
 void			free_split(char **split);
 void			cleanup_game(t_game *game);
 void			err(char *str);
-void			check_dub_texture_id(t_config *config, int index);
-void			check_texture_extension(char *extension);
-void			check_texture_path(int fd);
+int				check_dub_texture_id(t_config *config, int index);
+int				check_texture_extension(char *extension);
+int				check_texture_path(int fd);
 int				check_white_spaces(char *str);
 int				map_loop(int fd, char **map, t_game *game);
 int				check_newline_inside_map(

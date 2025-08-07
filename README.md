@@ -7,8 +7,8 @@ Welcome to my Cub3D project! This is a journey through the fascinating world of 
 
 ### 📚 Interactive Ray-Casting Learning Resource
 
-I've developed a comprehensive visual guide that demonstrates the fundamental principles of ray-casting algorithms. This interactive educational tool provides step-by-step breakdowns of the mathematical concepts and implementation strategies.
-**[🔗 Access Ray-Casting Tutorial](https://www.tldraw.com/p/nrxBdkny-lr8txkRoSnyt?d=v4168.-4136.38400.21600.eLz4W7KpaMOCqJI7W8QwN)**
+I've DONE all the ray-casting and developed a comprehensive visual guide that demonstrates the fundamental principles of ray-casting algorithms. This interactive educational tool provides step-by-step breakdowns of the mathematical concepts and implementation strategies.  
+Created by: (@ma1loc) =>  **[🔗 Access Ray-Casting Tutorial](https://www.tldraw.com/p/nrxBdkny-lr8txkRoSnyt?d=v4168.-4136.38400.21600.eLz4W7KpaMOCqJI7W8QwN)**
 
 
 ---

@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:53:44 by ytabia            #+#    #+#             */
-/*   Updated: 2025/08/05 19:55:49 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/12 22:31:28 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,31 @@ int	process_texture_line(char *line, t_game *game)
 			return (1);
 	}
 	return (0);
+}
+
+void	set_rgbs_flag(t_config *config)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		config->ceiling_rgb[i] = -1;
+		config->floor_rgb[i] = -1;
+		i++;
+	}
+}
+
+int	validate_rgb_is_set(int rgb[3])
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (rgb[i] == -1)
+			return (0);
+		i++;
+	}
+	return (1);
 }

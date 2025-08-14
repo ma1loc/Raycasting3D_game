@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:46:01 by ytabia            #+#    #+#             */
-/*   Updated: 2025/08/04 16:47:34 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/11 23:25:43 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	check_map_extension(char *str)
 	if (i >= 1)
 	{
 		i--;
-		if (str[i] == 'b' && str[i - 1] == 'u' && str[i - 2] == 'c')
+		if (str[i] == 'b' && str[i - 1] == 'u' && str[i - 2] == 'c' && str[i
+				- 3] == '.')
 			return (0);
 		return (1);
 	}

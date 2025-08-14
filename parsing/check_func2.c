@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:00:28 by ytabia            #+#    #+#             */
-/*   Updated: 2025/08/05 19:55:10 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/11 23:29:56 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,9 @@ int	check_texture_path(int fd)
 		return (1);
 	}
 	return (0);
+}
+
+int	is_whitespace(char c)
+{
+	return (c == ' ' || c == '\n' || c == '\0');
 }

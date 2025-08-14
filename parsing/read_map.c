@@ -6,7 +6,7 @@
 /*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:57:09 by ytabia            #+#    #+#             */
-/*   Updated: 2025/08/05 20:03:21 by ytabia           ###   ########.fr       */
+/*   Updated: 2025/08/12 22:28:13 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	init_game_config(t_game *game, int fd)
 		return (1);
 	}
 	ft_memset(game->config, 0, sizeof(t_config));
+	set_rgbs_flag(game->config);
 	return (0);
 }
 
@@ -111,6 +112,11 @@ int	read_config_section(int fd, t_game *game)
 			break ;
 	}
 	if (result == -1)
-		return (close(fd), 1);
+	{
+		err("Error:\nmap file is empty\n");
+		close(fd);
+		cleanup_game(game);
+		exit(1);
+	}
 	return (0);
 }

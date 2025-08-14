@@ -113,7 +113,7 @@ int	read_config_section(int fd, t_game *game)
 	}
 	if (result == -1)
 	{
-		err("Error:\nmap file is empty\n");
+		err("Error:\nmap file not valid\n");
 		close(fd);
 		cleanup_game(game);
 		exit(1);

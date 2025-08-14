@@ -48,7 +48,7 @@ void	draw_slice(t_game *game, int row_slice)
 	if (ceiling < 0)
 		ceiling = 0;
 	if (floor >= SCREEN_HEIGHT)
-		floor = SCREEN_HEIGHT - 1;
+		floor = SCREEN_HEIGHT;
 	draw_ceiling(game, row_slice, 0, ceiling);
 	set_wall_textures(game, row_slice, ceiling, floor);
 	draw_floor(game, row_slice, floor);

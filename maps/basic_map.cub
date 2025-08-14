@@ -4,9 +4,10 @@ SO textures/xpm/colorstone.xpm
 EA textures/xpm/wood.xpm
 WE textures/xpm/purplestone.xpm
 
-C 50,167,255
-F 59,59,59
+F 50,167 ,255
+C 50,167 ,255
 
-1111111
-1E00001
+1111 111
+1E00101
+111111
 111111

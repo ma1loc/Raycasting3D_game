@@ -27,6 +27,7 @@ void	front_view_randring(t_game *game)
 		ray_angle = normalize_angle(ray_angle);
 		cast_data->obj_hit = cast_ray(game, ray_angle);
 		angle_difference = game->player.angle - ray_angle;
+		cast_data->wall_dist = (cast_data->wall_dist);
 		cast_data->wall_dist = (cast_data->wall_dist * cos(angle_difference));
 		game->cast_data.wall_height = ((TILE_SIZE / cast_data->wall_dist)
 				* cast_data->proj_plane_dist);

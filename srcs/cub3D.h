@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanflous <yanflous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytabia <ytabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:07:37 by yanflous          #+#    #+#             */
-/*   Updated: 2025/08/06 00:45:44 by yanflous         ###   ########.fr       */
+/*   Updated: 2025/08/12 22:30:40 by ytabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # define EXIT_SUCCESS 0
-# define EXIT_FAILURE	1
+# define EXIT_FAILURE 1
 
 # define TILE_SIZE 64
 # define EPS 0.00001
@@ -30,13 +30,13 @@
 # define SCREEN_WIDTH 850
 # define SCREEN_HEIGHT 600
 
-# define UP_KEY    XK_w
-# define DOWN_KEY  XK_s
-# define LEFT_KEY  XK_a
+# define UP_KEY XK_w
+# define DOWN_KEY XK_s
+# define LEFT_KEY XK_a
 # define RIGHT_KEY XK_d
 # define LEFT_ARROW XK_Left
 # define RIGHT_ARROW XK_Right
-# define ESC_KEY   XK_Escape
+# define ESC_KEY XK_Escape
 
 # define FORWARD 1
 # define BACKWARD -1
@@ -45,95 +45,95 @@
 # define TURN_LEFT -1
 # define TURN_RIGHT 1
 
+# include "../libft/libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <math.h>
 # include <mlx.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <limits.h>
-# include <unistd.h>
 # include <string.h>
-# include <math.h>
-# include <stdbool.h>
-# include "../libft/libft.h"
+# include <unistd.h>
 
 typedef struct s_counters
 {
-	int	floor_count;
-	int	ceiling_count;
-}	t_counters;
+	int				floor_count;
+	int				ceiling_count;
+}					t_counters;
 
 typedef struct s_ppos
 {
-	int		height;
-	int		width;
-	char	player[2];
-}	t_ppos;
+	int				height;
+	int				width;
+	char			player[2];
+}					t_ppos;
 
 typedef struct s_ids
 {
-	char	id[3];
-	char	*path;
-}	t_ids;
+	char			id[3];
+	char			*path;
+}					t_ids;
 
 typedef struct s_config
 {
-	int		fd;
-	t_ids	ids[4];
-	int		floor_rgb[3];
-	int		ceiling_rgb[3];
-}	t_config;
+	int				fd;
+	t_ids			ids[4];
+	int				floor_rgb[3];
+	int				ceiling_rgb[3];
+}					t_config;
 
 typedef struct s_image
 {
-	char	*t_path;
-	void	*img_ptr;
-	char	*addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
-	int		width;
-	int		height;
-}	t_image;
+	char			*t_path;
+	void			*img_ptr;
+	char			*addr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+	int				width;
+	int				height;
+}					t_image;
 
 typedef struct s_window
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_image	main_img;
-	int		floor_color;
-	int		ceiling_color;
-}	t_window;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_image			main_img;
+	int				floor_color;
+	int				ceiling_color;
+}					t_window;
 
 typedef struct s_direction
 {
-	int		walk_dir;
-	int		side_dir;
-	int		turn_dir;
-}	t_direction;
+	int				walk_dir;
+	int				side_dir;
+	int				turn_dir;
+}					t_direction;
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
-}	t_coord;
+	double			x;
+	double			y;
+}					t_coord;
 
 typedef struct s_player
 {
 	double			fov;
 	double			angle;
 	t_coord			p_pos;
-}	t_player;
+}					t_player;
 
 typedef struct s_textures
 {
-	t_image		t_north;
-	t_image		t_south;
-	t_image		t_east;
-	t_image		t_west;
-}				t_textures;
+	t_image			t_north;
+	t_image			t_south;
+	t_image			t_east;
+	t_image			t_west;
+}					t_textures;
 
 typedef enum s_dir
 {
@@ -141,13 +141,13 @@ typedef enum s_dir
 	South,
 	East,
 	West
-}	t_dir;
+}					t_dir;
 
 typedef struct s_intercept_hit
 {
-	t_coord	intercept;
-	t_dir	inter_dir;
-}	t_intercept_hit;
+	t_coord			intercept;
+	t_dir			inter_dir;
+}					t_intercept_hit;
 
 typedef struct s_cast_data
 {
@@ -179,91 +179,92 @@ typedef struct s_game
 	t_direction		direction;
 	t_cast_data		cast_data;
 	t_textures		textures;
+}					t_game;
 
-}	t_game;
-
-char			*get_next_line(int fd);
-int				parsing(int argc, char **argv, t_game *game);
-int				read_map(char *file, t_game *game);
-// int				init_game_config(t_game *game);
-int				init_game_config(t_game *game, int fd);
-int				check_map_extension(char *str);
-int				check_map_chars(t_game *game);
-int				check_map_wall(t_game *game);
-int				check_config_dup(t_config *config);
-int				get_map_height(char **map);
-int				validate_map_char(t_game *game);
-int				validate_textures(t_config *config);
-const char		*get_texture_id(const char *line);
-int				is_texture_line(char *line);
-int				is_space_valid(char **map, int i, int j, int map_height);
-int				validate_spaces(t_game *game);
-void			get_player_position(t_game *game);
-int				read_config_section(int fd, t_game *game);
-int				process_line(int fd, t_game *game, t_counters *counters);
-int				process_config_line(
-					char *line, t_game *game, t_counters *counters);
-int				process_texture_line(char *line, t_game *game);
-int				pars_textures(char *line, t_config *config, const char *id);
-int				pars_rgb(char *line, int *rgb);
-int				store_and_validat_map(char *file, t_game *game);
-int				skip_to_map_start(int fd, t_game *game);
-int				preprocess_map_file(char *file, t_game *game);
-char			**allocate_map(t_game *game);
-int				read_map_lines(int fd, char **map, t_game *game);
-void			free_this_map(char **map, int map_index);
-int				handle_floor_color(
-					char *line, t_config *config, int *floor_count);
-int				handle_ceiling_color(
-					char *line, t_config *config, int *ceiling_count);
-void			*ft_memset(void *str, int c, size_t n);
-int				ft_strcmp(const char *s1, const char *s2);
-char			*ft_strncpy(char *dest, const char *src, int n);
-int				ft_isdigit_str(char *str);
-int				is_valid_char(char c);
-int				count_player(char **map);
-int				count_comma(char *str);
-void			free_map(t_game *game);
-void			free_config(t_game *game);
-void			free_split(char **split);
-void			cleanup_game(t_game *game);
-void			err(char *str);
-int				check_dub_texture_id(t_config *config, int index);
-int				check_texture_extension(char *extension);
-int				check_texture_path(int fd);
-int				check_white_spaces(char *str);
-int				map_loop(int fd, char **map, t_game *game);
-int				check_newline_inside_map(
-					int map_index, t_game *game, char **map);
-int				get_map_lines(int fd);
-int				ft_isspace(char c);
-t_game			*g_game(void);
-int				game_loop(t_game *game);
-void			init_textures(t_game *game);
-void			set_game_textures(t_game *game);
-void			init_mlx_window(t_game *game);
-void			init_player_dir(t_game *game);
-void			get_map_size(t_game *game);
-int				key_press(int key_code);
-int				key_release(int key_code);
-void			handle_key_press(t_game *game);
-double			degrees_to_radians(int degree);
-void			game_exit(int exit_nbr, char *msg);
-void			draw_square(int x, int y, int size, int color);
-void			upgrade_player_s_dir(t_game *game, double angle);
-void			upgrade_player_dir(t_game *game, int dir, bool strafe);
-void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
-int				is_wall(t_game *game, double x, double y);
-double			get_distance(t_coord p_pos, t_coord hit);
-void			get_closest_distance(
-					t_game *game, t_coord horizontal, t_coord vertical);
-double			normalize_angle(double angle);
-void			init_floor_ceiling_rgb(t_game *game);
-void			front_view_randring(t_game *game);
-t_image			*get_img_ptr(t_game *game, t_intercept_hit obj_hit);
-void			draw_slice(t_game *game, int row);
-void			set_wall_textures(t_game *game, int x, int top, int bottom);
-int				close_window(int key_code);
-t_intercept_hit	cast_ray(t_game *game, double ray_angle);
+char				*get_next_line(int fd);
+int					parsing(int argc, char **argv, t_game *game);
+int					read_map(char *file, t_game *game);
+int					init_game_config(t_game *game, int fd);
+void				set_rgbs_flag(t_config *config);
+int					validate_rgb_is_set(int rgb[3]);
+int					check_map_extension(char *str);
+int					check_map_chars(t_game *game);
+int					check_map_wall(t_game *game);
+int					check_config_dup(t_config *config);
+int					get_map_height(char **map);
+int					validate_map_char(t_game *game);
+int					validate_textures(t_config *config);
+const char			*get_texture_id(const char *line);
+int					is_texture_line(char *line);
+int					is_space_valid(char **map, int i, int j, int map_height);
+int					validate_spaces(t_game *game);
+int					is_whitespace(char c);
+void				get_player_position(t_game *game);
+int					read_config_section(int fd, t_game *game);
+int					process_line(int fd, t_game *game, t_counters *counters);
+int					process_config_line(char *line, t_game *game,
+						t_counters *counters);
+int					process_texture_line(char *line, t_game *game);
+int					pars_textures(char *line, t_config *config, const char *id);
+int					pars_rgb(char *line, int *rgb);
+int					store_and_validat_map(char *file, t_game *game);
+int					skip_to_map_start(int fd, t_game *game);
+int					preprocess_map_file(char *file, t_game *game);
+char				**allocate_map(t_game *game);
+int					read_map_lines(int fd, char **map, t_game *game);
+void				free_this_map(char **map, int map_index);
+int					handle_floor_color(char *line, t_config *config,
+						int *floor_count);
+int					handle_ceiling_color(char *line, t_config *config,
+						int *ceiling_count);
+void				*ft_memset(void *str, int c, size_t n);
+int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strncpy(char *dest, const char *src, int n);
+int					ft_isdigit_str(char *str);
+int					is_valid_char(char c);
+int					count_player(char **map);
+int					count_comma(char *str);
+void				free_map(t_game *game);
+void				free_config(t_game *game);
+void				free_split(char **split);
+void				cleanup_game(t_game *game);
+void				err(char *str);
+int					check_dub_texture_id(t_config *config, int index);
+int					check_texture_extension(char *extension);
+int					check_texture_path(int fd);
+int					check_white_spaces(char *str);
+int					map_loop(int fd, char **map, t_game *game);
+int					check_newline_inside_map(int map_index, t_game *game,
+						char **map);
+int					get_map_lines(int fd);
+int					ft_isspace(char c);
+t_game				*g_game(void);
+int					game_loop(t_game *game);
+void				init_textures(t_game *game);
+void				set_game_textures(t_game *game);
+void				init_mlx_window(t_game *game);
+void				init_player_dir(t_game *game);
+void				get_map_size(t_game *game);
+int					key_press(int key_code);
+int					key_release(int key_code);
+void				handle_key_press(t_game *game);
+double				degrees_to_radians(int degree);
+void				game_exit(int exit_nbr, char *msg);
+void				draw_square(int x, int y, int size, int color);
+void				upgrade_player_s_dir(t_game *game, double angle);
+void				upgrade_player_dir(t_game *game, int dir, bool strafe);
+void				my_mlx_pixel_put(t_game *game, int x, int y, int color);
+int					is_wall(t_game *game, double x, double y);
+double				get_distance(t_coord p_pos, t_coord hit);
+void				get_closest_distance(t_game *game, t_coord horizontal,
+						t_coord vertical);
+double				normalize_angle(double angle);
+void				init_floor_ceiling_rgb(t_game *game);
+void				front_view_randring(t_game *game);
+t_image				*get_img_ptr(t_game *game, t_intercept_hit obj_hit);
+void				draw_slice(t_game *game, int row);
+void				set_wall_textures(t_game *game, int x, int top, int bottom);
+int					close_window(int key_code);
+t_intercept_hit		cast_ray(t_game *game, double ray_angle);
 
 #endif

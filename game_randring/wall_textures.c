@@ -26,17 +26,6 @@ t_image	*get_img_ptr(t_game *game, t_intercept_hit obj_hit)
 	return (&textures->t_west);
 }
 
-double	get_tex_slice_hit(t_game *game, t_intercept_hit obj_hit)
-{
-	double	tex_slice_hit;
-
-	if (game->cast_data.horizontal_hit)
-		tex_slice_hit = fmod(obj_hit.intercept.x, TILE_SIZE);
-	else
-		tex_slice_hit = fmod(obj_hit.intercept.y, TILE_SIZE);
-	return (tex_slice_hit);
-}
-
 double	get_texture_offset_y(int wall_height, double tex_step_per_pixel)
 {
 	int		wall_top_offset;
@@ -51,11 +40,21 @@ double	get_texture_offset_y(int wall_height, double tex_step_per_pixel)
 	return (tex_index);
 }
 
+double	get_tex_slice_hit(t_game *game, t_intercept_hit obj_hit)
+{
+	double	tex_slice_hit;
+
+	if (game->cast_data.horizontal_hit)
+		tex_slice_hit = fmod(obj_hit.intercept.x, TILE_SIZE);
+	else
+		tex_slice_hit = fmod(obj_hit.intercept.y, TILE_SIZE);
+	return (tex_slice_hit);
+}
+
 void	set_wall_textures(t_game *game, int row_slice, int ceiling, int floor)
 {
 	t_image		*img;
 	double		tex_step_per_pixel;
-	double		tex_slice_hit;
 	double		tex_index;
 	int			wall_top_offset;
 
@@ -63,10 +62,8 @@ void	set_wall_textures(t_game *game, int row_slice, int ceiling, int floor)
 	tex_step_per_pixel = (double)img->height / game->cast_data.wall_height;
 	tex_index = get_texture_offset_y(
 			game->cast_data.wall_height, tex_step_per_pixel);
-	tex_slice_hit = get_tex_slice_hit(
+	game->cast_data.tex_offset_x = get_tex_slice_hit(
 			game, game->cast_data.obj_hit);
-	game->cast_data.tex_offset_x = ((int)((tex_slice_hit / img->width)
-				* img->width));
 	wall_top_offset = (ceiling - 1);
 	while (++wall_top_offset < floor)
 	{
